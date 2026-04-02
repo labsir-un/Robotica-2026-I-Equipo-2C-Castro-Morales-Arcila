@@ -8,4 +8,4 @@
 <h3>Laboratorio No. 01 Robótica Industrial- Trayectorias, Entradas y Salidas Digitales.</h3>
 </div>
 
-<h2>Solución planteada:</h2>
+<h4>Solución planteada:</h4>
