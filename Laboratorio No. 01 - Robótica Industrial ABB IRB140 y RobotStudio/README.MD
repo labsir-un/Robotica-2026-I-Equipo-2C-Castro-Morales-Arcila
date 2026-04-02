@@ -34,8 +34,8 @@ Finalmente, se cuenta con la rutina principal, a la que se puede acceder haciend
 <h3>Diseño de la herramienta:</h3>
 ---
 <h3>Código en RAPID:</h3>
-```RAPID
-effefe
+```vb
+effefe;
 ```
 ---
 <h3>Vídeos:</h3>
