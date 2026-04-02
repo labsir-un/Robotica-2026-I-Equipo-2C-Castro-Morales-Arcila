@@ -11,9 +11,7 @@
 <h3>Solución planteada:</h3>
 
 Para la solución física dentro del laboratorio primero se realizaron mediciones de todo el espacio disponible, es decir, medidas importantes como lo son la distancia del extremo de la banda a la base del manipulador, las dimensiones de la banda y las dimensiones de la caja que teníamos disponible para usar. Seguido a esto procedimos a construir simulaciones que nos permitieran tener cierto grado de certeza del comportamiento real de nuestra rutina antes de instalarla en el robot.
-
 <br><br>
-
 Una vez superada la fase de simulaciones, se procedió a la implementación dentro del laboratorio, lo que nos permitió corregir errores que no contemplamos dentro de las simulaciones y ajustar parámetros, y una vez todo arreglado, se concluyó en una rutina que satisface los requerimientos planteados, la misma se desglosa así:
 
 <br><br>
