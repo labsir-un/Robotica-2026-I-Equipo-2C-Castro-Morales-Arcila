@@ -9,6 +9,7 @@
 </div>
 
 <h3>Solución planteada:</h3>
+Para la solución física dentro del laboratorio 
 ---
 <h3>Diagrama de flujo de acciones del robot:</h3>
 ---
