@@ -57,14 +57,14 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
   <img src="./assets/integrantes/integrante1.jpg" alt="Foto integrante 1" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
-- **Nombre completo:** Nombre Apellido
+- **Nombre completo:** Pablo De Jesus Arcila Mora
 - **Carrera:** Ingeniería Mecatrónica
-- **Correo institucional:** nombre@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
-- **Rol en el equipo:** Ej. Integración ROS 2, documentación, simulación
-- **Intereses:** Robótica móvil, visión artificial, automatización
+- **Correo institucional:** parcilam@unal.edu.co
+- **Usuario de GitHub:** [Kreiop](https://github.com/Kreiop)
+- **Rol en el equipo:** Programación y simulación
+- **Intereses:** Automatización, IA, Robótica Colaborativa
 - **Descripción breve:**  
-  Escribe aquí una breve presentación personal y académica del integrante.
+  Estudiante de Ingeniería Mecatrónica con formación práctica en automatización industrial, motion control, sistemas de mando eléctrico y neumática. Experiencia en programación de PLCs (Siemens y Allen-Bradley), microcontroladores y entornos de simulación industrial. Interesado en el área de automatización, robótica y sistemas de control.
 
 ---
 
