@@ -5,3 +5,5 @@
     <img src="https://imgur.com/Os03JoE.png" alt="Escudo UNAL" width="350px">
 </picture>
 </div>
+
+<h3>Laboratorio No. 01 Robótica Industrial- Trayectorias, Entradas y Salidas Digitales.</h3>
