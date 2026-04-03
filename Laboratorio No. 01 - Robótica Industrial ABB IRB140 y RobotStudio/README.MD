@@ -588,7 +588,9 @@ ENDMODULE
 ---
 <h3>Vídeos:</h3>
 
-<h4>Vídeo de control de transporte simulación:</h4> https://www.youtube.com/watch?v=f315TsI2odc
+<h4>Vídeo de simulación de la decoración de una torta virtual:</h4> https://www.youtube.com/watch?v=O-p1SuG4cyI
+
+<h4>Vídeo de control de transporte - simulación:</h4> https://www.youtube.com/watch?v=f315TsI2odc
 
 <h4>Vídeo de control de transporte dentro del laboratorio:</h4> https://www.youtube.com/watch?v=tSsM_temUiw
 
