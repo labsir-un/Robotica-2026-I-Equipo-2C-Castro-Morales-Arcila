@@ -30,6 +30,18 @@ Finalmente, se cuenta con la rutina principal, a la que se puede acceder haciend
 <h3>Plano de planta:</h3>
 ---
 <h3>Descripción de las funciones utilizadas:</h3>
+
+Durante la implementación de la rutina se hizo uso de las siguientes funciones:
+
+- **`MoveL`:** Esta función es la más utilizada en el código, donde permite mover el TCP del robot desde una posición actual hasta una posición de destino. En la rutina fue utilizada mayormente para trazar las líneas rectas de las letras y la figura.
+
+- **`MoveC`:** Esta función describe una trayectoria mediante dos puntos adicionales al punto inicial, los cuales definen un radio y una longitud de arco, teniendo en cuenta que el ángulo del arco no supere los 180°, dado que al superarlos genera conflicto. En la rutina fue usada para trazar las partes redondeadas de letras como la `P`, `C`, `D`, entre otras letras.
+
+- **`SET`:** Configura una salida digital con el valor lógico de `1`. Es usado para encender los indicadores al activar los pulsadores y también es usada para activar y desactivar las bandas transportadoras (`BWD_Conveyor` / `FWD_Conveyor`).
+
+- **`RESET`:** Desactiva las señales digitales descritas anteriormente, asignando el valor lógico de `0`.
+
+- **`WaitTime`:** Pausa la ejecución del programa durante un tiempo determinado y es comúnmente utilizado en la rutina para sincronizar el movimiento de las bandas transportadoras con las trayectorias del robot.
 ---
 <h3>Diseño de la herramienta:</h3>
 ---
