@@ -13,11 +13,11 @@ Para la implementación física dentro del laboratorio, se comenzó realizando m
 
 Una vez desarrollada y verificada la implementación virtual de las rutinas, se llevó a cabo la implementación fisica en el laboratorio, lo que permitió identificar y corregir errores no contemplados en la simulación, así como reajustar ciertos parámetros, donde tras algunas modificaciones, se comprobó que las rutinas satisfacen los requerimientos planteados, operando de la siguiente manera:
 
-### Rutina de mantenimiento — `DI_02`
+#### Rutina de mantenimiento — `DI_02`
 
 Para facilitar la instalación y desinstalación de la herramienta, se programó una **posición de mantenimiento** la cual se activa mediante el botón `DI_02`, el cual, al oprimirlo, se activa el indicador asociado y el robot ejecuta la trayectoria de mantenimiento, cuyo objetivo es posicionar el manipulador de forma que el acceso a la herramienta sea cómodo y seguro para el operario.
 
-### Rutina de preparación — `DI_03`
+#### Rutina de preparación — `DI_03`
 
 Con el fin de garantizar que el desplazamiento de la caja por la banda permita dibujar sobre ella sin necesidad de mediciones adicionales de tiempo o distancia, se implementó una **rutina de preparación** activada mediante el botón `DI_03`, al oprimirlo, se activa el indicador correspondiente y el robot ejecuta realiza las siguientes tareas:
 
@@ -25,7 +25,7 @@ Con el fin de garantizar que el desplazamiento de la caja por la banda permita d
 2. Una vez transcurrido ese tiempo, el robot toca con la punta de la herramienta las **esquinas extremas de la caja** y espera **5 segundos**.
 3. Despues de esto, el manipulador regresa a la posición de *home* y, una vez alcanzada, **activa la banda durante 7 segundos**, donde este tiempo sirve como referencia temporal para determinar cuánto debe funcionar la banda en dirección contraria durante la rutina principal, asegurando que la caja regrese a la posición de trabajo establecida por el operario.
 
-### Rutina principal — `DI_01`
+#### Rutina principal — `DI_01`
 
 La rutina principal se activa mediante el botón `DI_01`, el cual al oprimirlo, se activa el indicador asociado y se ejecuta la siguiete rutina:
 
