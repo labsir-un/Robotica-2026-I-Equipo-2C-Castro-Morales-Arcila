@@ -9,19 +9,29 @@
 </div>
 
 <h3>Solución planteada:</h3>
+Para la implementación física dentro del laboratorio, se comenzó realizando mediciones del espacio de trabajo y el área de operación: dimensiones de la banda, distancia de la banda al manipulador y dimensiones de la caja, esta ultima simulando el pastel sobre el que se realizará el grabado. Con esta información, se procedió a construir el montaje virtual del área de trabajo en el software de **RobotStudio 2024**, con el fin de obtener una aproximación lo mas parecida del entorno físico y lograr que la rutina coincidiera entre ambos espacios.
 
-Para la solución física dentro del laboratorio primero se realizaron mediciones de todo el espacio disponible, es decir, medidas importantes como lo son la distancia del extremo de la banda a la base del manipulador, las dimensiones de la banda y las dimensiones de la caja que teníamos disponible para usar. Seguido a esto procedimos a construir simulaciones que nos permitieran tener cierto grado de certeza del comportamiento real de nuestra rutina antes de instalarla en el robot.
-<br><br>
-Una vez superada la fase de simulaciones, se procedió a la implementación dentro del laboratorio, lo que nos permitió corregir errores que no contemplamos dentro de las simulaciones y ajustar parámetros, y una vez todo arreglado, se concluyó en una rutina que satisface los requerimientos planteados, la misma se desglosa así:
+Una vez desarrollada y verificada la implementación virtual de las rutinas, se llevó a cabo la implementación fisica en el laboratorio, lo que permitió identificar y corregir errores no contemplados en la simulación, así como reajustar ciertos parámetros, donde tras algunas modificaciones, se comprobó que las rutinas satisfacen los requerimientos planteados, operando de la siguiente manera:
 
+### Rutina de mantenimiento — `DI_02`
 
-Para instalar y desinstalar la herramienta se programó una posición de mantenimiento, a la que se puede acceder haciendo uso del botón marcado como "DI_02". Una vez oprimido, se enciende el indicador asociado al mismo y el robot comienza a ejecutar la trayectoria de mantenimiento, cuyo objetivo es posicionar el manipulador de manera que sea sencillo el acceso a la herramienta.
+Para facilitar la instalación y desinstalación de la herramienta, se programó una **posición de mantenimiento** la cual se activa mediante el botón `DI_02`, el cual, al oprimirlo, se activa el indicador asociado y el robot ejecuta la trayectoria de mantenimiento, cuyo objetivo es posicionar el manipulador de forma que el acceso a la herramienta sea cómodo y seguro para el operario.
 
+### Rutina de preparación — `DI_03`
 
-Con el fin de tener certeza de que el desplazamiento de la caja por la banda permitiría dibujar sobre la misma sin tener que hacer mediciones adicionales a las ya realizadas, ya sean de tiempo o distancia, se implementó una rutina de preparación para la rutina principal, a la que se puede acceder haciendo uso del botón marcado como "DI_03". Una vez oprimido, se enciende el indicador asociado al mismo y el robot comienza a ejecutar las trayectorias de preparación, que se encargan de posicionar la herramienta en un punto asociado a una esquina de la caja y detiene el robot durante 30 segundos para que el operario ubique debidamente la misma, una vez superado este tiempo el robot procede a tocar con la punta de la herramienta las esquinas extremas de la caja y detiene el robot durante 5 segundos antes de enviar al manipulador a la posición de home, una vez alcanzada esta posición se enciende la banda durante 7 segundos, esto se hace con el fin de tener una referencia temporal casi exacta del tiempo que debe estar encendida la banda en la dirección opuesta para que la caja coincida con la posición establecida por el operador.
+Con el fin de garantizar que el desplazamiento de la caja por la banda permita dibujar sobre ella sin necesidad de mediciones adicionales de tiempo o distancia, se implementó una **rutina de preparación** activada mediante el botón `DI_03`, al oprimirlo, se activa el indicador correspondiente y el robot ejecuta realiza las siguientes tareas:
 
+1. Posiciona la herramienta en un punto asociado a una esquina de la caja y **detiene el robot durante 30 segundos**, permitiendo que el operario ubique la caja correctamente sobre la banda y quede alineada con el plano de trabajo.
+2. Una vez transcurrido ese tiempo, el robot toca con la punta de la herramienta las **esquinas extremas de la caja** y espera **5 segundos**.
+3. Despues de esto, el manipulador regresa a la posición de *home* y, una vez alcanzada, **activa la banda durante 7 segundos**, donde este tiempo sirve como referencia temporal para determinar cuánto debe funcionar la banda en dirección contraria durante la rutina principal, asegurando que la caja regrese a la posición de trabajo establecida por el operario.
 
-Finalmente, se cuenta con la rutina principal, a la que se puede acceder haciendo uso del botón marcado como "DI_01". Una vez oprimido, se enciende el indicador asociado al mismo y se enciende la banda en la dirección contraria a la ejecutada en la rutina explicada anteriormente. La banda se enciende durante los mismos 7 segundos y se procede a ejecutar las trayectorias de aproximación a la caja y de dibujo, durante esta rutina ningún operario introduce sus manos dentro del área de trabajo del robot. Una vez terminadas las trayectorias de dibujado el robot se envía a la posición de home, espera 5 segundos y enciende la banda durante 2, terminando así la rutina.
+### Rutina principal — `DI_01`
+
+La rutina principal se activa mediante el botón `DI_01`, el cual al oprimirlo, se activa el indicador asociado y se ejecuta la siguiete rutina:
+
+1. Se enciende la banda en la **dirección contraria** a la utilizada en la rutina de preparación durante los mismos **7 segundos**, reposicionando la caja en la posición de trabajo.
+2. Seguido a ello, el robot ejecuta las **trayectorias de aproximación y dibujo**, donde durante este proceso ningún operario debe introducir sus manos dentro del área de trabajo del robot.
+3. Al finalizar las trayectorias, el manipulador regresa a la posición de *home*, espera **5 segundos** y activa la banda durante **2 segundos**, dando por concluida la rutina.
 
 
 ---
@@ -44,6 +54,12 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 - **`WaitTime`:** Pausa la ejecución del programa durante un tiempo determinado y es comúnmente utilizado en la rutina para sincronizar el movimiento de las bandas transportadoras con las trayectorias del robot.
 ---
 <h3>Diseño de la herramienta:</h3>
+
+- **`Base`:** Es la sección inferior de la herramienta, la cual genera la unión directa con el flange del manipulador. Su geometría está diseñada para acoplarse de forma rígida al último eje del robot, mediante 4 tornillos `M6` y un agujero guia, garantizando que la herramienta quede fija y alineada con el TCP definido en la configuración del sistema. 
+
+- **`Cojín`:** Es la parte intermedia de la herramienta y cumple la función de sostener y alojar el marcador. El mecanismo de conexión entre el cojín y la base se realiza mediante pines fijos al cojín, los cuales encajan en cavidades o guías de la base, impidiendo cualquier desplazamiento relativo entre las piezas durante la operación.
+
+- **`Marcador`:** Es el elemento funcional de la herramienta, encargado de realizar directamente el trazado sobre la superficie de trabajo. Al estar alojado y retenido por el cojín y presionado mediante un resorte instalado en la base de la herramienta, el cual cumple la funcion de darle un margen de compensación al marcador con el fin de que se mantenga una presion de contacto casi contante en la superficie de trabajo.
 ---
 
 <h3>Código en RAPID:</h3>
