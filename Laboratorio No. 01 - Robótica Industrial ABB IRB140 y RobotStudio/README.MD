@@ -61,7 +61,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
 2. **`Cojín`:** Es la parte intermedia de la herramienta y cumple la función de sostener y alojar el marcador. El mecanismo de conexión entre el cojín y la base se realiza mediante pines fijos al cojín, los cuales encajan en cavidades o guías de la base, impidiendo cualquier desplazamiento relativo entre las piezas durante la operación.
 
-3. **`Marcador`:** Es el elemento funcional de la herramienta, encargado de realizar directamente el trazado sobre la superficie de trabajo. Al estar alojado y retenido por el cojín y presionado mediante un resorte instalado en la base de la herramienta, el cual cumple la funcion de darle un margen de compensación al marcador con el fin de que se mantenga una presion de contacto casi contante en la superficie de trabajo.
+3. **`Marcador`:** Es el elemento funcional de la herramienta, encargado de realizar directamente el trazado sobre la superficie de trabajo. Al estar alojado y retenido por el cojín y presionado mediante un **`resorte`** instalado en la base de la herramienta, el cual cumple la funcion de darle un margen de compensación al marcador con el fin de que se mantenga una presion de contacto casi contante en la superficie de trabajo.
 ---
 
 <h3>Código en RAPID:</h3>
