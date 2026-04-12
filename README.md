@@ -73,7 +73,7 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
   <img src="./assets/integrantes/integrante2.jpg" alt="Foto integrante 2" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
-- **Nombre completo:** Nombre Apellido
+- **Nombre completo:** Marco Alejandro Morales Pantoja
 - **Carrera:** Ingeniería Mecatrónica
 - **Correo institucional:** nombre@unal.edu.co
 - **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
