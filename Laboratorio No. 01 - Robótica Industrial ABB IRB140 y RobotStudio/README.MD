@@ -6,7 +6,7 @@
 </picture>
 
 # Laboratorio No. 01 Robótica Industrial- Trayectorias, Entradas y Salidas Digitales.</h2>
-
+</div>
 
 ## Solución planteada:
 Para la implementación física dentro del laboratorio, se comenzó realizando mediciones del espacio de trabajo y el área de operación: dimensiones de la banda, distancia de la banda al manipulador y dimensiones de la caja, esta ultima simulando el pastel sobre el que se realizará el grabado. Con esta información, se procedió a construir el montaje virtual del área de trabajo en el software de **RobotStudio 2024**, con el fin de obtener una aproximación lo mas parecida del entorno físico y lograr que la rutina coincidiera entre ambos espacios.
@@ -47,9 +47,9 @@ A continuacion se presenta un plano visto desde la vista superior de la estacion
 - Banda transportadora 
 
 - La caja (simula el pastel)
-
+<div align="center">
 ![Vista de Planta - Estacion de Trabajo](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Plano%20de%20Planta.png)
-
+</div>
 ---
 ## Descripción de las funciones utilizadas:
 
@@ -66,9 +66,9 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 - **`WaitTime`:** Pausa la ejecución del programa durante un tiempo determinado y es comúnmente utilizado en la rutina para sincronizar el movimiento de las bandas transportadoras con las trayectorias del robot.
 ---
 ## Diseño de la herramienta:
-
+<div align="center">
 ![Partes de la herramienta](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Herramienta%20Explosionada.png)
-
+</div>
 1. **`Base`:** Es la sección inferior de la herramienta, la cual genera la unión directa con el flange del manipulador. Su geometría está diseñada para acoplarse de forma rígida al último eje del robot, mediante 4 tornillos `M6` y un agujero guia, garantizando que la herramienta quede fija y alineada con el TCP definido en la configuración del sistema, ademas de ello, con el fin de evitar problemas de singularidad con el manipulador, el segmento donde se conecta el cojin cuenta con una inclinacion de **30°** respecto a la base. 
 
 2. **`Cojín`:** Es la parte intermedia de la herramienta y cumple la función de sostener y alojar el marcador. El mecanismo de conexión entre el cojín y la base se realiza mediante pines fijos al cojín, los cuales encajan en cavidades o guías de la base, impidiendo cualquier desplazamiento relativo entre las piezas durante la operación.
@@ -144,7 +144,7 @@ En esta sesion se mostrara un fragmento del codogo especificamente las rutinas i
 
 ---
 ## Vídeos
-
+<div align="center">
 #### Vídeo de simulación de la decoración de una torta virtual
 [![Vídeo de simulación de la decoración de una torta virtual](https://img.youtube.com/vi/O-p1SuG4cyI/0.jpg)](https://www.youtube.com/watch?v=O-p1SuG4cyI)
 
@@ -153,4 +153,4 @@ En esta sesion se mostrara un fragmento del codogo especificamente las rutinas i
 
 #### Vídeo de control de transporte dentro del laboratorio
 [![Vídeo de control de transporte dentro del laboratorio](https://img.youtube.com/vi/tSsM_temUiw/0.jpg)](https://www.youtube.com/watch?v=tSsM_temUiw)
-
+</div>
