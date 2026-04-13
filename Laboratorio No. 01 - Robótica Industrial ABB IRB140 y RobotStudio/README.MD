@@ -38,6 +38,14 @@ La rutina principal se activa mediante el botón `DI_01`, el cual al oprimirlo, 
 <h3>Diagrama de flujo de acciones del robot:</h3>
 ---
 <h3>Plano de planta:</h3>
+A continuacion se presenta un plano visto desde la vista superior de la estacion de trabajo y los elementos que interactuan en ella, en los cuales encontramos:
+- Manipulador IRB140 
+- Contolador IRC5
+- Banda transportadora 
+- La caja (simula el pastel)
+
+![Vista de Planta - Estacion de Trabajo](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Plano%20de%20Planta.png)
+
 ---
 <h3>Descripción de las funciones utilizadas:</h3>
 
@@ -57,7 +65,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
 ![Partes de la herramienta](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Herramienta%20Explosionada.png)
 
-1. **`Base`:** Es la sección inferior de la herramienta, la cual genera la unión directa con el flange del manipulador. Su geometría está diseñada para acoplarse de forma rígida al último eje del robot, mediante 4 tornillos `M6` y un agujero guia, garantizando que la herramienta quede fija y alineada con el TCP definido en la configuración del sistema. 
+1. **`Base`:** Es la sección inferior de la herramienta, la cual genera la unión directa con el flange del manipulador. Su geometría está diseñada para acoplarse de forma rígida al último eje del robot, mediante 4 tornillos `M6` y un agujero guia, garantizando que la herramienta quede fija y alineada con el TCP definido en la configuración del sistema, ademas de ello, con el fin de evitar problemas de singularidad con el manipulador, el segmento donde se conecta el cojin cuenta con una inclinacion de **30°** respecto a la base. 
 
 2. **`Cojín`:** Es la parte intermedia de la herramienta y cumple la función de sostener y alojar el marcador. El mecanismo de conexión entre el cojín y la base se realiza mediante pines fijos al cojín, los cuales encajan en cavidades o guías de la base, impidiendo cualquier desplazamiento relativo entre las piezas durante la operación.
 
