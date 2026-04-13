@@ -76,11 +76,11 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
 - **Nombre completo:** Marco Alejandro Morales Pantoja
 - **Carrera:** Ingeniería Mecatrónica
 - **Correo institucional:** mmoralespa@unal.edu.co
-- **Usuario de GitHub:** [mamp](https://github.com/usuariogithub)
-- **Rol en el equipo:** Modelado 3D, pruebas y simulacion
-- **Intereses:** 
+- **Usuario de GitHub:** [Mamp](https://github.com/usuariogithub)
+- **Rol en el equipo:** Modelado 3D, pruebas y simulación
+- **Intereses:** Automatización, diseño mecánico, electrónica, tutor, simulación y desarrollo de proyectos tecnológicos.
 - **Descripción breve:**  
-  Escribe aquí una breve presentación personal y académica del integrante.
+  Soy estudiante de Ingeniería Mecatrónica, con interés en el diseño y desarrollo de soluciones tecnológicas que integren la parte mecánica, electrónica y de control. Me gusta trabajar en modelado 3D, simulación y pruebas de sistemas, buscando siempre mejorar el rendimiento y la funcionalidad de los proyectos. Me considero una persona responsable, proactiva y con disposición para aprender y aportar al trabajo en equipo.
 
 ---
 
