@@ -12,7 +12,7 @@
 <h2>Profesores: <br>Pedro Fabián Cárdenas Herrera <br> Manuel Felipe Carranza Montenegro</h2>
 
 <h4>Pablo De Jesus Arcila Mora<br>
-    Nombre Integrante 2<br>
+    Marco Alejandro Morales Pantoja<br>
     Daniel Felipe Castro Galindo</h4>
 
 <p>
