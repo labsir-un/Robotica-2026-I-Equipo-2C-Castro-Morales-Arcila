@@ -38,7 +38,13 @@ La rutina principal se activa mediante el botón `DI_01`, el cual al oprimirlo, 
 
 ---
 
-## Diagrama de flujo de acciones del robot:
+## Diagrama de flujo de acciones del robot
+
+A continuación, se presenta el diagrama de flujo correspondiente a la secuencia de acciones programadas para el robot dentro de la estación de trabajo. En este se resume la lógica de operación implementada en la rutina principal, considerando la verificación de entradas digitales, la activación de salidas, el control de la banda transportadora y la ejecución de las trayectorias definidas para las rutinas de trabajo, mantenimiento y preparación. De esta manera, el diagrama permite visualizar de forma clara el orden de ejecución del sistema y la interacción entre las señales de control y los movimientos del manipulador.
+
+<div align="center">
+  <img src="./Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/diagrama_flujo_robot.png" alt="Diagrama de flujo de acciones del robot" width="700"/>
+</div>
 
 ---
 
