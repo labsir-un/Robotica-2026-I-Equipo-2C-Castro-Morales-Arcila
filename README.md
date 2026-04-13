@@ -76,7 +76,7 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
 - **Nombre completo:** Marco Alejandro Morales Pantoja
 - **Carrera:** Ingeniería Mecatrónica
 - **Correo institucional:** mmoralespa@unal.edu.co
-- **Usuario de GitHub:** [mmoralespa-cyber](https://github.com/usuariogithub)
+- **Usuario de GitHub:** [Mamp](https://github.com/usuariogithub)
 - **Rol en el equipo:** Modelado 3D, pruebas y simulación
 - **Intereses:** Automatización industrial, PLC Siemens y Rockwell, sistemas SCADA, diseño mecánico, electrónica, simulación y desarrollo de proyectos tecnológicos.
 - **Descripción breve:**  
