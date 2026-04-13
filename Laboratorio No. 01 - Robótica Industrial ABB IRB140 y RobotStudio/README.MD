@@ -89,7 +89,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
 ## Código en RAPID:
 
-En esta sección se mostrará un fragmento del código, específicamente las rutinas implementadas en la sección principal. Para ver el código completo, se puede acceder a la siguiente ruta: [Ver código fuente](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/tree/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/src)
+En esta sección se mostrará un fragmento del código, específicamente las rutinas implementadas en la sección principal. Para ver el código completo, se puede acceder a la siguiente ruta: [Ver código fuente](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/src/Module1.mod)
 
 ```bash
 PROC main()
