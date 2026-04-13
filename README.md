@@ -86,15 +86,14 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
 
 ### Integrante 3
 <div align="center">
-  <img src="./assets/integrantes/integrante3.jpg" alt="Foto integrante 3" style="border-radius: 50%; width: 180px;"><br>
+  <img src="./assets/integrantes/Integrante 3.jpg" alt="Foto integrante 3" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
-- **Nombre completo:** Nombre Apellido
+- **Nombre completo:** Daniel Felipe Castro Galindo
 - **Carrera:** Ingeniería Mecatrónica
-- **Correo institucional:** nombre@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
-- **Rol en el equipo:** Ej. Documentación, pruebas, simulación
-- **Intereses:** Robótica industrial, sistemas autónomos, IA
+- **Correo institucional:** dancastroga@unal.edu.co
+- **Usuario de GitHub:** [usuariogithub](https://github.com/DanielCastro-02)
+- **Rol en el equipo:** Documentación, pruebas, modelado 3D
+- **Intereses:** Robótica industrial, Robótica Movil, integración de hardware y software
 - **Descripción breve:**  
-  Escribe aquí una breve presentación personal y académica del integrante.
-
+  Soy estudiante de Ingeniería Mecatrónica con un gran interés en la electrónica y en el uso de diversas herramientas de diseño para el desarrollo de sistemas tecnológicos. Me apasiona la robótica, la electrónica aplicada y la integración hardware-software. Durante mi trayecto por la Universidad he desarrollado proyectos que han involucrado el desarrollo de prototipos y soluciones funcionales que resuelvan problemáticas.
