@@ -5,10 +5,10 @@
     <img src="https://imgur.com/Os03JoE.png" alt="Escudo UNAL" width="350px">
 </picture>
 
-<h2>Laboratorio No. 01 Robótica Industrial- Trayectorias, Entradas y Salidas Digitales.</h2>
-</div>
+# Laboratorio No. 01 Robótica Industrial- Trayectorias, Entradas y Salidas Digitales.</h2>
 
-<h3>Solución planteada:</h3>
+
+## Solución planteada:
 Para la implementación física dentro del laboratorio, se comenzó realizando mediciones del espacio de trabajo y el área de operación: dimensiones de la banda, distancia de la banda al manipulador y dimensiones de la caja, esta ultima simulando el pastel sobre el que se realizará el grabado. Con esta información, se procedió a construir el montaje virtual del área de trabajo en el software de **RobotStudio 2024**, con el fin de obtener una aproximación lo mas parecida del entorno físico y lograr que la rutina coincidiera entre ambos espacios.
 
 Una vez desarrollada y verificada la implementación virtual de las rutinas, se llevó a cabo la implementación fisica en el laboratorio, lo que permitió identificar y corregir errores no contemplados en la simulación, así como reajustar ciertos parámetros, donde tras algunas modificaciones, se comprobó que las rutinas satisfacen los requerimientos planteados, operando de la siguiente manera:
@@ -35,19 +35,23 @@ La rutina principal se activa mediante el botón `DI_01`, el cual al oprimirlo, 
 
 
 ---
-<h3>Diagrama de flujo de acciones del robot:</h3>
+## Diagrama de flujo de acciones del robot:
 ---
-<h3>Plano de planta:</h3>
+## Plano de planta:
 A continuacion se presenta un plano visto desde la vista superior de la estacion de trabajo y los elementos que interactuan en ella, en los cuales encontramos:
+
 - Manipulador IRB140 
+
 - Contolador IRC5
+
 - Banda transportadora 
+
 - La caja (simula el pastel)
 
 ![Vista de Planta - Estacion de Trabajo](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Plano%20de%20Planta.png)
 
 ---
-<h3>Descripción de las funciones utilizadas:</h3>
+## Descripción de las funciones utilizadas:
 
 Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
@@ -61,7 +65,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
 - **`WaitTime`:** Pausa la ejecución del programa durante un tiempo determinado y es comúnmente utilizado en la rutina para sincronizar el movimiento de las bandas transportadoras con las trayectorias del robot.
 ---
-<h3>Diseño de la herramienta:</h3>
+## Diseño de la herramienta:
 
 ![Partes de la herramienta](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Herramienta%20Explosionada.png)
 
@@ -72,7 +76,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 3. **`Marcador`:** Es el elemento funcional de la herramienta, encargado de realizar directamente el trazado sobre la superficie de trabajo. Al estar alojado y retenido por el cojín y presionado mediante un **`resorte`** instalado en la base de la herramienta, el cual cumple la funcion de darle un margen de compensación al marcador con el fin de que se mantenga una presion de contacto casi contante en la superficie de trabajo.
 ---
 
-<h3>Código en RAPID:</h3>
+## Código en RAPID:
 
 En esta sesion se mostrara un fragmento del codogo especificamente las rutinas implementadas en la seccion principal, para mirar a detalle el codigo completo, se puede acceder a la siguiente ruta: [Ver código fuente](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/tree/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/src)
 ```bash
@@ -139,16 +143,14 @@ En esta sesion se mostrara un fragmento del codogo especificamente las rutinas i
 ```
 
 ---
-<h3>Vídeos:</h3>
-<h4>Vídeo de simulación de la decoración de una torta virtual:
+## Vídeos
+
+#### Vídeo de simulación de la decoración de una torta virtual
 [![Vídeo de simulación de la decoración de una torta virtual](https://img.youtube.com/vi/O-p1SuG4cyI/0.jpg)](https://www.youtube.com/watch?v=O-p1SuG4cyI)
-https://www.youtube.com/watch?v=O-p1SuG4cyI
 
-<h4>Vídeo de control de transporte - simulación:</h4> 
+#### Vídeo de control de transporte - simulación
 [![Vídeo de control de transporte - simulación](https://img.youtube.com/vi/f315TsI2odc/0.jpg)](https://www.youtube.com/watch?v=f315TsI2odc)
-https://www.youtube.com/watch?v=f315TsI2odc
 
-<h4>Vídeo de control de transporte dentro del laboratorio:</h4> 
+#### Vídeo de control de transporte dentro del laboratorio
 [![Vídeo de control de transporte dentro del laboratorio](https://img.youtube.com/vi/tSsM_temUiw/0.jpg)](https://www.youtube.com/watch?v=tSsM_temUiw)
-https://www.youtube.com/watch?v=tSsM_temUiw
 
