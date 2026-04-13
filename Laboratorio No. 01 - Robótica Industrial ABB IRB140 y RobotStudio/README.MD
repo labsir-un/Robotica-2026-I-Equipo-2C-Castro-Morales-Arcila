@@ -85,11 +85,13 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 
 3. **`Marcador`:** Es el elemento funcional de la herramienta, encargado de realizar directamente el trazado sobre la superficie de trabajo. Al estar alojado y retenido por el cojín y presionado mediante un **`resorte`** instalado en la base de la herramienta, el cual cumple la función de darle un margen de compensación al marcador con el fin de que se mantenga una presión de contacto casi constante en la superficie de trabajo.
 
+**`Nota`:** Los modelos STL de la herramienta se pueden encontrar mediante el siguiente link: [Ver modelados](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/tree/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/models)
+
 ---
 
 ## Código en RAPID:
 
-En esta sección se mostrará un fragmento del código, específicamente las rutinas implementadas en la sección principal. Para ver el código completo, se puede acceder a la siguiente ruta: [Ver código fuente](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/src/Module1.mod)
+En esta sección se mostrará un fragmento del código, específicamente las rutinas implementadas en la sección principal. Para ver el código completo, se puede acceder mediante el siguiente link: [Ver código fuente](https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/src/Module1.mod)
 
 ```bash
 PROC main()
