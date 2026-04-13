@@ -86,7 +86,7 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
 
 ### Integrante 3
 <div align="center">
-  <img src="./assets/integrantes/Integrante 3.jpg" alt="Foto integrante 3" style="border-radius: 50%; width: 180px;"><br>
+  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/assets/integrantes/integrante3.jpeg" alt="Foto integrante 3" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
 - **Nombre completo:** Daniel Felipe Castro Galindo
