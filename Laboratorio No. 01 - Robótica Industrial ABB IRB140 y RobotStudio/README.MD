@@ -76,7 +76,7 @@ Durante la implementación de la rutina se hizo uso de las siguientes funciones:
 ## Diseño de la herramienta:
 
 <div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Herramienta%20Explosionada.png" alt="Partes de la herramienta" width="700"/>
+  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/Herramienta%20Explosionada.png" alt="Partes de la herramienta" width="500"/>
 </div>
 
 1. **`Base`:** Es la sección inferior de la herramienta, la cual genera la unión directa con el flange del manipulador. Su geometría está diseñada para acoplarse de forma rígida al último eje del robot, mediante 4 tornillos `M6` y un agujero guía, garantizando que la herramienta quede fija y alineada con el TCP definido en la configuración del sistema. Además de ello, con el fin de evitar problemas de singularidad con el manipulador, el segmento donde se conecta el cojín cuenta con una inclinación de **30°** respecto a la base.
