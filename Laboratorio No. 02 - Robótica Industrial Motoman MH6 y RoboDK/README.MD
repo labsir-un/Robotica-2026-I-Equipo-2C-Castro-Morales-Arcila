@@ -112,21 +112,13 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 | `T` | `1393` |
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="600"/>
-</div>
-
-<div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/work_home.png?raw=true" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="600"/>
-</div>
-
-
-<div align="center">
   <img src="./rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="600"/>
 </div>
 
 <div align="center">
   <img src="./work_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="600"/>
 </div>
+
 #### Configuración `Home 2`
 
 La configuración **Home 2** corresponde a una segunda posición de referencia del manipulador. En la pantalla aparece como **SECOND HOME POS**, donde se muestran los valores especificados, actuales y la diferencia entre ambos. En la imagen se observa que la diferencia es igual a cero en todos los ejes, lo que indica que el robot se encuentra exactamente en la posición definida como segundo Home.
@@ -141,10 +133,11 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 | `T` | `1392` |
 
 <div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/rsecond_home.png?raw=true" alt="Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6" width="600"/>
+  <img src="./rsecond_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición SECOND HOME POS" width="600"/>
 </div>
+
 <div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/second_home.png?raw=true" alt="Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6" width="600"/>
+  <img src="./second_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición SECOND HOME POS del Motoman MH6" width="600"/>
 </div>
 
 ## Movimiento manual del manipulador Motoman MH6
