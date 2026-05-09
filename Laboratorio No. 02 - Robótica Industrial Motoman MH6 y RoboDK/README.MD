@@ -132,15 +132,6 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
   <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/second_home.png?raw=true" alt="Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6" width="600"/>
 </div>
 
-
-#### Comparación entre `Home 1` y `Home 2`
-
-Al comparar ambas configuraciones, se nota que **Home 1** y **Home 2** no representan simplemente el mismo punto con otro nombre, sino dos posturas distintas del manipulador. En **Home 1**, los ejes `L` y `U` presentan valores negativos bastante grandes, lo que indica una configuración más recogida o desplazada respecto a la posición de referencia del brazo. En **Home 2**, en cambio, los valores de `L` y `U` son positivos y pequeños en comparación, mientras que los demás ejes se mantienen cercanos a cero o con variaciones moderadas.
-
-Desde el punto de vista operativo, **Home 2** puede interpretarse como una posición más ordenada para verificar el estado inicial del robot, ya que en la pantalla se observa que la diferencia entre la posición especificada y la actual es cero. Sin embargo, la posición más conveniente depende de la rutina que se vaya a ejecutar. Si se requiere iniciar una trayectoria desde una postura más despejada y controlada, Home 2 puede ser más cómoda. Si se necesita regresar a una posición de trabajo ya definida por la celda, Home 1 puede ser más útil dentro de la operación programada.
-
-**`Nota:`** Los valores registrados corresponden a las lecturas observadas directamente en el teach pendant durante el laboratorio, por lo que se toman como referencia práctica para describir las configuraciones iniciales del manipulador.
-
 ## Movimiento manual del manipulador Motoman MH6
 
 Durante la práctica, el movimiento manual del manipulador Motoman MH6 permite al usuario desplazar el robot mediante el teach pendant. Este procedimiento es importante para enseñar puntos, verificar posiciones, ajustar trayectorias y comprobar que el robot pueda moverse sin colisionar con elementos de la estación.
