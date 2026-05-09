@@ -111,6 +111,9 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 | `B` | `42647` |
 | `T` | `1393` |
 
+<div align="center">
+  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/main/Laboratorio%20No.%2001%20-%20Rob%C3%B3tica%20Industrial%20ABB%20IRB140%20y%20RobotStudio/img/diagrama_flujo_robot.png" alt="Diagrama de flujo de acciones del robot" width="400"/>
+</div>
 **`Imagen propuesta:`** Fotografía del teach pendant mostrando la posición **WORK HOME POSITION** del Motoman MH6.
 
 #### Configuración `Home 2`
