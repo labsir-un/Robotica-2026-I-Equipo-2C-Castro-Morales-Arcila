@@ -195,84 +195,50 @@ En la práctica, lo más seguro es iniciar en `INCH` o `SLOW`, sobre todo cuando
 
 También existe la tecla `[HIGH SPEED]`, que permite aumentar la rapidez mientras se mantiene presionada una tecla de eje. Sin embargo, el propio manual indica que esta función no aplica cuando la velocidad manual está en `INCH`, y en operación real conviene usarla con cuidado, porque reduce el margen de reacción del operador.
 
+---
 
 ## Software RoboDK
 
-**RoboDK** es un software de simulación y programación fuera de línea para robots industriales. Su principal ventaja es que permite trabajar con robots de diferentes marcas dentro de una misma plataforma, lo cual facilita el diseño de estaciones virtuales, la generación de trayectorias y la creación de programas compatibles con distintos controladores.
+**RoboDK** se utilizó como el entorno de simulación y programación fuera de línea para el Motoman MH6. En comparación con trabajar directamente desde el controlador, RoboDK permite construir primero una estación virtual, ubicar el robot, definir el sistema de referencia, configurar la herramienta y probar la trayectoria antes de llevarla al equipo físico. Esto reduce bastante el riesgo de errores en la celda, porque se puede revisar el alcance del robot, la forma de la curva y la posición de los puntos antes de ejecutar el movimiento real.
 
-En este laboratorio, RoboDK se utiliza para modelar la estación de trabajo del Motoman MH6, generar una trayectoria polar, simular el movimiento del robot y preparar la ejecución física del manipulador desde el computador.
+En este laboratorio, RoboDK funciona como un puente entre la parte geométrica de la trayectoria y el movimiento físico del manipulador. El software no solo dibuja la trayectoria en pantalla, también convierte los puntos generados en movimientos que el robot puede interpretar, ya sea mediante ejecución directa desde el computador o mediante la generación de un programa compatible con el controlador Motoman.
 
 #### Aplicaciones principales de RoboDK
 
-RoboDK puede utilizarse en diferentes aplicaciones industriales y académicas, entre las cuales se encuentran:
+RoboDK es útil para simulación de robots industriales, programación fuera de línea, generación de trayectorias, validación de movimientos, revisión de colisiones, calibración de herramientas y creación de programas para diferentes marcas de robots. En un entorno académico resulta bastante práctico porque no se limita a una sola familia de manipuladores; permite trabajar con ABB, Motoman, KUKA, FANUC, Universal Robots y otros fabricantes desde una misma interfaz.
 
-- Simulación de robots industriales.
-- Programación fuera de línea.
-- Generación de trayectorias.
-- Importación de modelos CAD.
-- Verificación de colisiones.
-- Análisis de alcance del robot.
-- Calibración de herramientas y sistemas de referencia.
-- Mecanizado robotizado.
-- Impresión 3D.
-- Soldadura.
-- Corte.
-- Dispensado.
-- Paletizado.
-- Manipulación de piezas.
+En la práctica del Motoman MH6, su utilidad principal estuvo en generar una trayectoria polar, visualizarla antes de ejecutarla y luego usar el mismo script como base para comandar el robot físico. Digamos que la parte fuerte de RoboDK aquí no fue solo simular, sino permitir que una trayectoria matemática terminara convertida en una rutina de movimiento real.
 
 #### ¿Qué hace RoboDK para mover el manipulador?
 
-RoboDK permite construir una estación virtual en la cual se define el robot, la herramienta, la pieza y el sistema de referencia. A partir de esta información, el software calcula las posiciones necesarias para que el manipulador siga una trayectoria determinada.
+RoboDK trabaja con una estación virtual donde se definen el robot, el frame, la herramienta y los targets o poses de movimiento. En el script usado para este laboratorio, primero se establece la conexión con la estación mediante `Robolink()`, luego se selecciona el robot con `ItemUserPick`, se asigna el frame de trabajo con `setPoseFrame`, se define la herramienta con `setPoseTool`, y finalmente se ejecutan movimientos mediante `MoveJ` y `MoveL`.
 
-Cuando el usuario define una trayectoria, RoboDK genera una secuencia de movimientos que pueden ser simulados dentro del entorno virtual. Posteriormente, mediante un postprocesador, el software puede convertir esa trayectoria en un programa compatible con el controlador del robot.
-
-Para el caso de robots Motoman, el programa generado puede estar asociado al formato utilizado por los controladores Yaskawa Motoman, como los archivos de programa tipo `JBI`.
+En este caso, `MoveJ` se usa para desplazamientos generales, como ir a una posición segura o regresar a casa, mientras que `MoveL` se usa para seguir la trayectoria de dibujo punto por punto. La figura polar se genera mediante una ecuación en coordenadas polares y luego se convierte a coordenadas cartesianas `x`, `y`, `z`, porque el robot finalmente necesita posiciones espaciales para mover el TCP.
 
 #### ¿Cómo se comunica RoboDK con el manipulador?
 
-La comunicación entre RoboDK y el manipulador puede realizarse de diferentes formas, dependiendo de la configuración del laboratorio. En términos generales, el proceso consiste en:
+La comunicación con el manipulador se realiza desde el computador mediante la conexión configurada entre RoboDK y el controlador del robot. En la simulación, el script trabaja únicamente sobre la estación virtual. Para la ejecución física, se habilitan las líneas de conexión con `robot.Connect()` y se verifica el estado mediante `robot.ConnectedState()`.
 
-1. Crear la estación virtual en RoboDK.
-2. Seleccionar el modelo del robot Motoman MH6.
-3. Definir la herramienta y el sistema de referencia.
-4. Programar la trayectoria.
-5. Simular el movimiento.
-6. Generar el programa mediante el postprocesador correspondiente.
-7. Enviar o cargar el programa en el controlador del robot.
-8. Ejecutar la trayectoria en el manipulador físico.
-
-**`Nota:`** Esta sección debe completarse indicando si durante el laboratorio se utilizó comunicación directa por red, carga manual del programa, controlador Motoman o algún driver específico de RoboDK.
+En términos de operación, el robot debe estar correctamente configurado para aceptar comandos desde el PC, normalmente en modo remoto o con la configuración de comunicación correspondiente. Una vez RoboDK confirma la conexión, los movimientos enviados desde el script dejan de ser solo simulados y pasan a ejecutarse sobre el manipulador físico. Por eso, antes de correr la rutina real, es necesario haber validado la trayectoria virtualmente y tener despejada la zona de trabajo.
 
 ---
 
 ## Comparación entre RoboDK y RobotStudio
 
-A continuación se presenta una comparación general entre **RoboDK** y **RobotStudio**, considerando su enfoque, compatibilidad y utilidad dentro del laboratorio.
+RoboDK y RobotStudio cumplen funciones parecidas en el sentido de que ambos permiten simular y programar robots, pero no tienen exactamente el mismo enfoque. **RobotStudio** está pensado para el ecosistema ABB, por eso trabaja de forma muy fuerte con el controlador virtual de ABB y con el lenguaje `RAPID`. En el laboratorio anterior fue una herramienta muy útil porque el manipulador utilizado era el ABB IRB140, entonces la simulación y la programación estaban directamente alineadas con ese fabricante.
+
+**RoboDK**, en cambio, se entiende más como una plataforma general de programación fuera de línea. Su ventaja está en que permite trabajar con robots de diferentes marcas y generar trayectorias desde scripts, modelos CAD o puntos definidos por el usuario. Para este laboratorio eso fue clave, porque el robot trabajado era un Motoman MH6 y la trayectoria polar se podía construir desde Python, probar en el entorno virtual y después ejecutar en el robot real.
 
 | Característica | RoboDK | RobotStudio |
 |---|---|---|
-| Fabricante | RoboDK | ABB Robotics |
-| Enfoque principal | Simulación y programación fuera de línea para múltiples marcas | Simulación y programación fuera de línea para robots ABB |
-| Compatibilidad | Robots de diferentes fabricantes | Principalmente robots ABB |
-| Lenguaje o salida | Depende del postprocesador del robot | RAPID |
-| Uso en el laboratorio | Programación y simulación del Motoman MH6 | Programación y simulación del ABB IRB140 |
-| Ventaja principal | Flexibilidad con múltiples marcas | Alta fidelidad con el ecosistema ABB |
-| Limitación principal | Puede requerir ajustes según el controlador | Está orientado principalmente a robots ABB |
+| Enfoque | Plataforma multimarca | Plataforma orientada a ABB |
+| Robot trabajado en el laboratorio | Motoman MH6 | ABB IRB140 |
+| Programación | Scripts, postprocesadores y trayectorias offline | RAPID y controlador virtual ABB |
+| Ventaja principal | Flexibilidad con diferentes marcas | Alta fidelidad en robots ABB |
+| Uso más conveniente | Simulación general, trayectorias y celdas multimarca | Desarrollo y validación de rutinas ABB |
 
-#### ¿Qué significa RoboDK para este laboratorio?
+Para este laboratorio, RoboDK se puede entender como la herramienta que permitió conectar la matemática de la trayectoria con la ejecución real del Motoman. RobotStudio, más bien, queda como referencia del laboratorio anterior, donde el objetivo era trabajar dentro de un entorno ABB más cerrado pero también más fiel al controlador real de esa marca.
 
-Para este laboratorio, **RoboDK** representa una herramienta de conexión entre el diseño virtual y la ejecución física del Motoman MH6. Su importancia radica en que permite diseñar una trayectoria, simularla previamente y generar un programa que pueda ser utilizado por el manipulador real.
-
-Además, al no estar limitado a una sola marca, RoboDK resulta útil en laboratorios donde se trabajan diferentes manipuladores industriales.
-
-#### ¿Qué significa RobotStudio frente a RoboDK?
-
-**RobotStudio** es una herramienta especializada en robots ABB. En el laboratorio anterior fue útil porque se trabajó con el manipulador ABB IRB140, permitiendo simular rutinas y trabajar con instrucciones propias del lenguaje RAPID.
-
-Frente a RoboDK, RobotStudio ofrece mayor fidelidad cuando se trabaja con robots ABB, debido a que emplea el controlador virtual de ABB. Sin embargo, RoboDK resulta más flexible cuando se requiere trabajar con robots de diferentes fabricantes, como en este caso con el Motoman MH6.
-
----
 
 #### Simulación virtual en RoboDK
 
