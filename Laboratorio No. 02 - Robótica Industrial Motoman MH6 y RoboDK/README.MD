@@ -139,6 +139,11 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 <div align="center">
   <img src="./second_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición SECOND HOME POS del Motoman MH6" width="600"/>
 </div>
+#### Comparación entre `Home 1` y `Home 2`
+
+Al revisar ambas posiciones, se nota que **Home 1** y **Home 2** cumplen funciones distintas dentro de la operación. **Home 1**, al aparecer como `WORK HOME POSITION`, se puede asociar más con una posición de trabajo o referencia operativa de la celda. En cambio, **Home 2**, identificada como `SECOND HOME POS`, funciona mejor como una posición auxiliar, más ordenada para verificación, reposo o traslado seguro dentro del procedimiento.
+
+Para la práctica, **Home 2** puede considerarse más conveniente como posición segura inicial, ya que en la pantalla se observa que la diferencia entre la posición especificada y la actual es cero en todos los ejes. Sin embargo, si la rutina necesita iniciar cerca de la zona de operación, **Home 1** puede resultar más útil porque está más relacionada con la posición de trabajo definida para la celda.
 
 ## Movimiento manual del manipulador Motoman MH6
 
@@ -594,7 +599,17 @@ A continuación se presenta el diagrama de flujo correspondiente a la lógica ge
   <img src="./diagrama_flujo2.png" alt="Diagrama de flujo de acciones del robot para la trayectoria polar en RoboDK" width="700"/>
 </div>
 
+---
 
+## Plano de planta:
+
+En esta sección se presenta la distribución general de la estación de trabajo utilizada durante el laboratorio. El plano de planta permite ubicar visualmente el manipulador **Motoman MH6**, el controlador **DX100**, el computador con **RoboDK**, la superficie de trabajo y la zona donde se ejecuta la trayectoria polar.
+
+También debe indicarse la zona de seguridad y la ubicación aproximada del operador, ya que durante la ejecución física del robot es necesario mantener despejado el espacio de operación del manipulador.
+
+<div align="center">
+  <img src="./plano_planta2.png" alt="Plano de planta de la estación de trabajo del Motoman MH6" width="700"/>
+</div>
 
 ## Descripción de las funciones y conceptos utilizados:
 
@@ -658,7 +673,7 @@ El uso de **RoboDK** permite simular y programar trayectorias para robots de dif
 
 La trayectoria polar permite aplicar conceptos matemáticos al movimiento de un robot industrial, ya que convierte una ecuación definida mediante radio y ángulo en una serie de puntos cartesianos que el manipulador puede seguir. Esto demuestra la relación entre la programación, la geometría y la operación física de sistemas robóticos.
 
-**`Conclusión pendiente:`** Agregar una conclusión basada en la experiencia real del laboratorio, incluyendo errores encontrados, ajustes realizados, comportamiento del robot y resultado final de la trayectoria polar.
+Durante la implementación física se evidenció que la trayectoria no depende únicamente del código, sino también de una correcta definición del frame, la herramienta activa, la altura segura y la comunicación con el controlador. La simulación permitió reducir errores antes de ejecutar el movimiento real, pero la validación final se dio al observar el comportamiento del manipulador dentro de la celda.
 
 ---
 
