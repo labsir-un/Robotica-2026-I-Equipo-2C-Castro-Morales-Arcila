@@ -321,8 +321,8 @@ La simulación en roboDK es bastante sencilla en comparación con la de Robot St
 
 
 ```python
-from robodk.robolink import * # API para comunicarte con RoboDK
-from robodk.robomath import * # Funciones matemáticas
+from robodk.robolink import *
+from robodk.robomath import *
 import math
 
 # Importamos las librerías necesarias para el texto
@@ -339,7 +339,7 @@ robot = RDK.ItemUserPick("Selecciona un robot", ITEM_TYPE_ROBOT)
 if not robot.Valid():
     raise Exception("No se ha seleccionado un robot válido.")
 
-# Conectar al robot físico
+#Conectar al robot físico
 #if not robot.Connect():
 #    raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
 
@@ -362,15 +362,15 @@ robot.setSpeed(300)
 robot.setRounding(5)
 
 #------------------------------------------------
-# 3) Parámetros de posición (AJUSTADOS)
+# 3) Parámetros de posición
 #------------------------------------------------
 z_surface = 0
 z_safe = 50
 
 # --- POSICIÓN DE LA FIGURA ---
-offset_x = 500    # Centro X de la figura
-offset_y = 0      # Centro Y de la figura
-escala = 50       # Radio máximo de la figura es 150mm (3 * 50)
+offset_x = 500    
+offset_y = 0      
+escala = 50 
 
 # --- POSICIÓN DEL TEXTO ---
 texto_str = "PABLO"
@@ -417,18 +417,16 @@ for i in range(num_points + 1):
         robot.MoveL(transl(x, y, z_surface))
     x_fin_fig, y_fin_fig = x, y
 
-# Levantar tras la figura
 robot.MoveL(transl(x_fin_fig, y_fin_fig, z_surface - z_safe))
 
 #------------------------------------------------
 # 6) DIBUJAR NOMBRES (ROTADOS Y EN VARIOS RENGLONES)
 #------------------------------------------------
 # --- CONFIGURACIÓN DE LOS TEXTOS ---
-lineas_de_texto = ["PABLO", "MARCO", "DANIEL"] # Agrega aquí los nombres que quieras separados por comas
+lineas_de_texto = ["PABLO", "MARCO", "DANIEL"]
 tamano_letra = 40 
 espacio_entre_lineas = 60 # Distancia en milímetros entre cada renglón
 
-# 90 grados lo girará para que se lea desde el frente de la mesa
 angulo = -90 
 rad = math.radians(angulo)
 
@@ -444,8 +442,6 @@ for indice, texto_str in enumerate(lineas_de_texto):
     ancho_texto = bbox.width
     
     # --- CÁLCULO DE POSICIÓN PARA ESTE RENGLÓN ---
-    # offset_x + 200 es la posición inicial. 
-    # Le sumamos el espacio de las líneas multiplicando por el número de renglón (índice)
     centro_texto_x = offset_x - 200 - (indice * espacio_entre_lineas) 
     centro_texto_y = offset_y       
 
@@ -484,8 +480,6 @@ for indice, texto_str in enumerate(lineas_de_texto):
 robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
 robot.MoveJ(target)
 
-print("¡Listo! Figura y textos completados.")
-
 ```
 
 #### Implementación física en el Motoman MH6
@@ -493,8 +487,8 @@ print("¡Listo! Figura y textos completados.")
 A continuación, se puede evidenciar el código en python completo usado para conectarse al robot y que realice las trayectorias previamente probadas en la simulación:
 
 ```python
-from robodk.robolink import * # API para comunicarte con RoboDK
-from robodk.robomath import * # Funciones matemáticas
+from robodk.robolink import *
+from robodk.robomath import *
 import math
 
 # Importamos las librerías necesarias para el texto
@@ -511,11 +505,11 @@ robot = RDK.ItemUserPick("Selecciona un robot", ITEM_TYPE_ROBOT)
 if not robot.Valid():
     raise Exception("No se ha seleccionado un robot válido.")
 
- Conectar al robot físico
+# Conectar al robot físico
 if not robot.Connect():
     raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
 
- Confirmar conexión
+# Confirmar conexión
 if not robot.ConnectedState():
     raise Exception("El robot no está conectado correctamente. Revisa la conexión.")
 
@@ -534,15 +528,15 @@ robot.setSpeed(300)
 robot.setRounding(5)
 
 #------------------------------------------------
-# 3) Parámetros de posición (AJUSTADOS)
+# 3) Parámetros de posición
 #------------------------------------------------
 z_surface = 0
 z_safe = 50
 
 # --- POSICIÓN DE LA FIGURA ---
-offset_x = 500    # Centro X de la figura
-offset_y = 0      # Centro Y de la figura
-escala = 50       # Radio máximo de la figura es 150mm (3 * 50)
+offset_x = 500    
+offset_y = 0      
+escala = 50 
 
 # --- POSICIÓN DEL TEXTO ---
 texto_str = "PABLO"
@@ -589,18 +583,16 @@ for i in range(num_points + 1):
         robot.MoveL(transl(x, y, z_surface))
     x_fin_fig, y_fin_fig = x, y
 
-# Levantar tras la figura
 robot.MoveL(transl(x_fin_fig, y_fin_fig, z_surface - z_safe))
 
 #------------------------------------------------
 # 6) DIBUJAR NOMBRES (ROTADOS Y EN VARIOS RENGLONES)
 #------------------------------------------------
 # --- CONFIGURACIÓN DE LOS TEXTOS ---
-lineas_de_texto = ["PABLO", "MARCO", "DANIEL"] # Agrega aquí los nombres que quieras separados por comas
+lineas_de_texto = ["PABLO", "MARCO", "DANIEL"]
 tamano_letra = 40 
 espacio_entre_lineas = 60 # Distancia en milímetros entre cada renglón
 
-# 90 grados lo girará para que se lea desde el frente de la mesa
 angulo = -90 
 rad = math.radians(angulo)
 
@@ -616,8 +608,6 @@ for indice, texto_str in enumerate(lineas_de_texto):
     ancho_texto = bbox.width
     
     # --- CÁLCULO DE POSICIÓN PARA ESTE RENGLÓN ---
-    # offset_x + 200 es la posición inicial. 
-    # Le sumamos el espacio de las líneas multiplicando por el número de renglón (índice)
     centro_texto_x = offset_x - 200 - (indice * espacio_entre_lineas) 
     centro_texto_y = offset_y       
 
@@ -656,21 +646,19 @@ for indice, texto_str in enumerate(lineas_de_texto):
 robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
 robot.MoveJ(target)
 
-print("¡Listo! Figura y textos completados.")
 ```
-
-Como se puede ver, la principal diferencia es que se descomentan las líneas:
+Como se puede ver, la principal diferencia es que se descomentan las siguientes líneas, que son las usadas para conectarse al robot y para confirmar la conexión.:
 
 ```python
- Conectar al robot físico
+# Conectar al robot físico
 if not robot.Connect():
     raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
 
- Confirmar conexión
+# Confirmar conexión
 if not robot.ConnectedState():
     raise Exception("El robot no está conectado correctamente. Revisa la conexión.")
 ```
-que son las usadas para conectarse al robot y para confirmar la conexión.
+
 ---
 
 ## Diagrama de flujo de acciones del robot
