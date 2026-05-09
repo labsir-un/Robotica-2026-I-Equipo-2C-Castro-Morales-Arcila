@@ -112,7 +112,7 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 | `T` | `1393` |
 
 <div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/rwork_home.png?raw=true" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="600"/>
+  <img src="https://raw.githubusercontent.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="600"/>
 </div>
 
 <div align="center">
