@@ -782,7 +782,11 @@ Durante el desarrollo del script se emplean las siguientes funciones y conceptos
     <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" alt="Vídeo de simulación de la de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio" width="500"/>
   </a>
 </div>
-
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=asgsZZ6Cp0k">
+    <img src="https://img.youtube.com/vi/asgsZZ6Cp0k/0.jpg" alt="Vídeo de trayectoria polar y escritura de nombres en el laboratorio" width="500"/>
+  </a>
+</div>
 ---
 
 ## Conclusiones
