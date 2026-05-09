@@ -84,13 +84,11 @@ Aunque el ABB IRB140 tiene menor alcance que el Motoman MH6, mantiene velocidade
 
 ## Análisis comparativo de los manipuladores
 
-A partir de las características técnicas revisadas, se puede afirmar que ambos robots pertenecen a la categoría de manipuladores industriales de seis grados de libertad. Sin embargo, presentan diferencias importantes en su diseño y campo de aplicación.
+A partir de las características revisadas, ambos robots se pueden entender como manipuladores industriales de seis grados de libertad, aunque su aplicación no es exactamente la misma. Comparten una carga útil nominal similar, pero cambian bastante en alcance, tamaño de celda y entorno de programación.
 
-El **Motoman MH6** resulta conveniente para tareas donde se requiere mayor alcance y una zona de trabajo más amplia. Esto puede ser útil en procesos de manipulación de piezas, empaque, soldadura o atención de máquinas. Su alcance de 1422 mm le permite cubrir distancias mayores sin necesidad de desplazar la base del robot.
+El Motoman MH6 destaca por su mayor alcance, cercano a 1422 mm, lo que le permite cubrir una zona de trabajo más amplia sin mover la base. Esto lo hace conveniente para trayectorias largas, manipulación de piezas, empaque, dispensado o atención de máquinas. En el laboratorio, además, aunque el manipulador mantiene sus seis ejes principales, la estación cuenta con dos ejes adicionales, lo que amplía un poco las posibilidades de operación.
 
-El **ABB IRB140**, en cambio, es un robot más compacto. Su menor alcance puede ser una ventaja cuando se trabaja en celdas pequeñas o estaciones donde el espacio disponible es limitado. Además, su integración con RobotStudio permite trabajar de forma directa con el lenguaje RAPID y con el controlador virtual de ABB.
-
-En términos generales, el Motoman MH6 ofrece mayor cobertura espacial, mientras que el ABB IRB140 ofrece una solución compacta y altamente integrada con el entorno ABB.
+El ABB IRB140, en cambio, es más compacto, con un alcance aproximado de 810 mm. Por eso funciona mejor en celdas pequeñas o espacios reducidos, y tiene la ventaja de integrarse directamente con RobotStudio, el lenguaje RAPID y el controlador virtual de ABB. En términos prácticos, el Motoman ofrece mayor cobertura espacial, mientras que el ABB resulta más cómodo para estaciones compactas y trabajos dentro del entorno ABB.
 
 ---
 
