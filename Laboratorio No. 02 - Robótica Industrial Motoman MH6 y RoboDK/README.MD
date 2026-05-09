@@ -182,36 +182,19 @@ Desde el pendant, estas rotaciones se realizan usando las teclas asociadas a la 
 
 ## Control de velocidad para movimientos manuales
 
-El control de velocidad es un aspecto fundamental en la operación manual del manipulador, ya que permite realizar movimientos más seguros y precisos. En general, las velocidades bajas se utilizan durante la enseñanza de puntos, aproximaciones a objetos o validación de trayectorias. Las velocidades más altas deben utilizarse únicamente cuando la zona de trabajo está libre de obstáculos y el operador tiene certeza de que el movimiento es seguro.
+El control de velocidad manual es uno de los puntos más importantes cuando se opera el Motoman desde el teach pendant. En el DX100, la velocidad manual se cambia con las teclas `[FAST]` y `[SLOW]`, ubicadas en la zona central del mando. Según el manual del controlador, al presionar `[FAST]` la velocidad cambia en el orden `INCH`, `SLOW`, `MED` y `FAST`; al presionar `[SLOW]`, el cambio se hace en sentido contrario, es decir, `FAST`, `MED`, `SLOW` e `INCH`.
 
-#### Niveles de velocidad
-
-| Nivel | Descripción | Uso recomendado |
+| Nivel | Identificación en pantalla | Uso dentro de la operación |
 |---|---|---|
-| Baja | Movimiento lento y controlado | Enseñanza de puntos, aproximaciones y zonas cercanas a objetos |
-| Media | Movimiento moderado | Desplazamientos generales con supervisión |
-| Alta | Movimiento rápido | Movimientos en zonas despejadas y previamente verificadas |
+| `INCH` | `INCH` | Movimiento muy pequeño o por incrementos, útil para ajustes finos. |
+| `SLOW` | `SLW` | Movimiento lento, recomendado para enseñar puntos o acercarse a la pieza. |
+| `MED` | `MED` | Movimiento intermedio, útil para desplazamientos controlados dentro de la celda. |
+| `FAST` | `FST` | Movimiento rápido, recomendable solo cuando la trayectoria está despejada. |
 
-**`Nota:`** Los niveles exactos de velocidad deben completarse con base en lo observado en la pantalla del teach pendant durante el laboratorio.
+En la práctica, lo más seguro es iniciar en `INCH` o `SLOW`, sobre todo cuando la herramienta está cerca de la mesa, de una pieza o de cualquier elemento de la estación. Luego, si el recorrido está libre y ya se conoce la dirección del movimiento, se puede aumentar a `MED` o `FAST`. El nivel activo se identifica en la parte superior de la pantalla del teach pendant, dentro del área de estado, junto con la información del modo de coordenadas y del grupo de control activo.
 
-#### Cambio entre niveles de velocidad
+También existe la tecla `[HIGH SPEED]`, que permite aumentar la rapidez mientras se mantiene presionada una tecla de eje. Sin embargo, el propio manual indica que esta función no aplica cuando la velocidad manual está en `INCH`, y en operación real conviene usarla con cuidado, porque reduce el margen de reacción del operador.
 
-El cambio entre niveles de velocidad se realiza desde el teach pendant del manipulador. Este procedimiento permite ajustar la rapidez del movimiento manual antes de desplazar el robot.
-
-**`Procedimiento pendiente:`**
-
-1. `[PENDIENTE]` Identificar la opción o tecla de velocidad en el teach pendant.
-2. `[PENDIENTE]` Cambiar el nivel de velocidad.
-3. `[PENDIENTE]` Verificar el nivel seleccionado en la pantalla.
-4. `[PENDIENTE]` Realizar un movimiento corto para comprobar la velocidad.
-
-#### Identificación de la velocidad en pantalla
-
-El nivel de velocidad establecido se identifica en la interfaz del teach pendant. Esta información permite al operador confirmar si el robot se moverá lentamente o con mayor rapidez antes de ejecutar cualquier desplazamiento.
-
-**`Imagen propuesta:`** Captura o fotografía de la pantalla del teach pendant mostrando el nivel de velocidad seleccionado.
-
----
 
 ## Software RoboDK
 
