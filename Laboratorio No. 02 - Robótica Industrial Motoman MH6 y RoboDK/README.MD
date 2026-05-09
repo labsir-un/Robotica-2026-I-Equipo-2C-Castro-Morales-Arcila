@@ -560,6 +560,15 @@ for pose in puntos:
 
 ## Vídeos
 
+#### Vídeo de trayectoria polar en RoboDK y escritura simulado
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
+    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" width="500"/>
+  </a>
+</div>
+
+
 #### Vídeo de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio
 
 <div align="center">
