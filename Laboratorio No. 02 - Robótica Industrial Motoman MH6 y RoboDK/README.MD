@@ -116,7 +116,7 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 </div>
 
 <div align="center">
-  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/work_home.png?raw=true" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="600"/>
+  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/rwork_home.png?raw=true" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="600"/>
 </div>
 
 #### Configuración `Home 2`
