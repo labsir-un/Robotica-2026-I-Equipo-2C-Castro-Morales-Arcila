@@ -94,45 +94,47 @@ El ABB IRB140, en cambio, es más compacto, con un alcance aproximado de 810 mm.
 
 ## Configuraciones iniciales del Motoman MH6
 
-Durante la operación del manipulador Motoman MH6, se identifican configuraciones iniciales conocidas como **Home 1** y **Home 2**. Estas posiciones permiten ubicar el robot en una postura de referencia antes de iniciar una rutina, realizar una calibración visual o preparar el sistema para un movimiento seguro.
+Durante la operación del manipulador **Motoman MH6** se identificaron dos posiciones de referencia principales, conocidas como **Home 1** y **Home 2**. Estas configuraciones permiten llevar el robot a una postura conocida antes de iniciar una rutina, verificar el estado de los ejes o dejar el manipulador en una posición segura cuando no se está ejecutando una trayectoria.
+
+En el teach pendant se observan las posiciones de cada articulación del robot, identificadas como `S`, `L`, `U`, `R`, `B` y `T`. Estos valores corresponden a la posición interna registrada por el controlador para cada eje, por lo que sirven como referencia para comparar si el robot se encuentra correctamente ubicado en la posición de Home seleccionada.
 
 #### Configuración `Home 1`
 
-La configuración **Home 1** corresponde a una posición inicial del manipulador en la cual sus articulaciones se ubican de forma ordenada y segura. Esta posición puede utilizarse como punto de partida para una rutina o como posición de reposo del robot.
+La configuración **Home 1** corresponde a una posición de referencia general del manipulador. En la pantalla del teach pendant aparece como **WORK HOME POSITION**, mostrando los valores de origen y la posición actual de cada eje. En este caso, la posición actual del robot prácticamente coincide con los valores definidos para esta configuración, con diferencias muy pequeñas en algunos ejes, lo cual indica que el manipulador se encontraba correctamente ubicado en dicha posición.
 
 | Articulación | Posición en Home 1 |
 |---|---|
-| `S` | `[PENDIENTE]` |
-| `L` | `[PENDIENTE]` |
-| `U` | `[PENDIENTE]` |
-| `R` | `[PENDIENTE]` |
-| `B` | `[PENDIENTE]` |
-| `T` | `[PENDIENTE]` |
+| `S` | `0` |
+| `L` | `-115290` |
+| `U` | `-111623` |
+| `R` | `1` |
+| `B` | `42647` |
+| `T` | `1393` |
 
-**`Imagen propuesta:`** Fotografía del manipulador Motoman MH6 ubicado en la configuración Home 1.
+**`Imagen propuesta:`** Fotografía del teach pendant mostrando la posición **WORK HOME POSITION** del Motoman MH6.
 
 #### Configuración `Home 2`
 
-La configuración **Home 2** corresponde a una segunda posición de referencia del manipulador. Esta puede ser utilizada para ubicar el robot en una postura alternativa, dependiendo de la rutina, la herramienta instalada o la zona de trabajo.
+La configuración **Home 2** corresponde a una segunda posición de referencia del manipulador. En la pantalla aparece como **SECOND HOME POS**, donde se muestran los valores especificados, actuales y la diferencia entre ambos. En la imagen se observa que la diferencia es igual a cero en todos los ejes, lo que indica que el robot se encuentra exactamente en la posición definida como segundo Home.
 
 | Articulación | Posición en Home 2 |
 |---|---|
-| `S` | `[PENDIENTE]` |
-| `L` | `[PENDIENTE]` |
-| `U` | `[PENDIENTE]` |
-| `R` | `[PENDIENTE]` |
-| `B` | `[PENDIENTE]` |
-| `T` | `[PENDIENTE]` |
+| `S` | `0` |
+| `L` | `2037` |
+| `U` | `2369` |
+| `R` | `0` |
+| `B` | `-121` |
+| `T` | `1392` |
 
-**`Imagen propuesta:`** Fotografía del manipulador Motoman MH6 ubicado en la configuración Home 2.
+**`Imagen propuesta:`** Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6.
 
 #### Comparación entre `Home 1` y `Home 2`
 
-La elección entre **Home 1** y **Home 2** depende de la finalidad de la operación. Si se busca una posición segura para iniciar o finalizar una rutina, será más conveniente la configuración que deje al manipulador alejado de obstáculos y con menor riesgo de colisión. Por otro lado, si se busca iniciar una trayectoria específica, será mejor la configuración que reduzca desplazamientos innecesarios y facilite el acceso al área de trabajo.
+Al comparar ambas configuraciones, se nota que **Home 1** y **Home 2** no representan simplemente el mismo punto con otro nombre, sino dos posturas distintas del manipulador. En **Home 1**, los ejes `L` y `U` presentan valores negativos bastante grandes, lo que indica una configuración más recogida o desplazada respecto a la posición de referencia del brazo. En **Home 2**, en cambio, los valores de `L` y `U` son positivos y pequeños en comparación, mientras que los demás ejes se mantienen cercanos a cero o con variaciones moderadas.
 
-**`Nota:`** Esta sección debe completarse con las posiciones reales observadas en el laboratorio y con una justificación basada en la experiencia de operación del manipulador.
+Desde el punto de vista operativo, **Home 2** puede interpretarse como una posición más ordenada para verificar el estado inicial del robot, ya que en la pantalla se observa que la diferencia entre la posición especificada y la actual es cero. Sin embargo, la posición más conveniente depende de la rutina que se vaya a ejecutar. Si se requiere iniciar una trayectoria desde una postura más despejada y controlada, Home 2 puede ser más cómoda. Si se necesita regresar a una posición de trabajo ya definida por la celda, Home 1 puede ser más útil dentro de la operación programada.
 
----
+**`Nota:`** Los valores registrados corresponden a las lecturas observadas directamente en el teach pendant durante el laboratorio, por lo que se toman como referencia práctica para describir las configuraciones iniciales del manipulador.
 
 ## Movimiento manual del manipulador Motoman MH6
 
