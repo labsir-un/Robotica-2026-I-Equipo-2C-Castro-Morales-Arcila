@@ -707,7 +707,7 @@ Durante el desarrollo del script se emplean las siguientes funciones y conceptos
 
 - **`Robolink`:** Establece la conexión entre el script y la estación de RoboDK.
 
-- **`ItemUserPick` / `Item`:** Seleccionan elementos de la estación (robot, frame, target) por nombre o mediante un popup de selección.
+- **`ItemUserPick` / `Item`:** Seleccionan elementos de la estación (robot, frame, target) por nombre.
 
 - **`Connect` / `ConnectedState`:** Conectan al robot físico y verifican que la conexión sea exitosa.
 
