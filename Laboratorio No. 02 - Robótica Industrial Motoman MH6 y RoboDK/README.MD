@@ -627,7 +627,9 @@ A continuación se presenta el diagrama de flujo correspondiente a la lógica ge
 <div align="center">
   <img src="./diagrama_flujo2.png" alt="Diagrama de flujo de acciones del robot para la trayectoria polar en RoboDK" width="700"/>
 </div>
----
+
+
+
 ## Descripción de las funciones y conceptos utilizados:
 
 Durante el desarrollo del script se emplean las siguientes funciones y conceptos de RoboDK y Python.
