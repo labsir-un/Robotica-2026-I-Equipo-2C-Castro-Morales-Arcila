@@ -560,15 +560,13 @@ for pose in puntos:
 
 ## Vídeos
 
-Los videos deben comenzar con la introducción oficial del laboratorio **LabSIR Intro LabSIR**, de acuerdo con los requerimientos establecidos para la entrega.
+#### Vídeo de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio
 
-#### Vídeo de simulación de la trayectoria polar en RoboDK
-
-**`Video pendiente:`** Enlace o evidencia del video de simulación en RoboDK.
-
-#### Vídeo de implementación física en el Motoman MH6
-
-**`Video pendiente:`** Enlace o evidencia del video de ejecución física en el manipulador Motoman MH6.
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=tSsM_temUiw">
+    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" width="500"/>
+  </a>
+</div>
 
 ---
 
