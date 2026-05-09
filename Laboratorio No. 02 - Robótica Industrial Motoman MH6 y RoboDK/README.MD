@@ -485,48 +485,173 @@ Durante la implementación de la trayectoria polar y la operación del manipulad
 
 ## Código en RoboDK:
 
-En esta sección se debe incluir el código final utilizado para generar y ejecutar la trayectoria polar en RoboDK. El código debe corresponder a la versión final probada en la simulación y, si aplica, a la versión enviada al manipulador físico.
-
 ```python
-from robodk.robolink import *
-from robodk.robomath import *
+from robodk.robolink import * # API para comunicarte con RoboDK
+from robodk.robomath import * # Funciones matemáticas
 import math
 
+# Importamos las librerías necesarias para el texto
+from matplotlib.textpath import TextPath
+from matplotlib.path import Path
+
+#------------------------------------------------
+# 1) Conexión a RoboDK e inicialización
+#------------------------------------------------
 RDK = Robolink()
 
-robot = RDK.Item('Motoman MH6', ITEM_TYPE_ROBOT)
-
+# Elegir un robot (si hay varios, aparece un popup)
+robot = RDK.ItemUserPick("Selecciona un robot", ITEM_TYPE_ROBOT)
 if not robot.Valid():
-    raise Exception('No se encontró el robot Motoman MH6 en la estación de RoboDK')
+    raise Exception("No se ha seleccionado un robot válido.")
 
-# Parámetros de la trayectoria polar
-a = 80
-b = 40
-n = 4
+# Conectar al robot físico
+#if not robot.Connect():
+#    raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
 
-z_constante = 50
-centro_x = 0
-centro_y = 0
+# Confirmar conexión
+#if not robot.ConnectedState():
+#    raise Exception("El robot no está conectado correctamente. Revisa la conexión.")
 
-puntos = []
+print("Robot conectado correctamente.")
+#------------------------------------------------
+# 2) Cargar el Frame y herramientas
+#------------------------------------------------
+frame_name = "Frame_from_Target1"
+frame = RDK.Item(frame_name, ITEM_TYPE_FRAME)
+if not frame.Valid():
+    raise Exception(f'No se encontró el Frame "{frame_name}" en la estación.')
 
-for i in range(0, 361, 5):
-    theta = math.radians(i)
+robot.setPoseFrame(frame)
+robot.setPoseTool(robot.PoseTool())
+robot.setSpeed(300)
+robot.setRounding(5)
 
-    r = a + b * math.cos(n * theta)
+#------------------------------------------------
+# 3) Parámetros de posición (AJUSTADOS)
+#------------------------------------------------
+z_surface = 0
+z_safe = 50
 
-    x = centro_x + r * math.cos(theta)
-    y = centro_y + r * math.sin(theta)
-    z = z_constante
+# --- POSICIÓN DE LA FIGURA ---
+offset_x = 500    # Centro X de la figura
+offset_y = 0      # Centro Y de la figura
+escala = 50       # Radio máximo de la figura es 150mm (3 * 50)
 
-    pose = transl(x, y, z)
-    puntos.append(pose)
+# --- POSICIÓN DEL TEXTO ---
+texto_str = "PABLO"
+tamano_letra = 40 
 
-for pose in puntos:
-    robot.MoveL(pose)
+# Generamos el path primero para calcular su tamaño y centrarlo
+path_temp = TextPath((0, 0), texto_str, size=tamano_letra)
+bbox = path_temp.get_extents()
+ancho_texto = bbox.width
+
+# Centramos el texto respecto al offset_x de la figura
+offset_texto_x = offset_x - 210 
+# Lo ponemos debajo del radio inferior de la figura (que llega a -150)
+offset_texto_y = offset_y - (ancho_texto / 2)
+
+#------------------------------------------------
+# 4) Movimiento a casa
+#------------------------------------------------
+target = RDK.Item("Target_Casa", ITEM_TYPE_TARGET)
+robot.MoveJ(target)
+
+#------------------------------------------------
+# 5) DIBUJAR FIGURA POLAR
+#------------------------------------------------
+print("Dibujando figura...")
+# Punto de aproximación
+robot.MoveJ(transl(offset_x, offset_y, z_surface - z_safe))
+
+num_points = 720
+full_turn = 2 * math.pi
+x_fin_fig = 0
+y_fin_fig = 0
+
+for i in range(num_points + 1):
+    theta = full_turn * (i / num_points)
+    r = (1 - 2 * math.sin(3 * theta)) * escala
+    
+    x = (r * math.cos(theta)) + offset_x
+    y = (r * math.sin(theta)) + offset_y
+    
+    if i == 0:
+        robot.MoveL(transl(x, y, z_surface))
+    else:
+        robot.MoveL(transl(x, y, z_surface))
+    x_fin_fig, y_fin_fig = x, y
+
+# Levantar tras la figura
+robot.MoveL(transl(x_fin_fig, y_fin_fig, z_surface - z_safe))
+
+#------------------------------------------------
+# 6) DIBUJAR NOMBRES (ROTADOS Y EN VARIOS RENGLONES)
+#------------------------------------------------
+# --- CONFIGURACIÓN DE LOS TEXTOS ---
+lineas_de_texto = ["PABLO", "MARCO", "DANIEL"] # Agrega aquí los nombres que quieras separados por comas
+tamano_letra = 40 
+espacio_entre_lineas = 60 # Distancia en milímetros entre cada renglón
+
+# 90 grados lo girará para que se lea desde el frente de la mesa
+angulo = -90 
+rad = math.radians(angulo)
+
+x_curr, y_curr = 0, 0
+
+# Recorremos cada palabra de la lista
+for indice, texto_str in enumerate(lineas_de_texto):
+    print(f"Dibujando renglón {indice + 1}: {texto_str}...")
+    
+    # Generamos el path para medir esta palabra específica
+    path_temp = TextPath((0, 0), texto_str, size=tamano_letra)
+    bbox = path_temp.get_extents()
+    ancho_texto = bbox.width
+    
+    # --- CÁLCULO DE POSICIÓN PARA ESTE RENGLÓN ---
+    # offset_x + 200 es la posición inicial. 
+    # Le sumamos el espacio de las líneas multiplicando por el número de renglón (índice)
+    centro_texto_x = offset_x - 200 - (indice * espacio_entre_lineas) 
+    centro_texto_y = offset_y       
+
+    vertices = path_temp.vertices
+    codigos = path_temp.codes
+
+    for i in range(len(vertices)):
+        # 1. Centramos la palabra localmente
+        x_orig = vertices[i][0] - (ancho_texto / 2)
+        y_orig = vertices[i][1]
+        
+        # 2. Aplicamos rotación
+        x_rot = (-x_orig * math.cos(rad)) - (y_orig * math.sin(rad))
+        y_rot = (-x_orig * math.sin(rad)) + (y_orig * math.cos(rad))
+
+        # 3. Posición final en la mesa
+        px = x_rot + centro_texto_x
+        py = y_rot + centro_texto_y
+        
+        tipo = codigos[i]
+
+        if tipo == Path.MOVETO:
+            # Subir la herramienta si estábamos dibujando
+            if i > 0 or indice > 0: 
+                robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
+            
+            # Mover al nuevo punto inicial
+            robot.MoveJ(transl(px, py, z_surface - z_safe))
+            robot.MoveL(transl(px, py, z_surface))
+        else:
+            robot.MoveL(transl(px, py, z_surface))
+        
+        x_curr, y_curr = px, py
+
+# Retorno final al terminar todas las palabras
+robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
+robot.MoveJ(target)
+
+print("¡Listo! Figura y textos completados.")
+
 ```
-
-**`Nota:`** Este código debe reemplazarse o ajustarse con el código definitivo desarrollado durante la práctica.
 
 ---
 
