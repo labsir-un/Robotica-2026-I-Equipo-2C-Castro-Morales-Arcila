@@ -641,25 +641,6 @@ A continuación se propone la estructura general del diagrama de flujo correspon
 **`Imagen propuesta:`** Diagrama de flujo de acciones del robot durante la trayectoria polar.
 
 ---
-
-## Plano de planta:
-
-A continuación se debe presentar el plano de planta de la estación de trabajo utilizada durante el laboratorio. Este plano debe mostrar la ubicación de los elementos principales que intervienen en la operación del manipulador Motoman MH6.
-
-Elementos sugeridos para el plano:
-
-- Manipulador Motoman MH6.
-- Controlador del robot.
-- Computador con RoboDK.
-- Mesa o superficie de trabajo.
-- Pieza o área donde se realiza la trayectoria polar.
-- Zona de seguridad.
-- Ubicación del operador.
-
-**`Imagen propuesta:`** Plano de planta de la estación de trabajo del Motoman MH6.
-
----
-
 ## Descripción de las funciones y conceptos utilizados:
 
 Durante el desarrollo del script se emplean las siguientes funciones y conceptos de RoboDK y Python.
