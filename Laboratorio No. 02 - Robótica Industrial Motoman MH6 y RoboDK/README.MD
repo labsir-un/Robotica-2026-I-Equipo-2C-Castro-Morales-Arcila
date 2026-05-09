@@ -40,11 +40,11 @@ A continuación se presenta un cuadro comparativo entre el manipulador **Motoman
 | Software trabajado | RoboDK | RobotStudio |
 | Aplicaciones típicas | Manipulación, ensamble, empaque, dispensado, soldadura y atención de máquinas | Manipulación, ensamble, manufactura flexible, soldadura, limpieza, empaque y automatización industrial |
 
-El **Motoman MH6** es un robot industrial de seis ejes, con una carga útil de **6 kg** y un alcance aproximado de **1422 mm**, lo que le permite cubrir una zona de trabajo amplia. Debido a su diseño compacto y su capacidad de movimiento, puede ser utilizado en aplicaciones de manipulación, ensamble, empaque, soldadura, dispensado y atención de máquinas.
+El Motoman MH6 es un robot industrial de seis ejes, con una carga útil de 6 kg y un alcance aproximado de 1422 mm. Esto le da una zona de trabajo bastante amplia para un manipulador de este tipo, lo cual resulta útil en tareas donde el robot necesita cubrir más espacio sin mover su base. Aunque el manipulador como tal tiene seis ejes, en el laboratorio se cuenta con dos ejes adicionales asociados a la estación, detalle que amplía las posibilidades de operación dentro de la práctica, sin que eso cambie la configuración principal del robot.
 
-Por otro lado, el **ABB IRB140** también es un robot industrial de seis ejes con una carga útil de **6 kg**, pero con un alcance menor, aproximadamente de **810 mm**. Esto lo hace más adecuado para estaciones compactas donde se requiere precisión y flexibilidad en espacios reducidos.
+El ABB IRB140 también es un robot industrial de seis ejes y maneja la misma carga útil nominal de 6 kg, pero su alcance es menor, cerca de 810 mm. Por esa razón, se adapta mejor a estaciones compactas, donde el espacio disponible es más reducido y se busca trabajar con buena precisión en una celda más cerrada.
 
-A partir de esta comparación, se puede observar que ambos manipuladores tienen la misma capacidad de carga nominal, pero el Motoman MH6 presenta una ventaja en cuanto a alcance, mientras que el ABB IRB140 se caracteriza por ser un robot más compacto y estar directamente integrado al ecosistema de programación de ABB mediante RobotStudio.
+Con esta comparación se nota que ambos manipuladores tienen capacidades similares en cuanto a carga, pero se diferencian bastante en el área de trabajo que pueden cubrir. El Motoman MH6 ofrece mayor alcance y por eso resulta más conveniente para trayectorias amplias o estaciones con más separación entre elementos. El ABB IRB140, en cambio, se siente más orientado a celdas compactas y además tiene la ventaja de estar muy integrado al ecosistema de ABB mediante RobotStudio, lo que facilita la simulación y programación cuando se trabaja con esa marca.
 
 ---
 
