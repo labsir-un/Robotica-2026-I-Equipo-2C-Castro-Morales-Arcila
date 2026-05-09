@@ -703,23 +703,31 @@ Elementos sugeridos para el plano:
 
 ## Descripción de las funciones y conceptos utilizados:
 
-Durante la implementación de la trayectoria polar y la operación del manipulador se emplean diferentes funciones, conceptos y procedimientos relacionados con RoboDK y la programación del robot.
+Durante el desarrollo del script se emplean las siguientes funciones y conceptos de RoboDK y Python.
 
-- **`Robolink`:** Permite establecer la conexión entre el script de Python y la estación de RoboDK. A través de este objeto se pueden seleccionar robots, herramientas, referencias y otros elementos de la estación.
+- **`Robolink`:** Establece la conexión entre el script y la estación de RoboDK.
 
-- **`Item`:** Permite seleccionar un elemento dentro de la estación de RoboDK, como el robot, una herramienta, un objeto o un sistema de referencia.
+- **`ItemUserPick` / `Item`:** Seleccionan elementos de la estación (robot, frame, target) por nombre o mediante un popup de selección.
 
-- **`MoveL`:** Ejecuta un movimiento lineal del robot desde la posición actual hasta una posición objetivo. Es útil cuando se desea que el TCP siga una trayectoria continua sobre una superficie.
+- **`Connect` / `ConnectedState`:** Conectan al robot físico y verifican que la conexión sea exitosa.
 
-- **`transl`:** Crea una pose o matriz de transformación a partir de una posición cartesiana definida por las coordenadas `X`, `Y` y `Z`.
+- **`setPoseFrame` / `setPoseTool`:** Definen el sistema de referencia y la herramienta activa del robot.
 
-- **`cos`:** Función trigonométrica utilizada para calcular la componente en `X` de la trayectoria polar.
+- **`setSpeed` / `setRounding`:** Configuran la velocidad de movimiento y el radio de suavizado entre trayectorias.
 
-- **`sin`:** Función trigonométrica utilizada para calcular la componente en `Y` de la trayectoria polar.
+- **`MoveJ`:** Movimiento por interpolación de juntas, usado para desplazamientos grandes sin trayectoria cartesiana estricta.
 
-- **`theta`:** Variable angular utilizada para recorrer la trayectoria polar punto por punto.
+- **`MoveL`:** Movimiento lineal del TCP, usado para trazar cada segmento de la figura y del texto sobre la superficie.
 
-- **`r`:** Radio de la trayectoria polar, el cual puede variar en función del ángulo para generar diferentes formas.
+- **`transl(x, y, z)`:** Construye la matriz de transformación homogénea correspondiente a una traslación pura.
+
+- **`TextPath`:** Genera los vértices y códigos vectoriales de una cadena de texto mediante matplotlib, que luego se recorren como trayectoria.
+
+- **`Path.MOVETO`:** Código de control que indica un levantamiento de herramienta entre trazos del texto.
+
+- **Curva polar** `r = (1 - 2·sin(3θ)) · escala`: Ecuación que define la figura dibujada, muestreada en 720 puntos sobre [0, 2π].
+
+- **Rotación 2D:** Se aplica una rotación de −90° a los vértices del texto antes de posicionarlos en la mesa.
 
 ---
 
