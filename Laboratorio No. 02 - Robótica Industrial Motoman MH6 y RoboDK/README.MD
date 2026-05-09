@@ -691,33 +691,6 @@ Durante el desarrollo del script se emplean las siguientes funciones y conceptos
 ---
 
 
-## Evidencias del laboratorio
-
-#### Evidencia de Home 1
-
-**`Imagen propuesta:`** Fotografía del manipulador Motoman MH6 en la posición Home 1.
-
-#### Evidencia de Home 2
-
-**`Imagen propuesta:`** Fotografía del manipulador Motoman MH6 en la posición Home 2.
-
-#### Evidencia del movimiento manual
-
-**`Imagen propuesta:`** Fotografía del teach pendant durante el movimiento manual por articulaciones o cartesiano.
-
-#### Evidencia de RoboDK
-
-**`Imagen propuesta:`** Captura de pantalla de la estación virtual en RoboDK.
-
-#### Evidencia de la trayectoria polar simulada
-
-**`Imagen propuesta:`** Captura de pantalla de la trayectoria polar simulada en RoboDK.
-
-#### Evidencia de la trayectoria polar física
-
-**`Imagen propuesta:`** Fotografía del Motoman MH6 ejecutando la trayectoria polar en el laboratorio.
-
----
 
 ## Vídeos
 
