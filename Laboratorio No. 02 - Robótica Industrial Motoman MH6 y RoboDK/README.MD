@@ -564,7 +564,7 @@ for pose in puntos:
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
-    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" width="500"/>
+    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" alt="Vídeo de simulación de la de trayectoria polar en RoboDK y escritura simulado" width="500"/>
   </a>
 </div>
 
@@ -573,7 +573,7 @@ for pose in puntos:
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=tSsM_temUiw">
-    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" width="500"/>
+    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" alt="Vídeo de simulación de la de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio" width="500"/>
   </a>
 </div>
 
