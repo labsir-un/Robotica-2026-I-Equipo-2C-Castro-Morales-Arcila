@@ -142,69 +142,41 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 
 ## Movimiento manual del manipulador Motoman MH6
 
-Durante la práctica, el movimiento manual del manipulador Motoman MH6 permite al usuario desplazar el robot mediante el teach pendant. Este procedimiento es importante para enseñar puntos, verificar posiciones, ajustar trayectorias y comprobar que el robot pueda moverse sin colisionar con elementos de la estación.
+Durante la práctica, el movimiento manual del **Motoman MH6** se realizó desde el **teach pendant** del controlador DX100. Esta parte es clave porque antes de ejecutar cualquier rutina desde RoboDK o desde un programa cargado en el controlador, primero hay que entender cómo responde el manipulador cuando se mueve directamente desde el mando. En términos prácticos, aquí se aprende a controlar el robot en modo seguro, revisar su postura, ubicar el TCP y validar que no existan interferencias dentro de la celda.
 
-El movimiento manual puede realizarse principalmente en dos formas:
+El teach pendant concentra los elementos principales de operación: el selector de modo `TEACH / PLAY / REMOTE`, los botones `START`, `HOLD` y `EMERGENCY STOP`, las teclas de coordenadas, las teclas de velocidad manual, las teclas de movimiento por eje, el botón `SERVO ON READY` y el `Enable Switch`, ubicado en la parte posterior del mando. Este último es importante porque permite habilitar el movimiento del robot mientras se opera manualmente; si no se presiona correctamente, el manipulador no se desplaza aunque se presionen las teclas de eje.
 
-- Movimiento por articulaciones.
-- Movimiento cartesiano.
-
-Además, dentro del movimiento cartesiano se pueden realizar:
-
-- Traslaciones en los ejes `X`, `Y` y `Z`.
-- Rotaciones alrededor de los ejes `X`, `Y` y `Z`.
+<div align="center">
+  <img src="./tech.png" alt="Distribución general del teach pendant del controlador DX100" width="600"/>
+</div>
 
 #### Movimiento por articulaciones
 
-En el modo de movimiento por articulaciones, cada eje del robot se controla de forma independiente. Esto permite modificar directamente la posición angular de las articulaciones `S`, `L`, `U`, `R`, `B` y `T`.
+En el modo por articulaciones, el robot se mueve eje por eje. Para el Motoman MH6, las articulaciones principales se identifican como `S`, `L`, `U`, `R`, `B` y `T`. Los ejes `S`, `L` y `U` están más relacionados con el posicionamiento general del brazo, mientras que `R`, `B` y `T` corresponden principalmente a la orientación de la muñeca y de la herramienta.
 
-Este modo es útil cuando se requiere cambiar la postura general del robot, liberar una configuración incómoda, evitar una singularidad o ubicar el manipulador en una posición inicial antes de realizar movimientos más precisos.
+Para mover el manipulador de esta manera, primero se coloca el selector del pendant en modo `TEACH`. Luego se verifica que el grupo de control activo corresponda al robot, en este caso `R1`, ya que el laboratorio también cuenta con ejes adicionales asociados a la estación. Después se selecciona el sistema de coordenadas mediante la tecla `[COORD]` hasta llegar al modo de articulaciones o `Joint`. Con el robot en este modo, las teclas de eje permiten mover cada articulación en sentido positivo o negativo.
 
-**`Procedimiento pendiente:`**
-
-1. `[PENDIENTE]` Encender o habilitar el teach pendant.
-2. `[PENDIENTE]` Seleccionar el modo de movimiento por articulaciones.
-3. `[PENDIENTE]` Seleccionar el eje o articulación que se desea mover.
-4. `[PENDIENTE]` Usar las teclas correspondientes para mover la articulación en sentido positivo o negativo.
-5. `[PENDIENTE]` Verificar en pantalla el cambio de posición angular.
-
-**`Imagen propuesta:`** Pantalla del teach pendant durante el movimiento por articulaciones.
+En la botonera se observa que las teclas están organizadas de manera que una misma tecla sirve para el modo articular y para el modo cartesiano. Por ejemplo, cuando se trabaja por articulaciones, las teclas controlan `S- / S+`, `L- / L+`, `U- / U+`, `R- / R+`, `B- / B+` y `T- / T+`. Ya en operación, se presiona `[SERVO ON READY]`, se sostiene el `Enable Switch` y se oprime la tecla del eje que se desea mover. Naturalmente, esto se hace con una velocidad baja al principio, porque cualquier cambio brusco puede acercar la herramienta a una zona no deseada.
 
 #### Movimiento cartesiano
 
-En el modo cartesiano, el robot se mueve respecto a un sistema de coordenadas. En este caso, el usuario controla el desplazamiento del TCP de la herramienta en los ejes `X`, `Y` y `Z`, sin seleccionar directamente cada articulación.
+En el modo cartesiano, el movimiento ya no se interpreta como giro independiente de cada articulación, sino como desplazamiento del TCP respecto a un sistema de referencia. Esto resulta mucho más cómodo cuando se quiere aproximar la herramienta a una superficie, seguir una dirección específica o corregir la posición del efector final sin pensar directamente en cada junta del robot.
 
-Este modo resulta más intuitivo cuando se desea mover la herramienta en línea recta, aproximarla a una pieza o posicionarla sobre una superficie de trabajo.
+Para cambiar a este modo, se utiliza nuevamente la tecla `[COORD]`. Según el funcionamiento del DX100, cada pulsación cambia el sistema de coordenadas en el orden `Joint`, `Cartesian/Cylindrical`, `Tool` y `User`. El modo activo se revisa en la zona superior de la pantalla, dentro del área de estado del pendant. Una vez seleccionado el modo cartesiano, las mismas teclas de movimiento pasan a controlar traslaciones y rotaciones del TCP.
 
-**`Procedimiento pendiente:`**
-
-1. `[PENDIENTE]` Seleccionar el modo de movimiento cartesiano.
-2. `[PENDIENTE]` Verificar el sistema de referencia activo.
-3. `[PENDIENTE]` Mover el TCP en los ejes `X`, `Y` y `Z`.
-4. `[PENDIENTE]` Confirmar visualmente la dirección de movimiento.
-5. `[PENDIENTE]` Ajustar la posición final de la herramienta.
-
-**`Imagen propuesta:`** Pantalla del teach pendant durante el movimiento cartesiano.
+En este caso, las teclas marcadas como `X- / X+`, `Y- / Y+` y `Z- / Z+` permiten mover la herramienta linealmente sobre los ejes cartesianos. Las teclas asociadas a `R`, `B` y `T` se usan para modificar la orientación de la herramienta, que en la práctica se interpreta como rotación alrededor de los ejes del sistema de referencia seleccionado. Esta diferencia es importante porque en modo articular se modifica la postura del robot, mientras que en modo cartesiano se busca controlar mejor el comportamiento espacial del TCP.
 
 #### Traslaciones en `X`, `Y` y `Z`
 
-Las traslaciones permiten desplazar la herramienta de forma lineal sobre los ejes del sistema de referencia. Este procedimiento es útil para ubicar el TCP sobre puntos específicos de una trayectoria o para aproximar la herramienta a la superficie de trabajo.
+Las traslaciones se usan cuando se necesita desplazar la herramienta sin cambiar demasiado su orientación. En el laboratorio esto sirve para acercar el TCP a la zona de trabajo, corregir la altura respecto a la superficie y ubicar el punto inicial de una trayectoria. Para mover en `X`, `Y` o `Z`, se selecciona el modo cartesiano con `[COORD]`, se activa el servo, se mantiene presionado el `Enable Switch` y luego se presiona la tecla correspondiente a la dirección deseada.
 
-- Movimiento en `X`: `[PENDIENTE]`
-- Movimiento en `Y`: `[PENDIENTE]`
-- Movimiento en `Z`: `[PENDIENTE]`
-
-**`Imagen propuesta:`** Evidencia del manipulador realizando una traslación lineal.
+El movimiento en `X` desplaza el TCP hacia el sentido positivo o negativo de ese eje, el movimiento en `Y` corrige la posición lateral según el sistema activo, y el movimiento en `Z` normalmente se usa para subir o bajar la herramienta respecto a la superficie de trabajo. Esta última dirección fue especialmente importante para evitar que la herramienta golpeara la mesa o el material antes de iniciar la trayectoria.
 
 #### Rotaciones alrededor de `X`, `Y` y `Z`
 
-Las rotaciones permiten modificar la orientación de la herramienta alrededor de los ejes del sistema de referencia. Este movimiento es importante cuando se requiere ajustar el ángulo de ataque de la herramienta, orientar el marcador o modificar la posición angular del efector final.
+Las rotaciones permiten ajustar la orientación del TCP. En una práctica como esta, donde se trabaja con una trayectoria sobre una superficie, no basta con llegar a un punto; también importa cómo llega la herramienta. Una orientación incorrecta puede hacer que el marcador, punta o herramienta de trazado no contacte bien la superficie, o que llegue con un ángulo poco conveniente.
 
-- Rotación alrededor de `X`: `[PENDIENTE]`
-- Rotación alrededor de `Y`: `[PENDIENTE]`
-- Rotación alrededor de `Z`: `[PENDIENTE]`
-
-**`Imagen propuesta:`** Evidencia del manipulador realizando una rotación de la herramienta.
+Desde el pendant, estas rotaciones se realizan usando las teclas asociadas a la muñeca del robot cuando se está en un sistema cartesiano, de herramienta o de usuario. En términos operativos, el usuario selecciona el sistema con `[COORD]`, mantiene habilitado el robot con el `Enable Switch` y utiliza las teclas correspondientes para orientar la herramienta alrededor de los ejes definidos. En el laboratorio, esta operación se entiende más como un ajuste fino de orientación que como un desplazamiento grande del manipulador.
 
 ---
 
