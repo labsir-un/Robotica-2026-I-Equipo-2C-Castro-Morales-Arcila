@@ -622,23 +622,11 @@ if not robot.ConnectedState():
 
 ## Diagrama de flujo de acciones del robot
 
-A continuación se propone la estructura general del diagrama de flujo correspondiente a la ejecución de la trayectoria polar en el Motoman MH6.
+A continuación se presenta el diagrama de flujo correspondiente a la lógica general de operación seguida durante la simulación y ejecución física de la trayectoria polar. En este se resume el proceso desde la conexión con RoboDK, la selección del manipulador, la validación del frame, la generación de puntos de la curva polar, la escritura de nombres y el retorno final a la posición segura.
 
-1. Inicio del sistema.
-2. Verificación del estado del manipulador.
-3. Carga de la estación virtual en RoboDK.
-4. Definición del robot Motoman MH6.
-5. Definición de la herramienta y sistema de referencia.
-6. Generación de puntos de la trayectoria polar.
-7. Simulación de la trayectoria en RoboDK.
-8. Verificación de colisiones y límites del robot.
-9. Generación del programa para el controlador Motoman.
-10. Envío o carga del programa en el robot.
-11. Ejecución física de la trayectoria.
-12. Retorno a posición segura.
-13. Finalización del proceso.
-
-**`Imagen propuesta:`** Diagrama de flujo de acciones del robot durante la trayectoria polar.
+<div align="center">
+  <img src="./diagrama_flujo2.png" alt="Diagrama de flujo de acciones del robot para la trayectoria polar en RoboDK" width="700"/>
+</div>
 
 ---
 ## Descripción de las funciones y conceptos utilizados:
