@@ -30,7 +30,7 @@ A continuación se presenta un cuadro comparativo entre el manipulador **Motoman
 |---|---|---|
 | Fabricante | Yaskawa Motoman | ABB Robotics |
 | Tipo de robot | Manipulador industrial articulado | Manipulador industrial articulado |
-| Número de ejes | 6 ejes | 6 ejes |
+| Número de ejes | 8 ejes | 6 ejes |
 | Carga útil máxima | 6 kg | 6 kg |
 | Alcance máximo aproximado | 1422 mm | 810 mm |
 | Repetibilidad | ±0.08 mm | ±0.03 mm |
