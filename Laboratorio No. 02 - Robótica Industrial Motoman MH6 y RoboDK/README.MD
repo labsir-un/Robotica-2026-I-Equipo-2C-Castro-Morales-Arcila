@@ -766,27 +766,24 @@ Durante el desarrollo del script se emplean las siguientes funciones y conceptos
 
 ## Vídeos
 
-#### Vídeo de trayectoria polar en RoboDK y escritura simulado
+Los videos deben comenzar con la introducción oficial del laboratorio **LabSIR Intro LabSIR**, de acuerdo con los requerimientos de entrega.
+
+#### Vídeo de trayectoria polar en RoboDK y escritura simulada
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
-    <img src="https://www.youtube.com/watch?v=HAfciXf_1t0" alt="Vídeo de simulación de la de trayectoria polar en RoboDK y escritura simulado" width="500"/>
+    <img src="https://img.youtube.com/vi/HAfciXf_1t0/0.jpg" alt="Vídeo de simulación de trayectoria polar en RoboDK y escritura simulada" width="500"/>
   </a>
 </div>
-
 
 #### Vídeo de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=asgsZZ6Cp0k">
-    <img src="https://www.youtube.com/watch?v=asgsZZ6Cp0k" alt="Vídeo de simulación de la de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio" width="500"/>
-  </a>
-</div>
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=asgsZZ6Cp0k">
     <img src="https://img.youtube.com/vi/asgsZZ6Cp0k/0.jpg" alt="Vídeo de trayectoria polar y escritura de nombres en el laboratorio" width="500"/>
   </a>
 </div>
+
 ---
 
 ## Conclusiones
