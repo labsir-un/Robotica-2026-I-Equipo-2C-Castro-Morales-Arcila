@@ -383,7 +383,7 @@ ancho_texto = bbox.width
 
 # Centramos el texto respecto al offset_x de la figura
 offset_texto_x = offset_x - 210 
-# Lo ponemos debajo del radio inferior de la figura (que llega a -150)
+# Lo ponemos debajo del radio inferior de la figura
 offset_texto_y = offset_y - (ancho_texto / 2)
 
 #------------------------------------------------
@@ -549,7 +549,7 @@ ancho_texto = bbox.width
 
 # Centramos el texto respecto al offset_x de la figura
 offset_texto_x = offset_x - 210 
-# Lo ponemos debajo del radio inferior de la figura (que llega a -150)
+# Lo ponemos debajo del radio inferior de la figura
 offset_texto_y = offset_y - (ancho_texto / 2)
 
 #------------------------------------------------
