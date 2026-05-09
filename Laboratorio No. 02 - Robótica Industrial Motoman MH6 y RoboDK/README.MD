@@ -315,175 +315,10 @@ Frente a RoboDK, RobotStudio ofrece mayor fidelidad cuando se trabaja con robots
 
 ---
 
-## Trayectoria polar en RoboDK
-
-La trayectoria polar corresponde a una curva generada a partir de coordenadas polares. En este tipo de coordenadas, cada punto se define mediante un radio `r` y un ángulo `θ`.
-
-Para llevar esta trayectoria a RoboDK, los puntos polares deben convertirse a coordenadas cartesianas, ya que el robot trabaja con posiciones en el espacio. La conversión básica es:
-
-```python
-x = r * cos(theta)
-y = r * sin(theta)
-z = constante
-```
-
-Donde:
-
-- **`r`:** Radio de la trayectoria.
-- **`theta`:** Ángulo polar.
-- **`x`:** Coordenada cartesiana en el eje X.
-- **`y`:** Coordenada cartesiana en el eje Y.
-- **`z`:** Altura constante de la trayectoria.
-
-#### Integrantes del equipo
-
-- `[PENDIENTE: Nombre del integrante 1]`
-- `[PENDIENTE: Nombre del integrante 2]`
-- `[PENDIENTE: Nombre del integrante 3]`
-- `[PENDIENTE: Nombre del integrante 4]`
-
-#### Diseño de la trayectoria polar
-
-Para el diseño de la trayectoria se puede utilizar una ecuación polar de la forma:
-
-```python
-r = a + b * cos(n * theta)
-```
-
-Donde:
-
-- **`a`:** Constante que define un radio base.
-- **`b`:** Constante que modifica la amplitud de la curva.
-- **`n`:** Número asociado a la repetición o forma de la trayectoria.
-- **`theta`:** Ángulo variable de la trayectoria.
-
-**`Nota:`** La ecuación definitiva debe ajustarse según la figura que se haya decidido implementar en RoboDK.
-
-#### Código base propuesto para la trayectoria polar
-
-A continuación se deja un código base en Python que puede servir como punto de partida para generar una trayectoria polar en RoboDK. Este código debe ajustarse según el sistema de referencia, la herramienta y las dimensiones reales de la estación.
-
-```python
-from robodk.robolink import *
-from robodk.robomath import *
-import math
-
-RDK = Robolink()
-
-robot = RDK.Item('Motoman MH6', ITEM_TYPE_ROBOT)
-
-if not robot.Valid():
-    raise Exception('No se encontró el robot Motoman MH6 en la estación de RoboDK')
-
-# Parámetros de la trayectoria polar
-a = 80
-b = 40
-n = 4
-
-z_constante = 50
-centro_x = 0
-centro_y = 0
-
-puntos = []
-
-for i in range(0, 361, 5):
-    theta = math.radians(i)
-
-    r = a + b * math.cos(n * theta)
-
-    x = centro_x + r * math.cos(theta)
-    y = centro_y + r * math.sin(theta)
-    z = z_constante
-
-    pose = transl(x, y, z)
-    puntos.append(pose)
-
-# Movimiento del robot por los puntos generados
-for pose in puntos:
-    robot.MoveL(pose)
-```
-
-**`Nota:`** Este código es una base de trabajo. Para la implementación real se deben definir correctamente el sistema de referencia, la herramienta, la orientación del TCP y la posición inicial segura del manipulador.
-
 #### Simulación virtual en RoboDK
 
-En esta sección se debe describir cómo se ejecutó la trayectoria dentro de RoboDK, indicando si el robot logró seguir la curva polar sin colisiones ni errores de alcance.
+La simulación en roboDK es bastante sencilla en comparación con la de Robot Studio. Se debe construir un script en python que contena todos los parametros necesarios para que el robot lleve a cabo las trayectorias y movimientos requeridos. A continuación, se puede evidenciar el código en python completo usado para la simulación:
 
-**`Imagen propuesta:`** Captura de pantalla de la simulación de la trayectoria polar en RoboDK.
-
-#### Implementación física en el Motoman MH6
-
-En esta sección se debe describir la ejecución de la trayectoria en el manipulador físico, indicando cómo se envió el programa desde el computador, qué ajustes fueron necesarios y si el robot logró realizar correctamente el movimiento.
-
-**`Imagen propuesta:`** Fotografía del manipulador Motoman MH6 ejecutando la trayectoria polar.
-
-**`Video propuesto:`** Video de la ejecución física de la trayectoria polar en el laboratorio.
-
----
-
-## Diagrama de flujo de acciones del robot
-
-A continuación se propone la estructura general del diagrama de flujo correspondiente a la ejecución de la trayectoria polar en el Motoman MH6.
-
-1. Inicio del sistema.
-2. Verificación del estado del manipulador.
-3. Carga de la estación virtual en RoboDK.
-4. Definición del robot Motoman MH6.
-5. Definición de la herramienta y sistema de referencia.
-6. Generación de puntos de la trayectoria polar.
-7. Simulación de la trayectoria en RoboDK.
-8. Verificación de colisiones y límites del robot.
-9. Generación del programa para el controlador Motoman.
-10. Envío o carga del programa en el robot.
-11. Ejecución física de la trayectoria.
-12. Retorno a posición segura.
-13. Finalización del proceso.
-
-**`Imagen propuesta:`** Diagrama de flujo de acciones del robot durante la trayectoria polar.
-
----
-
-## Plano de planta:
-
-A continuación se debe presentar el plano de planta de la estación de trabajo utilizada durante el laboratorio. Este plano debe mostrar la ubicación de los elementos principales que intervienen en la operación del manipulador Motoman MH6.
-
-Elementos sugeridos para el plano:
-
-- Manipulador Motoman MH6.
-- Controlador del robot.
-- Computador con RoboDK.
-- Mesa o superficie de trabajo.
-- Pieza o área donde se realiza la trayectoria polar.
-- Zona de seguridad.
-- Ubicación del operador.
-
-**`Imagen propuesta:`** Plano de planta de la estación de trabajo del Motoman MH6.
-
----
-
-## Descripción de las funciones y conceptos utilizados:
-
-Durante la implementación de la trayectoria polar y la operación del manipulador se emplean diferentes funciones, conceptos y procedimientos relacionados con RoboDK y la programación del robot.
-
-- **`Robolink`:** Permite establecer la conexión entre el script de Python y la estación de RoboDK. A través de este objeto se pueden seleccionar robots, herramientas, referencias y otros elementos de la estación.
-
-- **`Item`:** Permite seleccionar un elemento dentro de la estación de RoboDK, como el robot, una herramienta, un objeto o un sistema de referencia.
-
-- **`MoveL`:** Ejecuta un movimiento lineal del robot desde la posición actual hasta una posición objetivo. Es útil cuando se desea que el TCP siga una trayectoria continua sobre una superficie.
-
-- **`transl`:** Crea una pose o matriz de transformación a partir de una posición cartesiana definida por las coordenadas `X`, `Y` y `Z`.
-
-- **`cos`:** Función trigonométrica utilizada para calcular la componente en `X` de la trayectoria polar.
-
-- **`sin`:** Función trigonométrica utilizada para calcular la componente en `Y` de la trayectoria polar.
-
-- **`theta`:** Variable angular utilizada para recorrer la trayectoria polar punto por punto.
-
-- **`r`:** Radio de la trayectoria polar, el cual puede variar en función del ángulo para generar diferentes formas.
-
----
-
-## Código en RoboDK:
 
 ```python
 from robodk.robolink import * # API para comunicarte con RoboDK
@@ -653,7 +488,253 @@ print("¡Listo! Figura y textos completados.")
 
 ```
 
+#### Implementación física en el Motoman MH6
+
+A continuación, se puede evidenciar el código en python completo usado para conectarse al robot y que realice las trayectorias previamente probadas en la simulación:
+
+```python
+from robodk.robolink import * # API para comunicarte con RoboDK
+from robodk.robomath import * # Funciones matemáticas
+import math
+
+# Importamos las librerías necesarias para el texto
+from matplotlib.textpath import TextPath
+from matplotlib.path import Path
+
+#------------------------------------------------
+# 1) Conexión a RoboDK e inicialización
+#------------------------------------------------
+RDK = Robolink()
+
+# Elegir un robot (si hay varios, aparece un popup)
+robot = RDK.ItemUserPick("Selecciona un robot", ITEM_TYPE_ROBOT)
+if not robot.Valid():
+    raise Exception("No se ha seleccionado un robot válido.")
+
+ Conectar al robot físico
+if not robot.Connect():
+    raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
+
+ Confirmar conexión
+if not robot.ConnectedState():
+    raise Exception("El robot no está conectado correctamente. Revisa la conexión.")
+
+print("Robot conectado correctamente.")
+#------------------------------------------------
+# 2) Cargar el Frame y herramientas
+#------------------------------------------------
+frame_name = "Frame_from_Target1"
+frame = RDK.Item(frame_name, ITEM_TYPE_FRAME)
+if not frame.Valid():
+    raise Exception(f'No se encontró el Frame "{frame_name}" en la estación.')
+
+robot.setPoseFrame(frame)
+robot.setPoseTool(robot.PoseTool())
+robot.setSpeed(300)
+robot.setRounding(5)
+
+#------------------------------------------------
+# 3) Parámetros de posición (AJUSTADOS)
+#------------------------------------------------
+z_surface = 0
+z_safe = 50
+
+# --- POSICIÓN DE LA FIGURA ---
+offset_x = 500    # Centro X de la figura
+offset_y = 0      # Centro Y de la figura
+escala = 50       # Radio máximo de la figura es 150mm (3 * 50)
+
+# --- POSICIÓN DEL TEXTO ---
+texto_str = "PABLO"
+tamano_letra = 40 
+
+# Generamos el path primero para calcular su tamaño y centrarlo
+path_temp = TextPath((0, 0), texto_str, size=tamano_letra)
+bbox = path_temp.get_extents()
+ancho_texto = bbox.width
+
+# Centramos el texto respecto al offset_x de la figura
+offset_texto_x = offset_x - 210 
+# Lo ponemos debajo del radio inferior de la figura (que llega a -150)
+offset_texto_y = offset_y - (ancho_texto / 2)
+
+#------------------------------------------------
+# 4) Movimiento a casa
+#------------------------------------------------
+target = RDK.Item("Target_Casa", ITEM_TYPE_TARGET)
+robot.MoveJ(target)
+
+#------------------------------------------------
+# 5) DIBUJAR FIGURA POLAR
+#------------------------------------------------
+print("Dibujando figura...")
+# Punto de aproximación
+robot.MoveJ(transl(offset_x, offset_y, z_surface - z_safe))
+
+num_points = 720
+full_turn = 2 * math.pi
+x_fin_fig = 0
+y_fin_fig = 0
+
+for i in range(num_points + 1):
+    theta = full_turn * (i / num_points)
+    r = (1 - 2 * math.sin(3 * theta)) * escala
+    
+    x = (r * math.cos(theta)) + offset_x
+    y = (r * math.sin(theta)) + offset_y
+    
+    if i == 0:
+        robot.MoveL(transl(x, y, z_surface))
+    else:
+        robot.MoveL(transl(x, y, z_surface))
+    x_fin_fig, y_fin_fig = x, y
+
+# Levantar tras la figura
+robot.MoveL(transl(x_fin_fig, y_fin_fig, z_surface - z_safe))
+
+#------------------------------------------------
+# 6) DIBUJAR NOMBRES (ROTADOS Y EN VARIOS RENGLONES)
+#------------------------------------------------
+# --- CONFIGURACIÓN DE LOS TEXTOS ---
+lineas_de_texto = ["PABLO", "MARCO", "DANIEL"] # Agrega aquí los nombres que quieras separados por comas
+tamano_letra = 40 
+espacio_entre_lineas = 60 # Distancia en milímetros entre cada renglón
+
+# 90 grados lo girará para que se lea desde el frente de la mesa
+angulo = -90 
+rad = math.radians(angulo)
+
+x_curr, y_curr = 0, 0
+
+# Recorremos cada palabra de la lista
+for indice, texto_str in enumerate(lineas_de_texto):
+    print(f"Dibujando renglón {indice + 1}: {texto_str}...")
+    
+    # Generamos el path para medir esta palabra específica
+    path_temp = TextPath((0, 0), texto_str, size=tamano_letra)
+    bbox = path_temp.get_extents()
+    ancho_texto = bbox.width
+    
+    # --- CÁLCULO DE POSICIÓN PARA ESTE RENGLÓN ---
+    # offset_x + 200 es la posición inicial. 
+    # Le sumamos el espacio de las líneas multiplicando por el número de renglón (índice)
+    centro_texto_x = offset_x - 200 - (indice * espacio_entre_lineas) 
+    centro_texto_y = offset_y       
+
+    vertices = path_temp.vertices
+    codigos = path_temp.codes
+
+    for i in range(len(vertices)):
+        # 1. Centramos la palabra localmente
+        x_orig = vertices[i][0] - (ancho_texto / 2)
+        y_orig = vertices[i][1]
+        
+        # 2. Aplicamos rotación
+        x_rot = (-x_orig * math.cos(rad)) - (y_orig * math.sin(rad))
+        y_rot = (-x_orig * math.sin(rad)) + (y_orig * math.cos(rad))
+
+        # 3. Posición final en la mesa
+        px = x_rot + centro_texto_x
+        py = y_rot + centro_texto_y
+        
+        tipo = codigos[i]
+
+        if tipo == Path.MOVETO:
+            # Subir la herramienta si estábamos dibujando
+            if i > 0 or indice > 0: 
+                robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
+            
+            # Mover al nuevo punto inicial
+            robot.MoveJ(transl(px, py, z_surface - z_safe))
+            robot.MoveL(transl(px, py, z_surface))
+        else:
+            robot.MoveL(transl(px, py, z_surface))
+        
+        x_curr, y_curr = px, py
+
+# Retorno final al terminar todas las palabras
+robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
+robot.MoveJ(target)
+
+print("¡Listo! Figura y textos completados.")
+```
+
+Como se puede ver, la principal diferencia es que se descomentan las líneas:
+
+```python
+ Conectar al robot físico
+if not robot.Connect():
+    raise Exception("No se pudo conectar al robot. Verifica que esté en modo remoto y que la configuración sea correcta.")
+
+ Confirmar conexión
+if not robot.ConnectedState():
+    raise Exception("El robot no está conectado correctamente. Revisa la conexión.")
+```
+que son las usadas para conectarse al robot y para confirmar la conexión.
 ---
+
+## Diagrama de flujo de acciones del robot
+
+A continuación se propone la estructura general del diagrama de flujo correspondiente a la ejecución de la trayectoria polar en el Motoman MH6.
+
+1. Inicio del sistema.
+2. Verificación del estado del manipulador.
+3. Carga de la estación virtual en RoboDK.
+4. Definición del robot Motoman MH6.
+5. Definición de la herramienta y sistema de referencia.
+6. Generación de puntos de la trayectoria polar.
+7. Simulación de la trayectoria en RoboDK.
+8. Verificación de colisiones y límites del robot.
+9. Generación del programa para el controlador Motoman.
+10. Envío o carga del programa en el robot.
+11. Ejecución física de la trayectoria.
+12. Retorno a posición segura.
+13. Finalización del proceso.
+
+**`Imagen propuesta:`** Diagrama de flujo de acciones del robot durante la trayectoria polar.
+
+---
+
+## Plano de planta:
+
+A continuación se debe presentar el plano de planta de la estación de trabajo utilizada durante el laboratorio. Este plano debe mostrar la ubicación de los elementos principales que intervienen en la operación del manipulador Motoman MH6.
+
+Elementos sugeridos para el plano:
+
+- Manipulador Motoman MH6.
+- Controlador del robot.
+- Computador con RoboDK.
+- Mesa o superficie de trabajo.
+- Pieza o área donde se realiza la trayectoria polar.
+- Zona de seguridad.
+- Ubicación del operador.
+
+**`Imagen propuesta:`** Plano de planta de la estación de trabajo del Motoman MH6.
+
+---
+
+## Descripción de las funciones y conceptos utilizados:
+
+Durante la implementación de la trayectoria polar y la operación del manipulador se emplean diferentes funciones, conceptos y procedimientos relacionados con RoboDK y la programación del robot.
+
+- **`Robolink`:** Permite establecer la conexión entre el script de Python y la estación de RoboDK. A través de este objeto se pueden seleccionar robots, herramientas, referencias y otros elementos de la estación.
+
+- **`Item`:** Permite seleccionar un elemento dentro de la estación de RoboDK, como el robot, una herramienta, un objeto o un sistema de referencia.
+
+- **`MoveL`:** Ejecuta un movimiento lineal del robot desde la posición actual hasta una posición objetivo. Es útil cuando se desea que el TCP siga una trayectoria continua sobre una superficie.
+
+- **`transl`:** Crea una pose o matriz de transformación a partir de una posición cartesiana definida por las coordenadas `X`, `Y` y `Z`.
+
+- **`cos`:** Función trigonométrica utilizada para calcular la componente en `X` de la trayectoria polar.
+
+- **`sin`:** Función trigonométrica utilizada para calcular la componente en `Y` de la trayectoria polar.
+
+- **`theta`:** Variable angular utilizada para recorrer la trayectoria polar punto por punto.
+
+- **`r`:** Radio de la trayectoria polar, el cual puede variar en función del ángulo para generar diferentes formas.
+
+---
+
 
 ## Evidencias del laboratorio
 
