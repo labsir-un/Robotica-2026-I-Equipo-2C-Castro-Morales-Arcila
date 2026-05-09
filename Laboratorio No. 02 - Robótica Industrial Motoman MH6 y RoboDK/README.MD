@@ -106,7 +106,7 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 |---|---|
 | `S` | `0` |
 | `L` | `-115290` |
-| `U` | `-111623` |
+| `U` | `-111622` |
 | `R` | `1` |
 | `B` | `42647` |
 | `T` | `1393` |
@@ -128,7 +128,10 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 | `B` | `-121` |
 | `T` | `1392` |
 
-**`Imagen propuesta:`** Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6.
+<div align="center">
+  <img src="https://github.com/labsir-un/Robotica-2026-I-Equipo-2C-Castro-Morales-Arcila/blob/e09b2df5aa658098a099be883dd0eb651a918e3d/Laboratorio%20No.%2002%20-%20Rob%C3%B3tica%20Industrial%20Motoman%20MH6%20y%20RoboDK/second_home.png?raw=true" alt="Fotografía del teach pendant mostrando la posición **SECOND HOME POS** del Motoman MH6" width="400"/>
+</div>
+
 
 #### Comparación entre `Home 1` y `Home 2`
 
