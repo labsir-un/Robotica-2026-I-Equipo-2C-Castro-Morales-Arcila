@@ -12,13 +12,13 @@
 
 ## Solución planteada:
 
-Para el desarrollo del segundo laboratorio de robótica industrial, se plantea el análisis y operación del manipulador **Motoman MH6**, tomando como referencia la experiencia obtenida previamente con el manipulador **ABB IRB140** en RobotStudio. En esta práctica se busca comprender las principales características técnicas del Motoman MH6, sus configuraciones iniciales, los modos de movimiento manual, los niveles de velocidad y el uso del software **RoboDK** para la simulación y ejecución de trayectorias.
+Para este segundo laboratorio de robótica industrial se trabaja con el manipulador Motoman MH6, tomando como referencia la experiencia previa con el ABB IRB140 en RobotStudio. La idea es entender no solo sus características técnicas, sino también su forma de operación, sus posiciones iniciales y la manera en que se integra con un software como RoboDK.
 
-Inicialmente, se realiza una comparación técnica entre el Motoman MH6 y el ABB IRB140, con el fin de identificar diferencias importantes en cuanto a alcance, carga útil, repetibilidad, velocidades articulares, aplicaciones típicas y software de programación. Posteriormente, se estudian las posiciones iniciales del Motoman, específicamente **Home 1** y **Home 2**, para comprender su utilidad dentro de una rutina de operación segura.
+El trabajo parte de una comparación entre ambos robots, considerando aspectos como alcance, carga útil, repetibilidad, velocidades articulares, aplicaciones y entorno de programación. Aunque los dos son manipuladores industriales de seis ejes, cada uno responde a necesidades distintas dentro de una celda de trabajo. En el caso del Motoman MH6, también se revisan sus configuraciones Home 1 y Home 2, ya que sirven como referencias importantes para iniciar o finalizar rutinas de forma segura.
 
-Una vez reconocidas las características del manipulador, se procede a describir los modos de movimiento manual, incluyendo el movimiento por articulaciones, el movimiento cartesiano, las traslaciones y las rotaciones respecto a los ejes del sistema de referencia. Además, se analiza el control de velocidad manual, ya que este aspecto es fundamental para realizar movimientos seguros durante la enseñanza de puntos y la validación de trayectorias.
+Luego se aborda la operación manual del manipulador, incluyendo movimientos por articulaciones, desplazamientos cartesianos, traslaciones y rotaciones respecto a los ejes de referencia. Esta parte es importante porque permite reconocer cómo responde el robot desde el teach pendant y cómo controlar mejor el TCP durante la enseñanza de puntos.
 
-Finalmente, se trabaja con el software **RoboDK**, el cual permite crear una estación virtual, simular trayectorias, generar programas y establecer una comunicación con el manipulador físico. En este laboratorio, la actividad principal consiste en diseñar una **trayectoria polar**, simularla en RoboDK y posteriormente ejecutarla en el manipulador Motoman MH6 comandado desde el computador.
+Finalmente, se utiliza RoboDK para crear la estación virtual, simular movimientos y generar una trayectoria polar que después pueda ejecutarse en el manipulador físico. Así, el laboratorio conecta la comparación técnica, la operación manual y la programación de trayectorias en un mismo proceso práctico.
 
 ---
 
