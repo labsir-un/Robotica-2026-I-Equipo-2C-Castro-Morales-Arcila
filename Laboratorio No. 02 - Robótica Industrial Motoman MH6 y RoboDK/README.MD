@@ -110,7 +110,7 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 </div>
 
 <div align="center">
-  <img src="./work_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="500"/>
+  <img src="./img/work_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="500"/>
 </div>
 En el caso de esta ultima imagen, la posición actual del robot prácticamente coincide con los valores definidos para esta configuración, con diferencias muy pequeñas en algunos ejes, lo cual indica que el manipulador se encontraba correctamente ubicado en dicha posición.
 
@@ -128,11 +128,11 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 | `T` | `1392` |
 
 <div align="center">
-  <img src="./rsecond_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición SECOND HOME POS" width="600"/>
+  <img src="./img/rsecond_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición SECOND HOME POS" width="600"/>
 </div>
 
 <div align="center">
-  <img src="./second_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición SECOND HOME POS del Motoman MH6" width="600"/>
+  <img src="./img/second_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición SECOND HOME POS del Motoman MH6" width="600"/>
 </div>
 En la imagen se observa que la diferencia es igual a cero en todos los ejes, lo que indica que el robot se encuentra exactamente en la posición definida como segundo Home.
 
@@ -149,7 +149,7 @@ Durante la práctica, el movimiento manual del **Motoman MH6** se realizó desde
 El *teach pendant* concentra los elementos principales de operación: el selector de modo `TEACH / PLAY / REMOTE`, los botones `START`, `HOLD` y `EMERGENCY STOP`, las teclas de coordenadas, las teclas de velocidad manual, las teclas de movimiento por eje, el botón `SERVO ON READY` y el `Enable Switch`, ubicado en la parte posterior del mando. Este último es importante porque permite habilitar el movimiento del robot mientras se opera manualmente; si no se presiona correctamente, el manipulador no se desplaza aunque se presionen las teclas de eje.
 
 <div align="center">
-  <img src="./tech.png" alt="Distribución general del teach pendant del controlador DX100" width="600"/>
+  <img src="./img/tech.png" alt="Distribución general del teach pendant del controlador DX100" width="600"/>
 </div>
 
 ### Movimiento por articulaciones
@@ -596,7 +596,7 @@ if not robot.ConnectedState():
 A continuación se presenta el diagrama de flujo correspondiente a la lógica general de operación seguida durante la simulación y ejecución física de la trayectoria polar. En este se resume el proceso desde la conexión con RoboDK, la selección del manipulador, la validación del frame, la generación de puntos de la curva polar, la escritura de nombres y el retorno final a la posición segura.
 
 <div align="center">
-  <img src="./diagrama_flujo2.png" alt="Diagrama de flujo de acciones del robot para la trayectoria polar en RoboDK" width="700"/>
+  <img src="./img/diagrama_flujo2.png" alt="Diagrama de flujo de acciones del robot para la trayectoria polar en RoboDK" width="700"/>
 </div>
 
 ---
@@ -606,7 +606,7 @@ A continuación se presenta el diagrama de flujo correspondiente a la lógica ge
 En esta sección se presenta la distribución general de la estación de trabajo utilizada durante el laboratorio. El plano de planta permite ubicar visualmente el manipulador **Motoman MH6** y los ejes adicionales con los que cuenta este manipulador. 
 
 <div align="center">
-  <img src="./plano_planta2.png" alt="Plano de planta de la estación de trabajo del Motoman MH6" width="700"/>
+  <img src="./img/Plano de planta MotomanMH6.png" alt="Plano de planta de la estación de trabajo del Motoman MH6" width="700"/>
 </div>
 
 ## Descripción de las funciones y conceptos utilizados:
