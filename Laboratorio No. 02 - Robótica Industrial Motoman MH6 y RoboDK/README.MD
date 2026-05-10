@@ -12,13 +12,13 @@
 
 ## Solución planteada:
 
-Para este segundo laboratorio de robótica industrial se trabaja con el manipulador Motoman MH6, tomando como referencia la experiencia previa con el ABB IRB140 en RobotStudio. La idea es entender no solo sus características técnicas, sino también su forma de operación, sus posiciones iniciales y la manera en que se integra con un software como RoboDK.
+En este segundo laboratorio de robótica industrial se trabajó con el manipulador **Motoman MH6** del fabricante *Yaskawa*, instalado en la Sala CAM,el cual dispone de dos ejes adicionales asociados a la estación, ampliando de esta manera las posibilidades de operación sin cambiar la estructura principal del robot. Para el caso de este laboratorio se busca no solo comprender las caracteristicas tecnicas de este robot, sino también su modo de operación, posiciones iniciales y la forma en que puede ser controlado mediante el software ***RoboDK***. 
 
-El trabajo parte de una comparación entre ambos robots, considerando aspectos como alcance, carga útil, repetibilidad, velocidades articulares, aplicaciones y entorno de programación. Aunque los dos son manipuladores industriales de seis ejes, cada uno responde a necesidades distintas dentro de una celda de trabajo. En el caso del Motoman MH6, el manipulador como tal cuenta con seis ejes, aunque en el laboratorio se dispone de dos ejes adicionales asociados a la estación, lo cual amplía un poco las posibilidades de operación sin cambiar la estructura principal del robot.
+Ahora bien, el trabajo que se describe a continuacion, parte de una comparativa entre este manipulador y el con manipulador **ABB IRB 140** usado en la practica anterior, considerando aspectos como alcance, carga útil, repetibilidad, velocidades articulares, aplicaciones y entorno de programación. Lo anterior con el fin de que, si bien los dos son manipuladores industriales de seis ejes, cada uno responde a necesidades distintas dentro de una celda de trabajo.
 
-Luego se aborda la operación manual del manipulador, incluyendo movimientos por articulaciones, desplazamientos cartesianos, traslaciones y rotaciones respecto a los ejes de referencia. Esta parte es importante porque permite reconocer cómo responde el robot desde el teach pendant y cómo controlar mejor el TCP durante la enseñanza de puntos.
+Luego de ello, se aborda la operación manual del manipulador, incluyendo movimientos por articulaciones, desplazamientos cartesianos, traslaciones y rotaciones respecto a los ejes de referencia, sesion importante, dado que permite reconocer cómo responde el robot desde el *teach pendant* y cómo controlar mejor el TCP durante la enseñanza de puntos.
 
-Finalmente, se utiliza RoboDK para crear la estación virtual, simular movimientos y generar una trayectoria polar que después pueda ejecutarse en el manipulador físico. Así, el laboratorio conecta la comparación técnica, la operación manual y la programación de trayectorias en un mismo proceso práctico.
+Finalmente, se utiliza el software **RoboDK** para crear la estación virtual, simular movimientos y generar una trayectoria polar que después pueda ejecutarse en el manipulador físico, esto ultimo con el proposito de conectar la comparación técnica, la operación manual y la programación de trayectorias en un mismo proceso práctico.
 
 ---
 
@@ -40,15 +40,9 @@ A continuación se presenta un cuadro comparativo entre el manipulador **Motoman
 | Software trabajado | RoboDK | RobotStudio |
 | Aplicaciones típicas | Manipulación, ensamble, empaque, dispensado, soldadura y atención de máquinas | Manipulación, ensamble, manufactura flexible, soldadura, limpieza, empaque y automatización industrial |
 
-El Motoman MH6 es un robot industrial de seis ejes, con una carga útil de 6 kg y un alcance aproximado de 1422 mm. Esto le da una zona de trabajo bastante amplia para un manipulador de este tipo, lo cual resulta útil en tareas donde el robot necesita cubrir más espacio sin mover su base. Aunque el manipulador como tal tiene seis ejes, en el laboratorio se cuenta con dos ejes adicionales asociados a la estación, detalle que amplía las posibilidades de operación dentro de la práctica, sin que eso cambie la configuración principal del robot.
-
-El ABB IRB140 también es un robot industrial de seis ejes y maneja la misma carga útil nominal de 6 kg, pero su alcance es menor, cerca de 810 mm. Por esa razón, se adapta mejor a estaciones compactas, donde el espacio disponible es más reducido y se busca trabajar con buena precisión en una celda más cerrada.
-
-Con esta comparación se nota que ambos manipuladores tienen capacidades similares en cuanto a carga, pero se diferencian bastante en el área de trabajo que pueden cubrir. El Motoman MH6 ofrece mayor alcance y por eso resulta más conveniente para trayectorias amplias o estaciones con más separación entre elementos. El ABB IRB140, en cambio, se siente más orientado a celdas compactas y además tiene la ventaja de estar muy integrado al ecosistema de ABB mediante RobotStudio, lo que facilita la simulación y programación cuando se trabaja con esa marca.
-
 ---
 
-## Velocidades y rangos de movimiento del Motoman MH6
+### Velocidades y rangos de movimiento del Motoman MH6
 
 En el manipulador Motoman MH6, cada articulación posee un rango de movimiento y una velocidad máxima específica. Estos parámetros son importantes porque determinan la capacidad del robot para ejecutar movimientos rápidos, alcanzar distintas zonas del espacio de trabajo y evitar configuraciones no deseadas durante la programación.
 
@@ -65,7 +59,7 @@ Los ejes `S`, `L` y `U` corresponden principalmente al posicionamiento general d
 
 ---
 
-## Velocidades del ABB IRB140
+### Velocidades del ABB IRB140
 
 Para el caso del ABB IRB140, las velocidades articulares aproximadas son las siguientes:
 
@@ -78,29 +72,29 @@ Para el caso del ABB IRB140, las velocidades articulares aproximadas son las sig
 | Eje 5 | 360 °/s |
 | Eje 6 | 450 °/s |
 
-Aunque el ABB IRB140 tiene menor alcance que el Motoman MH6, mantiene velocidades adecuadas para aplicaciones industriales compactas. Además, al trabajar con RobotStudio, el usuario puede simular el comportamiento del robot utilizando el controlador virtual de ABB, lo que permite validar rutinas antes de ejecutarlas físicamente.
-
 ---
 
-## Análisis comparativo de los manipuladores
+### Análisis comparativo de los manipuladores
 
-A partir de las características revisadas, ambos robots se pueden entender como manipuladores industriales de seis grados de libertad, aunque su aplicación no es exactamente la misma. Comparten una carga útil nominal similar, pero cambian bastante en alcance, tamaño de celda y entorno de programación.
+A partir de las características revisadas, ambos robots se pueden entender como manipuladores industriales de seis grados de libertad, donde aunque su aplicación no es exactamente la misma, comparten una carga útil nominal similar, pero cambian bastante en alcance, tamaño de celda y entorno de programación.
 
-El Motoman MH6 destaca por su mayor alcance, cercano a 1422 mm, lo que le permite cubrir una zona de trabajo más amplia sin mover la base. Esto lo hace conveniente para trayectorias largas, manipulación de piezas, empaque, dispensado o atención de máquinas. En el laboratorio, además, aunque el manipulador mantiene sus seis ejes principales, la estación cuenta con dos ejes adicionales, lo que amplía un poco las posibilidades de operación.
+En este sentido, el **Motoman MH6** destaca por su mayor alcance, cercano a 1422 mm, lo que le permite cubrir una zona de trabajo más amplia sin mover la base, permitiendo asi ser conveniente para trayectorias largas, manipulación de piezas, empaque, dispensado o atención de máquinas. Ademas de ello, como se menciona al inicio, el Motoman instalado en el laboratorio cuenta con dos ejes adicionales, un eje traslacional, sobre el cual reposa el manipulador y se mueve mediante un Riel y un eje externo rotacional con el fin de que la pieza siempre quede en una posicion conveniente para el manipulador, lo que amplía un poco las posibilidades de operación.
 
-El ABB IRB140, en cambio, es más compacto, con un alcance aproximado de 810 mm. Por eso funciona mejor en celdas pequeñas o espacios reducidos, y tiene la ventaja de integrarse directamente con RobotStudio, el lenguaje RAPID y el controlador virtual de ABB. En términos prácticos, el Motoman ofrece mayor cobertura espacial, mientras que el ABB resulta más cómodo para estaciones compactas y trabajos dentro del entorno ABB.
+Ahora bien, el **ABB IRB140**, en cambio, es más compacto, con un alcance aproximado de 810 mm, funcionando mejor en celdas pequeñas o espacios reducidos; ademas de ello, tiene la ventaja de contar con un ecosistema bastante solido, *RobotStudio*, lo que facilita la simulación y programación cuando de trabajar con esta marca se refiere. 
+
+En términos prácticos, el Motoman ofrece mayor cobertura espacial, mientras que el ABB resulta más cómodo para estaciones compactas y trabajos dentro del entorno ABB.
 
 ---
 
 ## Configuraciones iniciales del Motoman MH6
 
-Durante la operación del manipulador **Motoman MH6** se identificaron dos posiciones de referencia principales, conocidas como **Home 1** y **Home 2**. Estas configuraciones permiten llevar el robot a una postura conocida antes de iniciar una rutina, verificar el estado de los ejes o dejar el manipulador en una posición segura cuando no se está ejecutando una trayectoria.
+Durante la operación del manipulador **Motoman MH6** se identificaron dos posiciones de referencia principales, conocidas como ***Home 1*** y ***Home 2***. Configuraciones que permiten llevar el robot a unas posturas conocidas antes de iniciar una rutina, con el fin de verificar el estado de los ejes o dejar el manipulador en una posición segura cuando no se está ejecutando una trayectoria.
 
-En el teach pendant se observan las posiciones de cada articulación del robot, identificadas como `S`, `L`, `U`, `R`, `B` y `T`. Estos valores corresponden a la posición interna registrada por el controlador para cada eje, por lo que sirven como referencia para comparar si el robot se encuentra correctamente ubicado en la posición de Home seleccionada.
+Estas posiciones las podemos observar mendiante el *teach pendant*, donde cada articulación del manipulador es identificada con `S`, `L`, `U`, `R`, `B` y `T`, donde los valores frente a las mismas permite conocer la posición interna registrada por el controlador para cada eje, sirviendo como referencia para comparar si el robot se encuentra correctamente ubicado en la posición de Home seleccionada.
 
-#### Configuración `Home 1`
+### Configuración `Home 1`
 
-La configuración **Home 1** corresponde a una posición de referencia general del manipulador. En la pantalla del teach pendant aparece como **WORK HOME POSITION**, mostrando los valores de origen y la posición actual de cada eje. En este caso, la posición actual del robot prácticamente coincide con los valores definidos para esta configuración, con diferencias muy pequeñas en algunos ejes, lo cual indica que el manipulador se encontraba correctamente ubicado en dicha posición.
+La configuración **Home 1** corresponde a una posición de referencia general del manipulador, en la pantalla del *teach pendant* aparece como **WORK HOME POSITION**, mostrando los valores de origen y la posición actual de cada eje. 
 
 | Articulación | Posición en Home 1 |
 |---|---|
@@ -112,16 +106,17 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 | `T` | `1393` |
 
 <div align="center">
-  <img src="./rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="600"/>
+  <img src="./rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="500"/>
 </div>
 
 <div align="center">
-  <img src="./work_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="600"/>
+  <img src="./work_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición WORK HOME POSITION del Motoman MH6" width="500"/>
 </div>
+En el caso de esta ultima imagen, la posición actual del robot prácticamente coincide con los valores definidos para esta configuración, con diferencias muy pequeñas en algunos ejes, lo cual indica que el manipulador se encontraba correctamente ubicado en dicha posición.
 
-#### Configuración `Home 2`
+### Configuración `Home 2`
 
-La configuración **Home 2** corresponde a una segunda posición de referencia del manipulador. En la pantalla aparece como **SECOND HOME POS**, donde se muestran los valores especificados, actuales y la diferencia entre ambos. En la imagen se observa que la diferencia es igual a cero en todos los ejes, lo que indica que el robot se encuentra exactamente en la posición definida como segundo Home.
+La configuración **Home 2** corresponde a una segunda posición de referencia del manipulador. En la pantalla aparece como **SECOND HOME POS**, donde se muestran los valores especificados, actuales y la diferencia entre ambos. 
 
 | Articulación | Posición en Home 2 |
 |---|---|
@@ -139,7 +134,9 @@ La configuración **Home 2** corresponde a una segunda posición de referencia d
 <div align="center">
   <img src="./second_home.png" alt="Fotografía del teach pendant mostrando los valores de la posición SECOND HOME POS del Motoman MH6" width="600"/>
 </div>
-#### Comparación entre `Home 1` y `Home 2`
+En la imagen se observa que la diferencia es igual a cero en todos los ejes, lo que indica que el robot se encuentra exactamente en la posición definida como segundo Home.
+
+### Comparación entre `Home 1` y `Home 2`
 
 Al revisar ambas posiciones, se nota que **Home 1** y **Home 2** cumplen funciones distintas dentro de la operación. **Home 1**, al aparecer como `WORK HOME POSITION`, se puede asociar más con una posición de trabajo o referencia operativa de la celda. En cambio, **Home 2**, identificada como `SECOND HOME POS`, funciona mejor como una posición auxiliar, más ordenada para verificación, reposo o traslado seguro dentro del procedimiento.
 
@@ -147,47 +144,50 @@ Para la práctica, **Home 2** puede considerarse más conveniente como posición
 
 ## Movimiento manual del manipulador Motoman MH6
 
-Durante la práctica, el movimiento manual del **Motoman MH6** se realizó desde el **teach pendant** del controlador DX100. Esta parte es clave porque antes de ejecutar cualquier rutina desde RoboDK o desde un programa cargado en el controlador, primero hay que entender cómo responde el manipulador cuando se mueve directamente desde el mando. En términos prácticos, aquí se aprende a controlar el robot en modo seguro, revisar su postura, ubicar el TCP y validar que no existan interferencias dentro de la celda.
+Durante la práctica, el movimiento manual del **Motoman MH6** se realizó desde el *teach pendant* del controlador *DX100*. Esta parte es clave porque antes de ejecutar cualquier rutina desde RoboDK o desde un programa cargado en el controlador, primero hay que entender cómo responde el manipulador cuando se mueve directamente desde el mando. En términos prácticos, aquí se aprende a controlar el robot en modo seguro, revisar su postura, ubicar el TCP y validar que no existan interferencias dentro de la celda.
 
-El teach pendant concentra los elementos principales de operación: el selector de modo `TEACH / PLAY / REMOTE`, los botones `START`, `HOLD` y `EMERGENCY STOP`, las teclas de coordenadas, las teclas de velocidad manual, las teclas de movimiento por eje, el botón `SERVO ON READY` y el `Enable Switch`, ubicado en la parte posterior del mando. Este último es importante porque permite habilitar el movimiento del robot mientras se opera manualmente; si no se presiona correctamente, el manipulador no se desplaza aunque se presionen las teclas de eje.
+El *teach pendant* concentra los elementos principales de operación: el selector de modo `TEACH / PLAY / REMOTE`, los botones `START`, `HOLD` y `EMERGENCY STOP`, las teclas de coordenadas, las teclas de velocidad manual, las teclas de movimiento por eje, el botón `SERVO ON READY` y el `Enable Switch`, ubicado en la parte posterior del mando. Este último es importante porque permite habilitar el movimiento del robot mientras se opera manualmente; si no se presiona correctamente, el manipulador no se desplaza aunque se presionen las teclas de eje.
 
 <div align="center">
   <img src="./tech.png" alt="Distribución general del teach pendant del controlador DX100" width="600"/>
 </div>
 
-#### Movimiento por articulaciones
+### Movimiento por articulaciones
 
-En el modo por articulaciones, el robot se mueve eje por eje. Para el Motoman MH6, las articulaciones principales se identifican como `S`, `L`, `U`, `R`, `B` y `T`. Los ejes `S`, `L` y `U` están más relacionados con el posicionamiento general del brazo, mientras que `R`, `B` y `T` corresponden principalmente a la orientación de la muñeca y de la herramienta.
+En el modo por articulaciones, el robot se mueve eje por eje. Para el **Motoman MH6**, las articulaciones principales se identifican como `S`, `L`, `U`, `R`, `B` y `T`. Los ejes `S`, `L` y `U` están más relacionados con el posicionamiento general del brazo, mientras que `R`, `B` y `T` corresponden principalmente a la orientación de la muñeca y de la herramienta.
 
 Para mover el manipulador de esta manera, primero se coloca el selector del pendant en modo `TEACH`. Luego se verifica que el grupo de control activo corresponda al robot, en este caso `R1`, ya que el laboratorio también cuenta con ejes adicionales asociados a la estación. Después se selecciona el sistema de coordenadas mediante la tecla `[COORD]` hasta llegar al modo de articulaciones o `Joint`. Con el robot en este modo, las teclas de eje permiten mover cada articulación en sentido positivo o negativo.
 
-En la botonera se observa que las teclas están organizadas de manera que una misma tecla sirve para el modo articular y para el modo cartesiano. Por ejemplo, cuando se trabaja por articulaciones, las teclas controlan `S- / S+`, `L- / L+`, `U- / U+`, `R- / R+`, `B- / B+` y `T- / T+`. Ya en operación, después de liberar el paro de emergencia si estaba activo, se presiona `[SERVO ON READY]`, se sostiene el `Enable Switch` y se oprime la tecla del eje que se desea mover.. Naturalmente, esto se hace con una velocidad baja al principio, porque cualquier cambio brusco puede acercar la herramienta a una zona no deseada.
+En la botonera se observa que las teclas están organizadas de manera que una misma tecla sirve para el modo articular y para el modo cartesiano. Por ejemplo, cuando se trabaja por articulaciones, las teclas controlan `S- / S+`, `L- / L+`, `U- / U+`, `R- / R+`, `B- / B+` y `T- / T+`. Ya en operación, después de liberar el paro de emergencia si estaba activo, se presiona `[SERVO ON READY]`, se sostiene el `Enable Switch` y se oprime la tecla del eje que se desea mover. Naturalmente, esto se hace con una velocidad baja al principio, porque cualquier cambio brusco puede acercar la herramienta a una zona no deseada.
 
-#### Movimiento cartesiano
+Ahora bien, como se mencionó, el Motoman cuenta con 2 ejes adicionales, el rotacional externo y el traslacional, los cuales son controlados mediante las teclas `E- / E+` y `8- / 8+` respectivamente. 
+
+
+### Movimiento cartesiano
 
 En el modo cartesiano, el movimiento ya no se interpreta como giro independiente de cada articulación, sino como desplazamiento del TCP respecto a un sistema de referencia. Esto resulta mucho más cómodo cuando se quiere aproximar la herramienta a una superficie, seguir una dirección específica o corregir la posición del efector final sin pensar directamente en cada junta del robot.
 
-Para cambiar a este modo, se utiliza nuevamente la tecla `[COORD]`. Según el funcionamiento del DX100, cada pulsación cambia el sistema de coordenadas en el orden `Joint`, `Cartesian/Cylindrical`, `Tool` y `User`. El modo activo se revisa en la zona superior de la pantalla, dentro del área de estado del pendant. Una vez seleccionado el modo cartesiano, las mismas teclas de movimiento pasan a controlar traslaciones y rotaciones del TCP.
+Para cambiar a este modo, se utiliza nuevamente la tecla `[COORD]`. Según el funcionamiento del DX100, cada pulsación cambia el sistema de coordenadas en el orden `Joint`, `Cartesian/Cylindrical`, `Tool` y `User`. El modo activo se revisa en la zona superior de la pantalla, dentro del área de estado del *teach pendant*. Una vez seleccionado el modo cartesiano, las mismas teclas de movimiento pasan a controlar traslaciones y rotaciones del TCP.
 
 En este caso, las teclas marcadas como `X- / X+`, `Y- / Y+` y `Z- / Z+` permiten mover la herramienta linealmente sobre los ejes cartesianos. Las teclas asociadas a `R`, `B` y `T` se usan para modificar la orientación de la herramienta, que en la práctica se interpreta como rotación alrededor de los ejes del sistema de referencia seleccionado. Esta diferencia es importante porque en modo articular se modifica la postura del robot, mientras que en modo cartesiano se busca controlar mejor el comportamiento espacial del TCP.
 
-#### Traslaciones en `X`, `Y` y `Z`
+### Traslaciones en `X`, `Y` y `Z`
 
 Las traslaciones se usan cuando se necesita desplazar la herramienta sin cambiar demasiado su orientación. En el laboratorio esto sirve para acercar el TCP a la zona de trabajo, corregir la altura respecto a la superficie y ubicar el punto inicial de una trayectoria. Para mover en `X`, `Y` o `Z`, se selecciona el modo cartesiano con `[COORD]`, se activa el servo, se mantiene presionado el `Enable Switch` y luego se presiona la tecla correspondiente a la dirección deseada.
 
 El movimiento en `X` desplaza el TCP hacia el sentido positivo o negativo de ese eje, el movimiento en `Y` corrige la posición lateral según el sistema activo, y el movimiento en `Z` normalmente se usa para subir o bajar la herramienta respecto a la superficie de trabajo. Esta última dirección fue especialmente importante para evitar que la herramienta golpeara la mesa o el material antes de iniciar la trayectoria.
 
-#### Rotaciones alrededor de `X`, `Y` y `Z`
+### Rotaciones alrededor de `X`, `Y` y `Z`
 
 Las rotaciones permiten ajustar la orientación del TCP. En una práctica como esta, donde se trabaja con una trayectoria sobre una superficie, no basta con llegar a un punto; también importa cómo llega la herramienta. Una orientación incorrecta puede hacer que el marcador, punta o herramienta de trazado no contacte bien la superficie, o que llegue con un ángulo poco conveniente.
 
-Desde el pendant, estas rotaciones se realizan usando las teclas asociadas a la muñeca del robot cuando se está en un sistema cartesiano, de herramienta o de usuario. En términos operativos, el usuario selecciona el sistema con `[COORD]`, mantiene habilitado el robot con el `Enable Switch` y utiliza las teclas correspondientes para orientar la herramienta alrededor de los ejes definidos. En el laboratorio, esta operación se entiende más como un ajuste fino de orientación que como un desplazamiento grande del manipulador.
+Desde el *teach pendant*, estas rotaciones se realizan usando las teclas asociadas a la muñeca del robot cuando se está en un sistema cartesiano, de herramienta o de usuario. En términos operativos, el usuario selecciona el sistema con `[COORD]`, mantiene habilitado el robot con el `Enable Switch` y utiliza las teclas correspondientes para orientar la herramienta alrededor de los ejes definidos. En el laboratorio, esta operación se entiende más como un ajuste fino de orientación que como un desplazamiento grande del manipulador.
 
 ---
 
 ## Control de velocidad para movimientos manuales
 
-El control de velocidad manual es uno de los puntos más importantes cuando se opera el Motoman desde el teach pendant. En el DX100, la velocidad manual se cambia con las teclas `[FAST]` y `[SLOW]`, ubicadas en la zona central del mando. Según el manual del controlador, al presionar `[FAST]` la velocidad cambia en el orden `INCH`, `SLOW`, `MED` y `FAST`; al presionar `[SLOW]`, el cambio se hace en sentido contrario, es decir, `FAST`, `MED`, `SLOW` e `INCH`.
+El control de velocidad manual es uno de los puntos más importantes cuando se opera el Motoman desde el *teach pendant*. En el DX100, la velocidad manual se cambia con las teclas `[FAST]` y `[SLOW]`, ubicadas en la zona central del mando. Según el manual del controlador, al presionar `[FAST]` la velocidad cambia en el orden `INCH`, `SLOW`, `MED` y `FAST`; al presionar `[SLOW]`, el cambio se hace en sentido contrario, es decir, `FAST`, `MED`, `SLOW` e `INCH`.
 
 | Nivel | Identificación en pantalla | Uso dentro de la operación |
 |---|---|---|
@@ -196,7 +196,7 @@ El control de velocidad manual es uno de los puntos más importantes cuando se o
 | `MED` | `MED` | Movimiento intermedio, útil para desplazamientos controlados dentro de la celda. |
 | `FAST` | `FST` | Movimiento rápido, recomendable solo cuando la trayectoria está despejada. |
 
-En la práctica, lo más seguro es iniciar en `INCH` o `SLOW`, sobre todo cuando la herramienta está cerca de la mesa, de una pieza o de cualquier elemento de la estación. Luego, si el recorrido está libre y ya se conoce la dirección del movimiento, se puede aumentar a `MED` o `FAST`. El nivel activo se identifica en la parte superior de la pantalla del teach pendant, dentro del área de estado, junto con la información del modo de coordenadas y del grupo de control activo.
+En la práctica, lo más seguro es iniciar en `INCH` o `SLOW`, sobre todo cuando la herramienta está cerca de la mesa, de una pieza o de cualquier elemento de la estación, luego, si el recorrido está libre y ya se conoce la dirección del movimiento, se puede aumentar a `MED` o `FAST`. El nivel activo se identifica en la parte superior de la pantalla del *teach pendant*, dentro del área de estado, junto con la información del modo de coordenadas y del grupo de control activo.
 
 También existe la tecla `[HIGH SPEED]`, que permite aumentar la rapidez mientras se mantiene presionada una tecla de eje. Sin embargo, el propio manual indica que esta función no aplica cuando la velocidad manual está en `INCH`, y en operación real conviene usarla con cuidado, porque reduce el margen de reacción del operador.
 
@@ -204,35 +204,35 @@ También existe la tecla `[HIGH SPEED]`, que permite aumentar la rapidez mientra
 
 ## Software RoboDK
 
-**RoboDK** se utilizó como el entorno de simulación y programación fuera de línea para el Motoman MH6. En comparación con trabajar directamente desde el controlador, RoboDK permite construir primero una estación virtual, ubicar el robot, definir el sistema de referencia, configurar la herramienta y probar la trayectoria antes de llevarla al equipo físico. Esto reduce bastante el riesgo de errores en la celda, porque se puede revisar el alcance del robot, la forma de la curva y la posición de los puntos antes de ejecutar el movimiento real.
+**RoboDK** se utilizó como el entorno de simulación y programación para el **Motoman MH6**, en comparación con trabajar directamente desde el controlador, RoboDK permite construir primero una estación virtual, ubicar el robot, definir el sistema de referencia, configurar la herramienta y probar la trayectoria antes de llevarla al equipo físico; lo cual reduce bastante el riesgo de errores en la celda, porque se puede revisar el alcance del robot, la forma de la curva y la posición de los puntos antes de ejecutar el movimiento real.
 
-En este laboratorio, RoboDK funciona como un puente entre la parte geométrica de la trayectoria y el movimiento físico del manipulador. El software no solo dibuja la trayectoria en pantalla, también convierte los puntos generados en movimientos que el robot puede interpretar, ya sea mediante ejecución directa desde el computador o mediante la generación de un programa compatible con el controlador Motoman.
+En este laboratorio, RoboDK funciona como un puente entre la parte geométrica de la trayectoria y el movimiento físico del manipulador, dado que no solo dibuja la trayectoria en pantalla, sino también convierte los puntos generados en movimientos que el robot puede interpretar, ya sea mediante ejecución directa desde el computador o mediante la generación de un programa compatible con el controlador Motoman.
 
-#### Aplicaciones principales de RoboDK
+### Aplicaciones principales de RoboDK
 
-RoboDK es útil para simulación de robots industriales, programación fuera de línea, generación de trayectorias, validación de movimientos, revisión de colisiones, calibración de herramientas y creación de programas para diferentes marcas de robots. En un entorno académico resulta bastante práctico porque no se limita a una sola familia de manipuladores; permite trabajar con ABB, Motoman, KUKA, FANUC, Universal Robots y otros fabricantes desde una misma interfaz.
+**RoboDK** es útil para simulación de robots industriales, programación fuera de línea, generación de trayectorias, validación de movimientos, revisión de colisiones, calibración de herramientas y creación de programas para diferentes marcas de robots. En nuestro caso, en el cual estamos en un entorno académico resulta bastante práctico porque no se limita a una sola familia de manipuladores, sino que permite trabajar con robots de fabricantes como ABB, Motoman, KUKA, FANUC, Universal Robots y otros fabricantes desde una misma interfaz.
 
-En la práctica del Motoman MH6, su utilidad principal estuvo en generar una trayectoria polar, visualizarla antes de ejecutarla y luego usar el mismo script como base para comandar el robot físico. Digamos que la parte fuerte de RoboDK aquí no fue solo simular, sino permitir que una trayectoria matemática terminara convertida en una rutina de movimiento real.
+En la práctica del **Motoman MH6**, su utilidad principal estuvo en generar una trayectoria polar donde se pudo visualizar antes de ejecutarla y luego usar el mismo script como base para comandar el robot físico. Digamos que la parte fuerte de **RoboDK** aquí no fue solo simular, sino permitir que una trayectoria matemática terminara convertida en una rutina de movimiento real.
 
-#### ¿Qué hace RoboDK para mover el manipulador?
+### ¿Qué hace RoboDK para mover el manipulador?
 
-RoboDK trabaja con una estación virtual donde se definen el robot, el frame, la herramienta y los targets o poses de movimiento. En el script usado para este laboratorio, primero se establece la conexión con la estación mediante `Robolink()`, luego se selecciona el robot con `ItemUserPick`, se asigna el frame de trabajo con `setPoseFrame`, se define la herramienta con `setPoseTool`, y finalmente se ejecutan movimientos mediante `MoveJ` y `MoveL`.
+**RoboDK** trabaja con una estación virtual donde se definen el robot, el frame, la herramienta y los targets o poses de movimiento. En el script usado para este laboratorio, primero se establece la conexión con la estación mediante `Robolink()`, luego se selecciona el robot con `ItemUserPick`, se asigna el frame de trabajo con `setPoseFrame`, se define la herramienta con `setPoseTool`, y finalmente se ejecutan movimientos mediante `MoveJ` y `MoveL`.
 
-En este caso, `MoveJ` se usa para desplazamientos generales, como ir a una posición segura o regresar a casa, mientras que `MoveL` se usa para seguir la trayectoria de dibujo punto por punto. La figura polar se genera mediante una ecuación en coordenadas polares y luego se convierte a coordenadas cartesianas `x`, `y`, `z`, porque el robot finalmente necesita posiciones espaciales para mover el TCP.
+En este caso, `MoveJ` se usa para desplazamientos generales, como ir a una posición segura o regresar a casa, mientras que `MoveL` se usa para seguir la trayectoria de dibujo punto por punto. En el caso de la figura polar, esta se genera mediante una ecuación en coordenadas polares y luego se convierte a coordenadas cartesianas `x`, `y`, `z`, porque el robot finalmente necesita posiciones espaciales para mover el TCP.
 
-#### ¿Cómo se comunica RoboDK con el manipulador?
+### ¿Cómo se comunica RoboDK con el manipulador?
 
 La comunicación con el manipulador se realiza desde el computador mediante la conexión configurada entre RoboDK y el controlador del robot. En la simulación, el script trabaja únicamente sobre la estación virtual. Para la ejecución física, se habilitan las líneas de conexión con `robot.Connect()` y se verifica el estado mediante `robot.ConnectedState()`.
 
-En términos de operación, el robot debe estar correctamente configurado para aceptar comandos desde el PC, normalmente en modo remoto o con la configuración de comunicación correspondiente. Una vez RoboDK confirma la conexión, los movimientos enviados desde el script dejan de ser solo simulados y pasan a ejecutarse sobre el manipulador físico. Por eso, antes de correr la rutina real, es necesario haber validado la trayectoria virtualmente y tener despejada la zona de trabajo.
+En términos de operación, el robot debe estar correctamente configurado para aceptar comandos desde el PC, normalmente en modo remoto o con la configuración de comunicación correspondiente. Una vez **RoboDK** confirma la conexión, los movimientos enviados desde el script dejan de ser solo simulados y pasan a ejecutarse sobre el manipulador físico. Por eso, antes de correr la rutina real, es necesario haber validado la trayectoria virtualmente y tener despejada la zona de trabajo.
 
 ---
 
 ## Comparación entre RoboDK y RobotStudio
 
-RoboDK y RobotStudio cumplen funciones parecidas en el sentido de que ambos permiten simular y programar robots, pero no tienen exactamente el mismo enfoque. **RobotStudio** está pensado para el ecosistema ABB, por eso trabaja de forma muy fuerte con el controlador virtual de ABB y con el lenguaje `RAPID`. En el laboratorio anterior fue una herramienta muy útil porque el manipulador utilizado era el ABB IRB140, entonces la simulación y la programación estaban directamente alineadas con ese fabricante.
+RoboDK y RobotStudio cumplen funciones parecidas en el sentido de que ambos permiten simular y programar robots, pero no tienen exactamente el mismo enfoque. **RobotStudio** está pensado para el ecosistema ABB, por eso trabaja de forma muy fuerte con el controlador virtual de ABB y con el lenguaje `RAPID`. En el laboratorio anterior fue una herramienta muy útil porque el manipulador utilizado era el *ABB IRB140*, entonces la simulación y la programación estaban directamente alineadas con ese fabricante.
 
-**RoboDK**, en cambio, se entiende más como una plataforma general de programación fuera de línea. Su ventaja está en que permite trabajar con robots de diferentes marcas y generar trayectorias desde scripts, modelos CAD o puntos definidos por el usuario. Para este laboratorio eso fue clave, porque el robot trabajado era un Motoman MH6 y la trayectoria polar se podía construir desde Python, probar en el entorno virtual y después ejecutar en el robot real.
+**RoboDK**, en cambio, se entiende más como una plataforma general de programación fuera de línea, donde su ventaja principal radica en que permite trabajar con robots de diferentes marcas y generar trayectorias desde scripts, modelos CAD o puntos definidos por el usuario; para este laboratorio eso fue clave, porque el robot trabajado era un *Motoman MH6* y la trayectoria polar se podía construir desde Python, permitiendo a su vez probar el codigo en el entorno virtual y después ejecutarse en el robot real.
 
 | Característica | RoboDK | RobotStudio |
 |---|---|---|
@@ -242,12 +242,12 @@ RoboDK y RobotStudio cumplen funciones parecidas en el sentido de que ambos perm
 | Ventaja principal | Flexibilidad con diferentes marcas | Alta fidelidad en robots ABB |
 | Uso más conveniente | Simulación general, trayectorias y celdas multimarca | Desarrollo y validación de rutinas ABB |
 
-Para este laboratorio, RoboDK se puede entender como la herramienta que permitió conectar la matemática de la trayectoria con la ejecución real del Motoman. RobotStudio, más bien, queda como referencia del laboratorio anterior, donde el objetivo era trabajar dentro de un entorno ABB más cerrado pero también más fiel al controlador real de esa marca.
+Para este laboratorio,**RoboDK** se puede entender como la herramienta que permitió conectar la matemática de la trayectoria con la ejecución real del Motoman y **RobotStudio**, más bien, queda como referencia del laboratorio anterior, donde el objetivo era trabajar dentro de un entorno ABB más cerrado pero también más fiel al controlador real de esa marca.
 
 
-#### Simulación virtual en RoboDK
+### Simulación virtual en RoboDK
 
-La simulación en roboDK es bastante sencilla en comparación con la de Robot Studio. Se debe construir un script en python que contena todos los parametros necesarios para que el robot lleve a cabo las trayectorias y movimientos requeridos. A continuación, se puede evidenciar el código en python completo usado para la simulación:
+La simulación en **RoboDK** es bastante sencilla en comparación con la de **Robot Studio**, en este caso se contruyó un script en python que contena todos los parametros necesarios para que el robot lleve a cabo las trayectorias y movimientos requeridos. A continuación, se puede evidenciar el código en python completo usado para la simulación:
 
 
 ```python
@@ -412,7 +412,7 @@ robot.MoveJ(target)
 
 ```
 
-#### Implementación física en el Motoman MH6
+### Implementación física en el Motoman MH6
 
 A continuación, se puede evidenciar el código en python completo usado para conectarse al robot y que realice las trayectorias previamente probadas en la simulación:
 
@@ -577,7 +577,7 @@ robot.MoveL(transl(x_curr, y_curr, z_surface - z_safe))
 robot.MoveJ(target)
 
 ```
-Como se puede ver, la principal diferencia es que se descomentan las siguientes líneas, que son las usadas para conectarse al robot y para confirmar la conexión.:
+Como se puede ver, la principal diferencia entre ambos codigos es que se descomentan las siguientes líneas, que son las usadas para conectarse al robot y para confirmar la conexión.:
 
 ```python
 # Conectar al robot físico
@@ -603,9 +603,7 @@ A continuación se presenta el diagrama de flujo correspondiente a la lógica ge
 
 ## Plano de planta:
 
-En esta sección se presenta la distribución general de la estación de trabajo utilizada durante el laboratorio. El plano de planta permite ubicar visualmente el manipulador **Motoman MH6**, el controlador **DX100**, el computador con **RoboDK**, la superficie de trabajo y la zona donde se ejecuta la trayectoria polar.
-
-También debe indicarse la zona de seguridad y la ubicación aproximada del operador, ya que durante la ejecución física del robot es necesario mantener despejado el espacio de operación del manipulador.
+En esta sección se presenta la distribución general de la estación de trabajo utilizada durante el laboratorio. El plano de planta permite ubicar visualmente el manipulador **Motoman MH6** y los ejes adicionales con los que cuenta este manipulador. 
 
 <div align="center">
   <img src="./plano_planta2.png" alt="Plano de planta de la estación de trabajo del Motoman MH6" width="700"/>
@@ -641,13 +639,9 @@ Durante el desarrollo del script se emplean las siguientes funciones y conceptos
 
 ---
 
-
-
 ## Vídeos
 
-Los videos deben comenzar con la introducción oficial del laboratorio **LabSIR Intro LabSIR**, de acuerdo con los requerimientos de entrega.
-
-#### Vídeo de trayectoria polar en RoboDK y escritura simulada
+### Vídeo de trayectoria polar en RoboDK y escritura simulada
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
@@ -655,7 +649,7 @@ Los videos deben comenzar con la introducción oficial del laboratorio **LabSIR 
   </a>
 </div>
 
-#### Vídeo de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio
+### Vídeo de trayectoria polar en RoboDK y escritura de nombres dentro del laboratorio
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=asgsZZ6Cp0k">
