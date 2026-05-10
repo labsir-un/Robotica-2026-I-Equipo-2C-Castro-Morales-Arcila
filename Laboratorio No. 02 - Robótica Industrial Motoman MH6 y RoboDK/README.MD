@@ -106,7 +106,7 @@ La configuración **Home 1** corresponde a una posición de referencia general d
 | `T` | `1393` |
 
 <div align="center">
-  <img src="./rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="500"/>
+  <img src="./img/rwork_home.png" alt="Fotografía del manipulador Motoman MH6 ubicado en la posición WORK HOME POSITION" width="500"/>
 </div>
 
 <div align="center">
