@@ -1,13 +1,14 @@
 # Laboratorio No. 03: Robótica Industrial - Manipulador EPSON T3-401S
 
 ## 1. Cuadro Comparativo de Manipuladores
-| Característica | EPSON T3-401S | Motoman MH6 | ABB IRB140 |
+| Característica | EPSON T3-401S | Motoman MH6 | ABB IRB 140 |
 | :--- | :--- | :--- | :--- |
-| **Carga Máxima** | [Completar] | [Completar] | [Completar] |
-| **Alcance** | [Completar] | [Completar] | [Completar] |
-| **Grados de Libertad** | [Completar] | [Completar] | [Completar] |
-| **Velocidad Máxima** | [Completar] | [Completar] | [Completar] |
-| **Aplicaciones Típicas** | [Completar] | [Completar] | [Completar] |
+| **Carga Máxima** | 3 kg | 6 kg | 6 kg |
+| **Alcance** | 400 mm | 1422 mm | 800 mm |
+| **Grados de Libertad** | 4 ejes (SCARA) | 6 ejes | 6 ejes |
+| **Velocidad Máxima** | J1-J2: 3700 mm/s, J3: 1000 mm/s, J4: 2600°/s | Hasta 1000°/s aprox. según eje | Hasta 200°/s según eje |
+| **Aplicaciones Típicas** | Pick & place, ensamblaje de piezas pequeñas, manipulación veloz | Soldadura, empaquetado, cuidado de máquinas, manipulación | Ensamblaje, desbarbado, soldadura, cuidado de máquinas |
+
 
 ## 2. Configuraciones Iniciales (Home)
 * **Definición de Home:** [Explicar concepto y procedimiento]
