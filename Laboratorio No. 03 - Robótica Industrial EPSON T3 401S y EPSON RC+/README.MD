@@ -10,9 +10,38 @@
 | **Aplicaciones Típicas** | Pick & place, ensamblaje de piezas pequeñas, manipulación veloz | Soldadura, empaquetado, cuidado de máquinas, manipulación | Ensamblaje, desbarbado, soldadura, cuidado de máquinas |
 
 
-## 2. Configuraciones Iniciales (Home)
-* **Definición de Home:** [Explicar concepto y procedimiento]
-* **Posición articular:** [Detallar grados de cada articulación]
+# 2. Configuraciones Iniciales (Home)
+
+## Definición de Home
+
+La posición Home corresponde a una posición de referencia segura utilizada para inicializar el robot, verificar la calibración y comenzar o finalizar rutinas de trabajo. Esta posición permite que el manipulador se ubique en una configuración conocida, reduciendo el riesgo de colisiones y facilitando la ejecución repetitiva de programas.
+
+En EPSON RC+ 7.0, la posición Home puede configurarse como un punto enseñado (Teach Point) y posteriormente ser llamada desde cualquier programa mediante instrucciones de movimiento.
+
+## Posición Articular
+
+La posición Home utilizada:
+
+| Articulación | Posición |
+|-------------|-----------|
+| J1 | 0° |
+| J2 | 0° |
+| J3 | 0 mm (posición superior) |
+| J4 | 0° |
+
+
+## Rangos de Movimiento
+
+| Eje | Rango de Movimiento |
+|------|-------------------|
+| J1 | ±132° |
+| J2 | ±141° |
+| J3 | 150 mm |
+| J4 | ±360° |
+
+---
+
+
 
 ## 3. Operación Manual
 * **Modos de Movimiento:**
