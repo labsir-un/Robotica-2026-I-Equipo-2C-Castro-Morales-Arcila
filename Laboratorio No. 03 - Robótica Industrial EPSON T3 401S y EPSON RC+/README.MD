@@ -44,7 +44,7 @@
 * **Diagrama de flujo:** [Insertar flujo lógico de la rutina]
 * **Código (EPSON RC+ 7.0):**
     ```basic
-    ' Incluir aquí el código desarrollado
+    ' Incluir aquí el partes importantes del código desarrollado
     ```
 
 ## 7. Evidencias
