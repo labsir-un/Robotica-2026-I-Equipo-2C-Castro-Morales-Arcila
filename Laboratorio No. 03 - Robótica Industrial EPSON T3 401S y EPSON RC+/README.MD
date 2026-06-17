@@ -43,14 +43,74 @@ La posición Home utilizada:
 
 
 
-## 3. Operación Manual
-* **Modos de Movimiento:**
-    * **Articular:** [Procedimiento y teclas]
-    * **Cartesiano:** [Procedimiento y teclas para traslación/rotación en X, Y, Z]
-* **Control de Velocidad:**
-    * **Niveles:** [Listar niveles disponibles]
-    * **Cambio de nivel:** [Pasos para realizar el cambio]
-    * **Identificación:** [Cómo visualizar el nivel en la pantalla]
+# 3. Operación Manual
+
+## Modos de Movimiento
+
+### Movimiento Articular (Joint)
+
+El modo articular permite controlar individualmente cada eje del robot.
+
+**Procedimiento:**
+
+1. Colocar el robot en modo Teach.
+2. Abrir la ventana **Jog & Teach** en EPSON RC+.
+3. Seleccionar el modo **Joint**.
+4. Mover cada articulación utilizando los controles de desplazamiento.
+
+**Ejes disponibles:**
+
+- J1 (+/-)
+- J2 (+/-)
+- J3 (+/-)
+- J4 (+/-)
+
+### Movimiento Cartesiano
+
+El modo cartesiano permite desplazar directamente el TCP (*Tool Center Point*) en coordenadas espaciales.
+
+#### Traslaciones
+
+- X+
+- X-
+- Y+
+- Y-
+- Z+
+- Z-
+
+#### Rotación
+
+- Rz+
+- Rz-
+
+Este modo resulta útil para posicionar el efector final respecto al entorno de trabajo.
+
+## Control de Velocidad
+
+### Niveles Disponibles
+
+El robot permite ajustar la velocidad de operación mediante porcentaje o velocidad lineal.
+
+| Parámetro | Rango |
+|------------|---------|
+| Speed | 1 – 100 % |
+| SpeedS | 0.1 – 2000 mm/s |
+
+### Cambio de Nivel
+
+1. Abrir la ventana **Jog & Teach**.
+2. Localizar el parámetro **Speed**.
+3. Seleccionar el porcentaje deseado.
+4. Confirmar el nuevo valor.
+
+### Identificación del Nivel
+
+El porcentaje de velocidad seleccionado se muestra directamente en la interfaz de EPSON RC+ 7.0.
+
+---
+
+
+
 
 ## 4. Software y Entorno de Control
 ### EPSON RC+ 7.0
