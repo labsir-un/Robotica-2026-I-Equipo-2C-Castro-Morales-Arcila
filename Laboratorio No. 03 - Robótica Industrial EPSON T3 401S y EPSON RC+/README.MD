@@ -11,36 +11,51 @@
 
 
 # 2. Configuraciones Iniciales (Home)
-
 ## Definición de Home
 
-La posición Home corresponde a una posición de referencia segura utilizada para inicializar el robot, verificar la calibración y comenzar o finalizar rutinas de trabajo. Esta posición permite que el manipulador se ubique en una configuración conocida, reduciendo el riesgo de colisiones y facilitando la ejecución repetitiva de programas.
+En EPSON RC+ 7.0, la posición Home puede configurarse como un **Teach Point**, es decir, un punto enseñado y almacenado en el sistema de coordenadas del robot, que posteriormente puede ser llamado desde cualquier programa mediante instrucciones de movimiento en SPEL+. Esta posición representa el punto de referencia seguro al cual el manipulador regresa al inicio o al final de una rutina, garantizando una configuración articular conocida y reproducible.
 
-En EPSON RC+ 7.0, la posición Home puede configurarse como un punto enseñado (Teach Point) y posteriormente ser llamada desde cualquier programa mediante instrucciones de movimiento.
+Para el robot EPSON T3-401S del laboratorio se tienen definidos dos puntos Home:
 
-## Posición Articular
+- **Home predeterminado del laboratorio** (ver Figura 1): definido en las coordenadas cartesianas **(400, 0, 0)** mm respecto al sistema de referencia del robot. Corresponde a la posición de fábrica establecida en la configuración del sistema.
 
-La posición Home utilizada:
+<div align="center">
+  <a href="images/figura1.png">
+    <img src="images/figura1.png" alt="Home predeterminado — coordenadas (400, 0, 0)" width="500"/>
+  </a>
+  <p><em>Figura 1. Home predeterminado del laboratorio — coordenadas (400, 0, 0).</em></p>
+</div>
 
-| Articulación | Posición |
-|-------------|-----------|
-| J1 | 0° |
-| J2 | 0° |
-| J3 | 0 mm (posición superior) |
-| J4 | 0° |
+- **Home configurado en el laboratorio** (ver Figura 2): establecido en las coordenadas **(−120, 150, 0)** mm. Esta posición fue ajustada para las condiciones específicas del espacio de trabajo disponible en el laboratorio, evitando colisiones con elementos del entorno cercano al robot.
 
+<div align="center">
+  <a href="images/figura1.png">
+    <img src="images/figura1.png" alt="Home predeterminado — coordenadas (400, 0, 0)" width="500"/>
+  </a>
+  <p><em>Figura 1. Home predeterminado del laboratorio — coordenadas (400, 0, 0).</em></p>
+</div>
+
+## Posición Articular en Home
+
+El EPSON T3-401S es un robot SCARA de 4 grados de libertad. En la posición Home, cada articulación se encuentra en su posición de referencia cero, lo que sitúa al manipulador en una configuración extendida y alineada respecto a su base, tal como se describe a continuación:
+
+| Articulación | Descripción | Posición en Home |
+|------------|------------------------------|-------------------|
+| J1 | Rotación de la base | 0°  |
+| J2 | Rotación del brazo| 0°  |
+| J3 | Desplazamiento vertical (Z)  | 0 mm (pos. superior) |
+| J4 | Rotación de la muñeca | 0°  |
 
 ## Rangos de Movimiento
 
-| Eje | Rango de Movimiento |
-|------|-------------------|
-| J1 | ±132° |
-| J2 | ±141° |
-| J3 | 150 mm |
-| J4 | ±360° |
+Los rangos de movimiento de cada articulación definen el espacio de trabajo del manipulador y establecen los límites dentro de los cuales pueden definirse puntos Home y trayectorias de forma segura:
 
----
-
+| Articulación | Descripción  Rango de Movimiento |
+|------|-------------------|-------------------|
+| J1 | Rotación de la base | ±132° |
+| J2 | Rotación del brazo | ±141° 
+| J3 | Desplazamiento vertical (Z) | 150 mm |
+| J4 | Rotación de la muñeca  ±360° |
 
 
 # 3. Operación Manual
@@ -49,39 +64,41 @@ La posición Home utilizada:
 
 ### Movimiento Articular (Joint)
 
-El modo articular permite controlar individualmente cada eje del robot.
+El modo articular permite controlar de forma independiente cada eje del robot, permitiendo reconfigurar la postura del manipulador sin desplazar necesariamente el TCP en el espacio cartesiano.
 
 **Procedimiento:**
 
 1. Colocar el robot en modo Teach.
-2. Abrir la ventana **Jog & Teach** en EPSON RC+.
-3. Seleccionar el modo **Joint**.
-4. Mover cada articulación utilizando los controles de desplazamiento.
+2. Abrir la ventana **Mover y enseñar** en EPSON RC+.
+3. Seleccionar el modo **articular** en el selector de modo de movimiento.
+4. Mover cada articulación utilizando los controles de desplazamiento (`+` / `−`).
 
 **Ejes disponibles:**
 
-- J1 (+/-)
-- J2 (+/-)
-- J3 (+/-)
-- J4 (+/-)
+| Articulación | Movimiento| Botones |
+|------------|---------------------|-------|
+| J1 | Rotación de la base | +  /  − |
+| J2 | Rotación del brazo  | +  /  − |
+| J3 | Desplazamiento en Z | +  /  − |
+| J4 | Rotación de la muñeca | +  /  − |
 
 ### Movimiento Cartesiano
 
-El modo cartesiano permite desplazar directamente el TCP (*Tool Center Point*) en coordenadas espaciales.
+El modo cartesiano permite desplazar directamente el TCP (*Tool Center Point*) en coordenadas espaciales, facilitando el posicionamienento del efector final a objetos o superficies que estan ubicadas en el area de trabajo, para ello, se selecciona el modo **Mundo** o **Herramienta** en la ventana **Mover y enseñar**, según si se desea referenciar el movimiento respecto al sistema global del robot o al sistema local de la herramienta.
 
 #### Traslaciones
 
-- X+
-- X-
-- Y+
-- Y-
-- Z+
-- Z-
+| Eje | Dirección positiva | Dirección negativa |
+|---|-------------------|-------------------|
+| X | Avance en X+ | Retroceso en X− |
+| Y | Avance en Y+ | Retroceso en Y−|
+| Z | Ascenso en Z+ | Descenso en Z− |
 
 #### Rotación
 
-- Rz+
-- Rz-
+| Eje | Movimiento  | Botones |
+|---|---------------------|-------|
+| Rz | Rotación en Z+/Z−  | + / − |
 
 Este modo resulta útil para posicionar el efector final respecto al entorno de trabajo.
 
@@ -89,28 +106,32 @@ Este modo resulta útil para posicionar el efector final respecto al entorno de 
 
 ### Niveles Disponibles
 
-El robot permite ajustar la velocidad de operación mediante porcentaje o velocidad lineal.
+El robot permite ajustar la velocidad de operación mediante porcentaje o velocidad lineal del TCP.
 
-| Parámetro | Rango |
-|------------|---------|
-| Speed | 1 – 100 % |
-| SpeedS | 0.1 – 2000 mm/s |
+| Parámetro | Descripción | Rango           |
+|---------|-------------------------------------|---------------|
+|`Speed` | Velocidad en % de la máxima| 1 – 100 % |
+|`SpeedS` | Velocidad lineal del TCP  | 0.1 – 2000 mm/s |
+
 
 ### Cambio de Nivel
 
-1. Abrir la ventana **Jog & Teach**.
-2. Localizar el parámetro **Speed**.
-3. Seleccionar el porcentaje deseado.
-4. Confirmar el nuevo valor.
+### Mediante Codigo Spelt+
 
-### Identificación del Nivel
+```spel
+Function Main
+    Motor On
+    Power High
+    Accel 100, 100
+    Speed 50 \\ modificar esta funcion por las mencionadas anteriormente
+...
+Fend
+```
 
-El porcentaje de velocidad seleccionado se muestra directamente en la interfaz de EPSON RC+ 7.0.
-
----
-
-
-
+### Mediante el administrador del Robot
+1. Abrir la ventana **Mover y enseñar**.
+2. Localizar el parámetro **Velocidad**.
+3. Seleccionar la velocidad deseada ("Baja" o "Alta").
 
 ## 4. Software y Entorno de Control
 
@@ -196,4 +217,8 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
     ```
 
 ## 6. Evidencias
-* **Simulación:** [Enlace al video de la simulación en EPSON RC+ 7.0]
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
+    <img src="https://img.youtube.com/vi/HAfciXf_1t0/0.jpg" alt="Simulación - Patrón de Caballo (Ajedrez)" width="500"/>
+  </a>
+</div>
