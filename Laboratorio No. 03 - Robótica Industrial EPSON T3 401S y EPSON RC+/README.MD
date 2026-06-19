@@ -20,8 +20,8 @@ Para el robot EPSON T3-401S del laboratorio se tienen definidos dos puntos Home:
 - **Home predeterminado del laboratorio** (ver Figura 1): definido en las coordenadas cartesianas **(400, 0, 0)** mm respecto al sistema de referencia del robot. Corresponde a la posición de fábrica establecida en la configuración del sistema.
 
 <div align="center">
-  <a href="images/figura1.png">
-    <img src="images/figura1.png" alt="Home predeterminado — coordenadas (400, 0, 0)" width="500"/>
+  <a href="./img/origen_real  manipulador.png">
+    <img src="./img/origen_real  manipulador.png" alt="Home predeterminado — coordenadas (400, 0, 0)" width="500"/>
   </a>
   <p><em>Figura 1. Home predeterminado del laboratorio — coordenadas (400, 0, 0).</em></p>
 </div>
@@ -29,10 +29,10 @@ Para el robot EPSON T3-401S del laboratorio se tienen definidos dos puntos Home:
 - **Home configurado en el laboratorio** (ver Figura 2): establecido en las coordenadas **(−120, 150, 0)** mm. Esta posición fue ajustada para las condiciones específicas del espacio de trabajo disponible en el laboratorio, evitando colisiones con elementos del entorno cercano al robot.
 
 <div align="center">
-  <a href="images/figura1.png">
-    <img src="images/figura1.png" alt="Home predeterminado — coordenadas (400, 0, 0)" width="500"/>
+  <a href="./img/Home_lab  manipulador.png">
+    <img src="./img/Home_lab  manipulador.png" alt="Home lab — coordenadas (0, 400, 0)" width="500"/>
   </a>
-  <p><em>Figura 1. Home predeterminado del laboratorio — coordenadas (400, 0, 0).</em></p>
+  <p><em>Figura 2. Home lab — coordenadas (0, 400, 0).</em></p>
 </div>
 
 ## Posición Articular en Home
@@ -123,7 +123,7 @@ Function Main
     Motor On
     Power High
     Accel 100, 100
-    Speed 50 \\ modificar esta funcion por las mencionadas anteriormente
+    *Speed 50* \\ modificar esta función por las mencionadas anteriormente
 ...
 Fend
 ```
@@ -217,9 +217,11 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 La lógica de la rutina se basa en el movimiento alternado de dos huevos, donde cada uno es tomado desde una posición inicial, trasladado a una nueva ubicación siguiendo el patrón del caballo de ajedrez y posteriormente liberado para continuar con el otro huevo. Este procedimiento se repite hasta recorrer todas las posiciones definidas en la matriz.
 
 <div align="center">
-  <img src="./img/Diagrama_Flujo.jpeg" alt="DIAGRAMA_FLUJO" width="600"/>
+  <a href="./img/Diagrama_Flujo.jpeg">
+    <img src="./img/Diagrama_Flujo.jpeg" alt="DIAGRAMA_FLUJO" width="600"/>
+  </a>
+  <p><em>Figura 3. DIAGRAMA_FLUJO.</em></p>
 </div>
-
 ### Secuencia de recorrido de cada huevo
 
 Para definir la secuencia de movimiento de cada huevo, se parte de una cuadrícula de **6 × 5**, la cual representa los espacios del cartón de huevos. En esta matriz, los huevos se ubican en esquinas opuestas, probando así una rutina capaz de recorrer todo el tablero siguiendo un patrón equivalente al movimiento del caballo en ajedrez.
@@ -237,16 +239,18 @@ La secuencia de recorrido definida para cada huevo es la siguiente:
 A partir de la rutina ya especificada, se estableció la distribución de los huevos sobre un cartón común de 6 × 5 posiciones, el cual simula la matriz de trabajo del manipulador. Para definir esta matriz, se tuvo en cuenta que la distancia entre centros del cartón es de **48 mm**, lo que permitió delimitar un espacio de trabajo adecuado para que el robot pudiera recorrer todas las posiciones sin presentar problemas de alcance ni singularidades durante la ejecución de la trayectoria. En función de esta distribución, se definieron los siguientes puntos sobre la matriz del pallet, los cuales sirven como referencia para el recorrido de los huevos.
 
 <div align="center">
-  <a href="images/figura_planta.png">
-    <img src="images/figura_planta.png" alt="matriz 6x5" width="500"/>
+   <a href="img/Cuadricula huevos.png">
+    <img src="./img/Cuadricula huevos.png" alt="matriz 6x5" width="500"/>
   </a>
+  <p><em>Figura 4. matriz 6x5 - Espacio de trabajo sobre la caja de huevos.</em></p>
 </div>
 
 Con esta organización, se implementó la secuencia en SPEL+, tomando como base los espacios definidos en la matriz del pallet. La rutina consiste en tomar el huevo en un punto de origen, trasladarlo al punto destino y luego repetir el mismo procedimiento con el otro huevo, alternando el movimiento entre ambos hasta completar el recorrido total.
 <div align="center">
-  <a href="images/figura_planta.png">
-    <img src="images/figura_planta.png" alt="Definicion de puntos para la construccion del pallet" width="500"/>
+  <a href="img/Definicion de puntos .png">
+    <img src="./img/Definicion de puntos .png" alt="Puntos Pallet" width="500"/>
   </a>
+  <p><em>Figura 5. Puntos Pallet.</em></p>
 </div>
 
 ### Código (EPSON RC+ 7.0)
