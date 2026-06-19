@@ -53,7 +53,7 @@ Los rangos de movimiento de cada articulación definen el espacio de trabajo del
 | Articulación | Descripción  Rango de Movimiento |
 |------|-------------------|-------------------|
 | J1 | Rotación de la base | ±132° |
-| J2 | Rotación del brazo | ±141° 
+| J2 | Rotación del brazo | ±141° |
 | J3 | Desplazamiento vertical (Z) | 150 mm |
 | J4 | Rotación de la muñeca  ±360° |
 
