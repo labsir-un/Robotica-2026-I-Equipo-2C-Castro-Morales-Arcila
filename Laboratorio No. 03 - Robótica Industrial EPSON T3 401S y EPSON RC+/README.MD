@@ -50,7 +50,7 @@ El EPSON T3-401S es un robot SCARA de 4 grados de libertad. En la posición Home
 
 Los rangos de movimiento de cada articulación definen el espacio de trabajo del manipulador y establecen los límites dentro de los cuales pueden definirse puntos Home y trayectorias de forma segura:
 
-| Articulación | Descripción  Rango de Movimiento |
+| Articulación | Descripción | Rango de Movimiento |
 |------|-------------------|-------------------|
 | J1 | Rotación de la base | ±132° |
 | J2 | Rotación del brazo | ±141° |
