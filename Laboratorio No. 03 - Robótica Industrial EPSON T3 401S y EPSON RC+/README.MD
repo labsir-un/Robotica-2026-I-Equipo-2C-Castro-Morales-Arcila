@@ -210,7 +210,10 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 
 ## 5. Trayectoria: Patrón de Caballo (Ajedrez)
 * **Plano de planta:** [Insertar diagrama de la cubeta y posiciones iniciales]
-* **Diagrama de flujo:** [Insertar flujo lógico de la rutina]
+* **Diagrama de flujo:** 
+<div align="center">
+  <img src="./img/Diagrama3.png" alt="DIAGRAMA_FLUJO" width="600"/>
+</div>
 * **Código (EPSON RC+ 7.0):**
     ```Spelt +
     ' Function Main
