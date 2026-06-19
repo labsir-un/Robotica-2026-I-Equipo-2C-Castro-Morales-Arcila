@@ -55,7 +55,7 @@ Los rangos de movimiento de cada articulación definen el espacio de trabajo del
 | J1 | Rotación de la base | ±132° |
 | J2 | Rotación del brazo | ±141° |
 | J3 | Desplazamiento vertical (Z) | 150 mm |
-| J4 | Rotación de la muñeca  ±360° |
+| J4 | Rotación de la muñeca | ±360° |
 
 
 # 3. Operación Manual
@@ -212,8 +212,34 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 * **Plano de planta:** [Insertar diagrama de la cubeta y posiciones iniciales]
 * **Diagrama de flujo:** [Insertar flujo lógico de la rutina]
 * **Código (EPSON RC+ 7.0):**
-    ```basic
-    ' Incluir aquí el partes importantes del código desarrollado
+    ```Spelt +
+    ' Function Main
+        Motor On
+        Power High
+        Accel 100, 100
+        Speed 50
+        Wait 10
+        Home
+        Call SecuenciaMovimientos
+        Home
+      Fend
+
+      Function MoverHuevo(huevo As Integer, origen As Integer, destino As Integer)
+          Pallet 1, Origen, PuntoX, PuntoY, 6, 5
+      
+          ' origen y destino vienen en base 0, el pallet trabaja en divisiones 1..30
+          Jump Pallet(1, origen)
+          Move Pallet(1, origen) :Z(-90)
+          On 9
+          Wait 0.2
+          Move Pallet(1, origen) :Z(0)
+      
+          Jump Pallet(1, destino)
+          Move Pallet(1, destino) :Z(-90)
+          Off 9
+          Wait 0.2
+          Move Pallet(1, destino) :Z(0)
+      Fend
     ```
 
 ## 6. Evidencias
