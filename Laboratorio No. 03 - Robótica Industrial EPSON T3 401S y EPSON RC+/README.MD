@@ -209,45 +209,82 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 
 
 ## 5. Trayectoria: Patrón de Caballo (Ajedrez)
-* **Plano de planta:** [Insertar diagrama de la cubeta y posiciones iniciales]
-* **Diagrama de flujo:** 
+
+### Plano de planta
+
+### Diagrama de flujo
+
+La lógica de la rutina se basa en el movimiento alternado de dos huevos, donde cada uno es tomado desde una posición inicial, trasladado a una nueva ubicación siguiendo el patrón del caballo de ajedrez y posteriormente liberado para continuar con el otro huevo. Este procedimiento se repite hasta recorrer todas las posiciones definidas en la matriz.
+
 <div align="center">
   <img src="./img/Diagrama_Flujo.jpeg" alt="DIAGRAMA_FLUJO" width="600"/>
 </div>
-* **Código (EPSON RC+ 7.0):**
-    ```Spelt +
-    ' Function Main
-        Motor On
-        Power High
-        Accel 100, 100
-        Speed 50
-        Wait 10
-        Home
-        Call SecuenciaMovimientos
-        Home
-      Fend
 
-      Function MoverHuevo(huevo As Integer, origen As Integer, destino As Integer)
-          Pallet 1, Origen, PuntoX, PuntoY, 6, 5
+### Secuencia de recorrido de cada huevo
 
-          'ir a la posicion inicial del huevo
-          Jump Pallet(1, origen)
-          Move Pallet(1, origen) :Z(-90)
-          'Encender la ventoza y agarrar el huevo
-          On 9
-          Wait 0.2
-          Move Pallet(1, origen) :Z(0)
+Para definir la secuencia de movimiento de cada huevo, se parte de una cuadrícula de **6 × 5**, la cual representa los espacios del cartón de huevos. En esta matriz, los huevos se ubican en esquinas opuestas, probando así una rutina capaz de recorrer todo el tablero siguiendo un patrón equivalente al movimiento del caballo en ajedrez.
 
-          'ir a la posicion final del huevo (para completar el movimiento del caballo)
-          Jump Pallet(1, destino)
-          Move Pallet(1, destino) :Z(-90)
-          'Soltar el huevo
-          Off 9
-          Wait 0.2
-          Move Pallet(1, destino) :Z(0)
-      Fend
-    ```
+La secuencia de recorrido definida para cada huevo es la siguiente:
 
+**Huevo A**
+
+`1 → 9 → 5 → 18 → 29 → 21 → 25 → 14 → 27 → 19 → 8 → 16 → 20 → 7 → 3 → 11 → 24 → 28 → 15 → 4 → 12 → 23 → 10 → 2 → 13 → 26 → 22 → 30 → 17 → 6`
+
+**Huevo B**
+
+`30 → 22 → 26 → 13 → 2 → 10 → 6 → 17 → 4 → 12 → 23 → 15 → 11 → 24 → 28 → 20 → 7 → 3 → 16 → 27 → 19 → 8 → 21 → 29 → 18 → 5 → 9 → 1 → 14 → 25`
+
+A partir de la rutina ya especificada, se estableció la distribución de los huevos sobre un cartón común de 6 × 5 posiciones, el cual simula la matriz de trabajo del manipulador. Para definir esta matriz, se tuvo en cuenta que la distancia entre centros del cartón es de **48 mm**, lo que permitió delimitar un espacio de trabajo adecuado para que el robot pudiera recorrer todas las posiciones sin presentar problemas de alcance ni singularidades durante la ejecución de la trayectoria. En función de esta distribución, se definieron los siguientes puntos sobre la matriz del pallet, los cuales sirven como referencia para el recorrido de los huevos.
+
+<div align="center">
+  <a href="images/figura_planta.png">
+    <img src="images/figura_planta.png" alt="matriz 6x5" width="500"/>
+  </a>
+</div>
+
+Con esta organización, se implementó la secuencia en SPEL+, tomando como base los espacios definidos en la matriz del pallet. La rutina consiste en tomar el huevo en un punto de origen, trasladarlo al punto destino y luego repetir el mismo procedimiento con el otro huevo, alternando el movimiento entre ambos hasta completar el recorrido total.
+<div align="center">
+  <a href="images/figura_planta.png">
+    <img src="images/figura_planta.png" alt="Definicion de puntos para la construccion del pallet" width="500"/>
+  </a>
+</div>
+
+### Código (EPSON RC+ 7.0)
+
+```spel
+Function Main
+    Motor On
+    Power High
+    Accel 100, 100
+    Speed 50
+    Wait 10
+    Home
+    Call SecuenciaMovimientos
+    Home
+Fend
+
+Function MoverHuevo(huevo As Integer, origen As Integer, destino As Integer)
+    Pallet 1, Origen, PuntoX, PuntoY, 6, 5
+
+    ' Ir a la posición inicial del huevo
+    Jump Pallet(1, origen)
+    Move Pallet(1, origen) :Z(-90)
+
+    ' Encender la ventosa y agarrar el huevo
+    On 9
+    Wait 0.2
+    Move Pallet(1, origen) :Z(0)
+
+    ' Ir a la posición final del huevo
+    Jump Pallet(1, destino)
+    Move Pallet(1, destino) :Z(-90)
+
+    ' Soltar el huevo
+    Off 9
+    Wait 0.2
+    Move Pallet(1, destino) :Z(0)
+Fend
+```
 ## 6. Evidencias
 <div align="center">
   <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
