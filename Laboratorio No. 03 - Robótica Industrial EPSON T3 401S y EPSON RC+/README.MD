@@ -226,16 +226,19 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 
       Function MoverHuevo(huevo As Integer, origen As Integer, destino As Integer)
           Pallet 1, Origen, PuntoX, PuntoY, 6, 5
-      
-          ' origen y destino vienen en base 0, el pallet trabaja en divisiones 1..30
+
+          'ir a la posicion inicial del huevo
           Jump Pallet(1, origen)
           Move Pallet(1, origen) :Z(-90)
+          'Encender la ventoza y agarrar el huevo
           On 9
           Wait 0.2
           Move Pallet(1, origen) :Z(0)
-      
+
+          'ir a la posicion final del huevo (para completar el movimiento del caballo)
           Jump Pallet(1, destino)
           Move Pallet(1, destino) :Z(-90)
+          'Soltar el huevo
           Off 9
           Wait 0.2
           Move Pallet(1, destino) :Z(0)
