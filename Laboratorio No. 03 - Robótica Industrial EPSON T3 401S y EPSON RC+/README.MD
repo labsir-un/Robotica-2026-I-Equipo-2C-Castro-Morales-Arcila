@@ -40,7 +40,7 @@ Para el robot EPSON T3-401S del laboratorio se tienen definidos dos puntos Home:
 El EPSON T3-401S es un robot SCARA de 4 grados de libertad. En la posición Home, cada articulación se encuentra en su posición de referencia cero, lo que sitúa al manipulador en una configuración extendida y alineada respecto a su base, tal como se describe a continuación:
 
 | Articulación | Descripción | Posición en Home |
-|:------------:|------------------------------|:-------------------:|
+|:------------|:------------------------------|:-------------------|
 | J1 | Rotación de la base | 0°  |
 | J2 | Rotación del brazo| 0°  |
 | J3 | Desplazamiento vertical (Z)  | 0 mm (pos. superior) |
