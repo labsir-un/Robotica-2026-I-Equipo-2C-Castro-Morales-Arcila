@@ -186,10 +186,8 @@ Para el desarrollo de este laboratorio, cada herramienta cumple una función dif
 - **RoboDK** es una herramienta general de simulación y programación fuera de línea que facilita la comparación y el trabajo con robots de diferentes fabricantes.
 - **RobotStudio** es una plataforma especializada en robots ABB que ofrece una simulación de alta fidelidad mediante el controlador virtual de ABB.
 
-## 5. Diseño de Gripper Neumático
-NA
 
-## 6. Trayectoria: Patrón de Caballo (Ajedrez)
+## 5. Trayectoria: Patrón de Caballo (Ajedrez)
 * **Plano de planta:** [Insertar diagrama de la cubeta y posiciones iniciales]
 * **Diagrama de flujo:** [Insertar flujo lógico de la rutina]
 * **Código (EPSON RC+ 7.0):**
@@ -197,5 +195,5 @@ NA
     ' Incluir aquí el partes importantes del código desarrollado
     ```
 
-## 7. Evidencias
+## 6. Evidencias
 * **Simulación:** [Enlace al video de la simulación en EPSON RC+ 7.0]
