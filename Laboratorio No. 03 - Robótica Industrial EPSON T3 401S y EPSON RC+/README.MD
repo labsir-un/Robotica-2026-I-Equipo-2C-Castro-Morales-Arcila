@@ -289,9 +289,10 @@ Function MoverHuevo(huevo As Integer, origen As Integer, destino As Integer)
     Move Pallet(1, destino) :Z(0)
 Fend
 ```
+Para ampliar el codigo ver: <a href="./src/main.prg" target="_blank">Codigo Completo</a> 
 ## 6. Evidencias
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=HAfciXf_1t0">
-    <img src="https://img.youtube.com/vi/HAfciXf_1t0/0.jpg" alt="Simulación - Patrón de Caballo (Ajedrez)" width="500"/>
+  <a href="https://youtu.be/iY24xKc1f0Y">
+    <img src="https://youtu.be/iY24xKc1f0Y.jpg" alt="Simulación - Patrón de Caballo (Ajedrez)" width="500"/>
   </a>
 </div>
