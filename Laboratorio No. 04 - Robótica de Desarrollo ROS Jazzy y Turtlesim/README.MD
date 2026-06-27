@@ -16,7 +16,7 @@
   </p>
 </div>
 
----
+
 
 ## Integrantes
 
@@ -24,15 +24,14 @@
 * **Marco Alejandro Morales Pantoja**
 * **Daniel Felipe Castro Galindo**
 
----
 
 ## a) Documentación del desarrollo
 
 ### Descripción general del laboratorio
 
-En este laboratorio se desarrolló una aplicación en **ROS 2 Jazzy Jalisco** usando Python, `rclpy` y el simulador **Turtlesim**.
+En este laboratorio se desarrolló una aplicación en ROS 2 Jazzy Jalisco usando Python con rclpy y el simulador Turtlesim, implementada dentro del archivo move_turtle.py del paquete my_turtle_controller. 
 
-El trabajo se realizó en el archivo `move_turtle.py` del paquete `my_turtle_controller`. El objetivo fue controlar a `turtle1` directamente desde el teclado, ejecutar trayectorias automáticas, dibujar figuras y letras personalizadas, y crear una segunda tortuga que siguiera a la primera.
+El objetivo principal fue controlar turtle1 directamente desde el teclado sin hacer uso de turtle_teleop_key, y a partir de esto, se añadieron funcionalidades extras al nodo, las cuales permiten ejecutar trayectorias automáticas, dibujar figuras geométricas y letras personalizadas. Adicionalmente, se integró una segunda tortuga al sistema configurándola para que siguiera de forma autónoma la posición de turtle1 en tiempo real.
 
 Toda la lógica quedó integrada en un nodo propio llamado:
 
@@ -46,9 +45,7 @@ Este nodo se comunica con el nodo del simulador:
 /turtlesim
 ```
 
-La comunicación se realiza mediante tópicos y servicios de ROS 2. No se utilizó `turtle_teleop_key`, ya que la lectura del teclado y el control de la tortuga fueron programados directamente dentro del script.
-
----
+La comunicación se realiza mediante tópicos y servicios de ROS 2, y para este caso, no se utilizó `turtle_teleop_key`, ya que la lectura del teclado y el control de la tortuga fueron programados directamente dentro del script.
 
 ### Funcionamiento general
 
@@ -62,9 +59,7 @@ Al iniciar el programa se crean:
 
 `rclpy.spin()` se ejecuta en un hilo secundario. De esta forma, ROS 2 puede seguir procesando mensajes, servicios y temporizadores mientras el hilo principal permanece leyendo las teclas.
 
-Las figuras, las letras y la trayectoria automática también se ejecutan en hilos independientes. Esto evita que las pausas usadas para construir los movimientos bloqueen permanentemente el nodo.
-
----
+Las figuras, las letras y la trayectoria automática también se ejecutan en hilos independientes, evitando que las pausas usadas para construir los movimientos bloqueen permanentemente el nodo.
 
 ### Lectura del teclado
 
@@ -82,9 +77,7 @@ Después se activa el modo de lectura directa:
 tty.setraw(fd)
 ```
 
-La función `select.select()` revisa si hay una tecla disponible. Se usa un tiempo de espera de `0.05 s`, por lo que el programa no se queda esperando indefinidamente.
-
-Las flechas generan una secuencia de tres caracteres. Cuando el primer carácter recibido es `\x1b`, se leen dos caracteres adicionales para determinar cuál flecha fue presionada.
+La función select.select() verifica si hay una tecla disponible en stdin antes de intentar leerla, definiendo un tiempo de espera de 0.05 s para evitar que el programa quede bloqueado esperando una entrada del teclado. Por otro lado, las teclas de flecha no generan un solo carácter sino una secuencia de tres, por lo que cuando se detecta \x1b como primer carácter, el programa lee dos caracteres adicionales para identificar cuál de las cuatro flechas fue presionada.
 
 Al terminar la lectura, la configuración original de la terminal se restaura mediante:
 
@@ -92,7 +85,6 @@ Al terminar la lectura, la configuración original de la terminal se restaura me
 termios.tcsetattr(fd, termios.TCSADRAIN, cfg)
 ```
 
----
 
 ### Control manual de `turtle1`
 
@@ -125,8 +117,6 @@ El método `parar()` utiliza la misma función, pero publica ambas velocidades e
 self.vel(0.0, 0.0)
 ```
 
----
-
 ### Funciones automáticas
 
 #### Movimiento temporizado
@@ -147,7 +137,6 @@ Cada paso dura `0.05 s`. Por esta razón se realizan aproximadamente veinte publ
 
 Cuando termina la secuencia, el método llama a `parar()`.
 
----
 
 #### Cuadrado
 
@@ -172,7 +161,6 @@ $$
 
 Con los cuatro avances y los cuatro giros se forma el cuadrado.
 
----
 
 #### Triángulo equilátero
 
@@ -194,7 +182,6 @@ $$
 
 Este giro permite cerrar el triángulo equilátero después de tres lados.
 
----
 
 #### Reinicio de la posición
 
@@ -214,11 +201,8 @@ y = 5.544
 theta = 0.0
 ```
 
-Estas coordenadas corresponden aproximadamente al centro de la ventana de Turtlesim.
+Estas coordenadas corresponden aproximadamente al centro de la ventana de Turtlesim. cabe recalcar que para este caso, se utilizó el teletransporte porque permite cambiar la posición de forma instantánea, sin dibujar una línea desde la ubicación anterior.
 
-Se utilizó el teletransporte porque permite cambiar la posición de forma instantánea, sin dibujar una línea desde la ubicación anterior.
-
----
 
 #### Activación y desactivación del lápiz
 
@@ -253,7 +237,6 @@ req.off = 0 if self.lapiz_activo else 1
 
 Cuando `off` es igual a cero, la tortuga dibuja. Cuando es igual a uno, puede moverse sin dejar trazo.
 
----
 
 #### Trayectoria automática y evasión de bordes
 
@@ -285,11 +268,8 @@ Cuando se detecta un borde, se publica:
 self.vel(0.0, 1.5)
 ```
 
-En ese momento se detiene el avance y la tortuga comienza a girar. Cuando deja de cumplir la condición de borde, vuelve a avanzar.
+Cuando la tortuga se aproxima a uno de los bordes de la ventana, el avance se detiene y el nodo la hace girar hasta que deja de cumplir la condición de borde, momento en el cual retoma el movimiento hacia adelante. Si la trayectoria ya se encuentra activa y se presiona nuevamente `A`, la variable `auto_corriendo` cambia a `False` y la tortuga se detiene.
 
-Si la trayectoria ya se encuentra activa y se presiona nuevamente `A`, la variable `auto_corriendo` cambia a `False` y la tortuga se detiene.
-
----
 
 #### Detención
 
@@ -302,7 +282,6 @@ self.parar()
 
 Con esto se desactiva la trayectoria automática y se publican velocidades iguales a cero para `turtle1`.
 
----
 
 #### Limpieza del lienzo
 
@@ -312,11 +291,8 @@ La tecla `L` llama al servicio:
 /clear
 ```
 
-Este servicio elimina los trazos de la ventana, pero conserva las tortugas y mantiene abierto el simulador.
+Este servicio elimina los trazos de la ventana conservando las tortugas y manteniendo el simulador activo, lo que resultó útil durante las pruebas para evitar que los dibujos anteriores dificultaran la visualización de los nuevos movimientos.
 
-Se añadió para facilitar las pruebas y evitar que los dibujos anteriores dificultaran la visualización.
-
----
 
 ### Letras personalizadas
 
@@ -348,7 +324,6 @@ Los trazos se forman combinando:
 
 Cada letra se ejecuta en un hilo independiente para no detener las demás funciones del nodo.
 
----
 
 ### Sistema líder-seguidor
 
@@ -389,7 +364,6 @@ Esta variable indica que el sistema de seguimiento ya puede comenzar.
 
 `turtle2` no se crea automáticamente porque durante las pruebas era más práctico verificar primero las funciones individuales de `turtle1`.
 
----
 
 #### Lectura de las posiciones
 
@@ -416,7 +390,6 @@ self.pose2
 
 Estas variables contienen la posición y orientación actual de las dos tortugas.
 
----
 
 #### Cálculo del seguimiento
 
@@ -486,7 +459,7 @@ $$
 \omega=6e_\theta
 $$
 
-La velocidad lineal aumenta de acuerdo con la distancia. La velocidad angular depende del error de orientación.
+La velocidad lineal aumenta de acuerdo con la distancia, mientras que la velocidad angular depende del error de orientación.
 
 Los comandos se publican en:
 
@@ -496,7 +469,6 @@ Los comandos se publican en:
 
 Cuando la distancia es menor o igual que `0.5`, el mensaje `Twist` conserva sus valores iniciales en cero. De esta forma, `turtle2` deja de aproximarse cuando ya se encuentra cerca de `turtle1`.
 
----
 
 ### Nodos utilizados
 
@@ -509,7 +481,6 @@ Durante la ejecución se identificaron dos nodos principales:
 
 `/control_tortuga` es el nodo propio desarrollado para el laboratorio.
 
----
 
 ### Tópicos utilizados
 
@@ -520,7 +491,6 @@ Durante la ejecución se identificaron dos nodos principales:
 | `/turtle1/pose`    | `turtlesim/msg/Pose`      | `/turtlesim`       | `/control_tortuga` | Leer la posición de `turtle1`.        |
 | `/turtle2/pose`    | `turtlesim/msg/Pose`      | `/turtlesim`       | `/control_tortuga` | Leer la posición de `turtle2`.        |
 
----
 
 ### Servicios utilizados
 
@@ -534,7 +504,6 @@ Durante la ejecución se identificaron dos nodos principales:
 
 El cliente `/reset` está declarado en el código, pero no se utiliza dentro del bucle del teclado. La tecla `R` trabaja con `/turtle1/teleport_absolute`.
 
----
 
 ### Decisiones de diseño
 
@@ -576,7 +545,6 @@ La segunda tortuga se crea con `K`. Esto permitió probar el control manual, las
 
 La tecla `R` utiliza `TeleportAbsolute`. Así se evita que la tortuga dibuje una línea al regresar al centro.
 
----
 
 ### Verificación de la arquitectura ROS 2
 
@@ -607,8 +575,6 @@ La Figura 1 muestra estos dos nodos y resume la dirección de los cuatro tópico
 
 Los comandos de velocidad salen de `/control_tortuga` hacia `/turtlesim`. Las poses se transmiten en el sentido contrario.
 
----
-
 #### `ros2 topic list`
 
 El comando:
@@ -636,8 +602,6 @@ La Figura 2 muestra estos canales y permite comprobar que cuentan con publicador
 
 <p align="center"><em>Figura 2. Nodos y tópicos activos durante la ejecución.</em></p>
 
----
-
 #### `ros2 topic echo /turtle1/pose`
 
 El comando:
@@ -656,8 +620,6 @@ permite observar en tiempo real:
 
 Durante una rotación sin avance, las coordenadas `x` y `y` permanecen prácticamente constantes. La orientación `theta` cambia y la velocidad angular conserva el valor publicado.
 
----
-
 #### `ros2 topic info /turtle1/cmd_vel`
 
 El comando:
@@ -666,11 +628,8 @@ El comando:
 ros2 topic info /turtle1/cmd_vel
 ```
 
-muestra el tipo de mensaje y la cantidad de publicadores y suscriptores.
+muestra el tipo de mensaje del tópico junto con la cantidad de publicadores y suscriptores activos. Durante la ejecución se observó un único publicador y un único suscriptor, correspondientes al nodo /control_tortuga y al nodo /turtlesim respectivamente.
 
-Durante la ejecución se observó un publicador y un suscriptor. El publicador corresponde a `/control_tortuga` y el suscriptor a `/turtlesim`.
-
----
 
 #### `ros2 service list`
 
@@ -694,7 +653,6 @@ Entre los servicios relacionados con el desarrollo se encuentran:
 
 Estos servicios permiten crear la segunda tortuga, limpiar el lienzo, modificar el lápiz y reposicionar a `turtle1`.
 
----
 
 #### `rqt_graph`
 
@@ -714,7 +672,6 @@ La Figura 3 presenta la vista completa de nodos y tópicos.
 
 En esta prueba, las vistas `Nodes/Topics (active)` y `Nodes/Topics (all)` muestran los mismos canales principales. Esto indica que los cuatro tópicos utilizados cuentan con los extremos de comunicación conectados.
 
----
 
 ## b) Diagrama de flujo
 
@@ -781,7 +738,6 @@ flowchart TD
     AK --> AL[Fin]
 ```
 
----
 
 ## c) Código fuente
 
@@ -1079,21 +1035,16 @@ if __name__ == '__main__':
     main()
 ```
 
----
 
 ## d) Evidencia de funcionamiento
 
-Durante la ejecución se comprobó el movimiento manual de `turtle1`, el dibujo del cuadrado y del triángulo, las letras P, M y D, el control del lápiz, la trayectoria automática y el sistema líder-seguidor.
+Durante la ejecución se comprobó el funcionamiento de todas las funcionalidades implementadas: el movimiento manual de turtle1, el dibujo del cuadrado y del triángulo, las letras P, M y D, el control del lápiz, la trayectoria automática con detección de bordes y el sistema líder-seguidor con turtle2. Adicionalmente, se verificaron los nodos, tópicos y servicios activos desde la consola, cuya arquitectura de comunicación entre /control_tortuga y /turtlesim puede observarse en las Figuras 5, 6 y 7, correspondientes a las tres vistas disponibles en rqt_graph.
 
-También se verificaron los nodos, tópicos y servicios desde la consola. La arquitectura puede observarse en las Figuras 1, 2 y 3, donde se aprecia la comunicación entre `/control_tortuga` y `/turtlesim`.
-
-Las pruebas completas de funcionamiento quedaron registradas en el video. Allí se observa la creación de `turtle2`, su aproximación hacia `turtle1` y el comportamiento de las dos tortugas durante las trayectorias.
-
----
+Las pruebas completas de funcionamiento quedaron registradas en el video demostrativo, donde se puede observar la creación de turtle2 mediante el servicio /spawn, su aproximación progresiva hacia turtle1 y el comportamiento conjunto de ambas tortugas durante la ejecución de las distintas trayectorias.
 
 ## e) Video explicativo
 
-En el video se presenta el trabajo de los integrantes y se explica el desarrollo del código. También se muestran las funciones principales del programa, el sistema líder-seguidor y la revisión de la arquitectura de ROS 2 mediante comandos de consola y `rqt_graph`. Al final se comentan los resultados obtenidos y los principales aprendizajes del laboratorio.
+En el video se explica el desarrollo del código, recorriendo las funciones principales del programa, el sistema líder-seguidor y la verificación de la arquitectura de ROS 2 mediante comandos de consola y rqt_graph. Al cierre se exponen los resultados obtenidos y los principales aprendizajes del laboratorio.
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=oKxvXR15o30">
