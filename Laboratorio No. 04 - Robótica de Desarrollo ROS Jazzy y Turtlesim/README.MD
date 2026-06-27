@@ -448,11 +448,12 @@ $$
 d=\sqrt{(\Delta x)^2+(\Delta y)^2}
 $$
 
-El ángulo que debe seguir `turtle2` se obtiene con:
+El ángulo que debe seguir `turtle2` se obtiene con la función `atan2`:
 
 $$
-\theta_d=\operatorname{atan2}(\Delta y,\Delta x)
+\theta_d = \mathrm{atan2}(\Delta y,\Delta x)
 $$
+
 
 El error angular se calcula como:
 
