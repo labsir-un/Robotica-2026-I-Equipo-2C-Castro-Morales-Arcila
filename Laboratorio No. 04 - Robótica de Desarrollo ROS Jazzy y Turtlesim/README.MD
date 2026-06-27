@@ -20,7 +20,7 @@
 
 ## Integrantes
 
-* **Pablo de Jesús Arzila Mora**
+* **Pablo de Jesús Arcila Mora**
 * **Marco Alejandro Morales Pantoja**
 * **Daniel Felipe Castro Galindo**
 
