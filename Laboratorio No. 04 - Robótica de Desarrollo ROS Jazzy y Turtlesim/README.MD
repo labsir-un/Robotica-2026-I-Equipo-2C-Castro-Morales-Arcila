@@ -20,403 +20,192 @@
 
 ## Integrantes
 
-* **Pablo de Jesús Elcila Mora**
+* **Pablo de Jesús Arcila Mora**
 * **Marco Alejandro Morales Pantoja**
-* **Daniel Felipe Castro Garindo**
+* **Daniel Felipe Castro Galindo**
 
 ---
 
-## Solución planteada
+# a) Documentación del desarrollo
 
-En este laboratorio se desarrolló una aplicación en **ROS 2 Jazzy Jalisco** utilizando el simulador **Turtlesim** y un nodo propio programado en Python mediante la biblioteca `rclpy`.
+## Descripción general del laboratorio
 
-La solución permite controlar manualmente la tortuga principal mediante las flechas del teclado, dibujar figuras geométricas, ejecutar una trayectoria automática, activar o desactivar el lápiz, limpiar el lienzo, reiniciar la posición de la tortuga y dibujar las letras correspondientes a los nombres de los integrantes.
+En este laboratorio se desarrolló una aplicación en **ROS 2 Jazzy Jalisco** utilizando Python, `rclpy` y el simulador **Turtlesim**.
 
-También se implementó un sistema líder-seguidor. En este sistema, `turtle1` funciona como tortuga líder y puede ser controlada mediante el teclado o mediante las funciones automáticas. La segunda tortuga, denominada `turtle2`, recibe comandos de velocidad calculados a partir de la distancia y orientación relativa con respecto a `turtle1`.
+El desarrollo se realizó dentro del archivo `move_turtle.py` del paquete `my_turtle_controller`. El programa permite controlar a `turtle1` mediante el teclado, ejecutar trayectorias automáticas, dibujar figuras geométricas y letras personalizadas, modificar el estado del lápiz y crear una segunda tortuga que sigue automáticamente a la primera.
 
-Toda la lógica del laboratorio se encuentra integrada en un único nodo propio llamado:
+Toda la lógica se implementó dentro de un nodo propio llamado:
 
 ```text
 /control_tortuga
 ```
 
-Este nodo se comunica con el nodo del simulador:
+Este nodo se comunica con:
 
 ```text
 /turtlesim
 ```
 
-La comunicación se realiza mediante publicadores, suscriptores y clientes de servicios propios de ROS 2.
+mediante publicadores, suscriptores y clientes de servicios.
+
+No se utilizó el nodo `turtle_teleop_key`. La lectura del teclado, la publicación de velocidades y las acciones automáticas fueron implementadas directamente en `move_turtle.py`.
 
 ---
 
-## Objetivos
+## Funcionamiento general del programa
 
-### Objetivo general
+Al iniciar el programa se crea el nodo `/control_tortuga`, junto con:
 
-Implementar una aplicación en ROS 2 Jazzy Jalisco que permita controlar dos tortugas en Turtlesim utilizando publicación, suscripción, servicios, temporizadores y herramientas de inspección de la arquitectura de comunicación.
+* Dos publicadores de velocidad.
+* Dos suscriptores de posición.
+* Cinco clientes de servicios.
+* Un temporizador para el sistema líder-seguidor.
+* Un bucle de lectura del teclado.
 
-### Objetivos específicos
+La comunicación de ROS 2 se mantiene activa mediante `rclpy.spin()`, ejecutado en un hilo secundario. El hilo principal permanece encargado de leer las teclas y seleccionar las acciones solicitadas por el usuario.
 
-* Conocer los conceptos básicos de ROS 2.
-* Utilizar comandos fundamentales de ROS 2 en Ubuntu 24.04.
-* Crear un nodo propio en Python mediante `rclpy`.
-* Publicar comandos de velocidad utilizando mensajes `Twist`.
-* Suscribirse a los tópicos de posición de las tortugas.
-* Utilizar servicios para crear, teletransportar y modificar tortugas.
-* Implementar el control manual de `turtle1`.
-* Dibujar figuras geométricas automáticamente.
-* Dibujar letras personalizadas.
-* Implementar una trayectoria automática con detección de bordes.
-* Desarrollar un sistema líder-seguidor.
-* Analizar los nodos, tópicos y servicios de la aplicación.
-* Visualizar la arquitectura mediante `rqt_graph`.
-
----
-
-## Requisitos
-
-El laboratorio fue desarrollado utilizando:
-
-* Ubuntu 24.04.
-* ROS 2 Jazzy Jalisco.
-* Python 3.
-* `rclpy`.
-* Turtlesim.
-* `rqt_graph`.
-* `colcon`.
-
-Los paquetes principales pueden instalarse mediante:
-
-```bash
-sudo apt update
-sudo apt install ros-jazzy-turtlesim
-sudo apt install ros-jazzy-rqt-graph
-sudo apt install python3-colcon-common-extensions
-```
-
-Antes de trabajar con ROS 2 se debe cargar su entorno:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-```
-
----
-
-## Estructura del repositorio
-
-```text
-Laboratorio No. 04 - Robótica de Desarrollo/
-├── img/
-│   ├── NodesOnly.png
-│   ├── NodesTopicsActive.png
-│   └── NodesTopicsAll.png
-├── src/
-└── README.MD
-```
-
-La carpeta `img` contiene las capturas obtenidas mediante `rqt_graph`.
-
-La carpeta `src` contiene el código fuente y los archivos correspondientes al paquete de ROS 2.
-
-Las carpetas generadas automáticamente durante la compilación no deben agregarse al repositorio:
-
-```text
-build/
-install/
-log/
-```
-
----
-
-## Preparación del workspace
-
-Para trabajar con el paquete se debe acceder al workspace:
-
-```bash
-cd ~/ros2_jazzy_jalisco/turtlesim_ws
-```
-
-Cargar el entorno de ROS 2:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-```
-
-Compilar el workspace:
-
-```bash
-colcon build
-```
-
-Cargar el entorno generado por la compilación:
-
-```bash
-source install/setup.bash
-```
-
----
-
-## Ejecución
-
-En una primera terminal se ejecuta Turtlesim:
-
-```bash
-ros2 run turtlesim turtlesim_node
-```
-
-En una segunda terminal se carga el workspace:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-source ~/ros2_jazzy_jalisco/turtlesim_ws/install/setup.bash
-```
-
-Posteriormente se ejecuta el nodo desarrollado:
-
-```bash
-ros2 run my_turtle_controller move_turtle
-```
-
-Al iniciar el programa se presenta en la terminal la leyenda con los controles disponibles.
-
----
-
-## Controles implementados
-
-| Tecla            | Acción                                                   |
-| ---------------- | -------------------------------------------------------- |
-| Flecha arriba    | Avanzar `turtle1`                                        |
-| Flecha abajo     | Retroceder `turtle1`                                     |
-| Flecha izquierda | Girar hacia la izquierda                                 |
-| Flecha derecha   | Girar hacia la derecha                                   |
-| `S`              | Dibujar un cuadrado                                      |
-| `T`              | Dibujar un triángulo equilátero                          |
-| `R`              | Llevar `turtle1` al centro                               |
-| `P`              | Activar o desactivar el lápiz                            |
-| `A`              | Activar o detener la trayectoria automática              |
-| `Q`              | Detener `turtle1` y desactivar la trayectoria automática |
-| `1`              | Dibujar la letra P                                       |
-| `M`              | Dibujar la letra M                                       |
-| `D`              | Dibujar la letra D                                       |
-| `K`              | Crear `turtle2`                                          |
-| `L`              | Limpiar los trazos del lienzo                            |
-| `Ctrl+C`         | Finalizar el programa                                    |
-
-La letra P se asignó a la tecla `1` porque la tecla `P` ya estaba reservada para activar o desactivar el lápiz.
-
----
-
-## Arquitectura de ROS 2
-
-Durante la ejecución se encuentran activos principalmente dos nodos.
-
-| Nodo               | Función                                                                                                         |
-| ------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `/turtlesim`       | Administra la ventana gráfica, las tortugas, sus posiciones y los servicios del simulador.                      |
-| `/control_tortuga` | Lee el teclado, publica velocidades, recibe posiciones, consume servicios y controla el sistema líder-seguidor. |
-
-### Publicadores
-
-El nodo `/control_tortuga` crea dos publicadores de mensajes `geometry_msgs/msg/Twist`.
-
-| Tópico             | Función                                              |
-| ------------------ | ---------------------------------------------------- |
-| `/turtle1/cmd_vel` | Enviar velocidades lineales y angulares a `turtle1`. |
-| `/turtle2/cmd_vel` | Enviar velocidades calculadas a `turtle2`.           |
-
-### Suscriptores
-
-El nodo recibe la posición de las dos tortugas mediante mensajes `turtlesim/msg/Pose`.
-
-| Tópico          | Función                                         |
-| --------------- | ----------------------------------------------- |
-| `/turtle1/pose` | Obtener la posición y orientación de `turtle1`. |
-| `/turtle2/pose` | Obtener la posición y orientación de `turtle2`. |
-
-### Servicios
-
-| Servicio                     | Tipo                             | Función                                         |
-| ---------------------------- | -------------------------------- | ----------------------------------------------- |
-| `/spawn`                     | `turtlesim/srv/Spawn`            | Crear `turtle2`.                                |
-| `/turtle1/set_pen`           | `turtlesim/srv/SetPen`           | Activar o desactivar el lápiz de `turtle1`.     |
-| `/turtle1/teleport_absolute` | `turtlesim/srv/TeleportAbsolute` | Llevar `turtle1` al centro.                     |
-| `/clear`                     | `std_srvs/srv/Empty`             | Limpiar los trazos del lienzo.                  |
-| `/reset`                     | `std_srvs/srv/Empty`             | Cliente disponible para reiniciar el simulador. |
-
-El cliente `/reset` se encuentra declarado en el código, aunque la tecla `R` utiliza realmente el servicio `/turtle1/teleport_absolute`.
+Las figuras, letras y trayectoria automática también se ejecutan en hilos secundarios para evitar que las pausas utilizadas durante los movimientos bloqueen permanentemente el nodo.
 
 ---
 
 ## Lectura del teclado
 
-La función `leer_tecla()` permite capturar las entradas del teclado sin necesidad de presionar `Enter`.
+La función `leer_tecla()` permite capturar las teclas sin necesidad de presionar `Enter`.
 
-Para esto se utilizan las bibliotecas:
+Para esto se utilizan:
 
 * `sys`
 * `tty`
 * `termios`
 * `select`
 
-La configuración actual de la terminal se guarda mediante `termios.tcgetattr()`. Después, la terminal se coloca temporalmente en modo de lectura directa utilizando `tty.setraw()`.
+La configuración de la terminal se guarda mediante:
 
-La función `select.select()` comprueba si existe una tecla disponible con un tiempo de espera de `0.05 s`. Esto evita que el programa permanezca bloqueado esperando una entrada.
+```python
+cfg = termios.tcgetattr(fd)
+```
 
-Las flechas generan una secuencia de caracteres que comienza con el carácter de escape `\x1b`. Por esta razón, cuando se detecta dicho carácter se leen dos caracteres adicionales.
+Después se utiliza:
 
-Al finalizar la lectura siempre se restaura la configuración original de la terminal.
+```python
+tty.setraw(fd)
+```
+
+para realizar la lectura directa de cada tecla.
+
+La función `select.select()` utiliza un tiempo de espera de `0.05 s`, permitiendo comprobar si existe una entrada disponible sin detener indefinidamente la ejecución.
+
+Las flechas del teclado generan secuencias de tres caracteres. Cuando el primer carácter corresponde a `\x1b`, se leen los dos caracteres adicionales necesarios para identificar la dirección.
+
+Al finalizar la lectura se restaura la configuración original de la terminal mediante:
+
+```python
+termios.tcsetattr(fd, termios.TCSADRAIN, cfg)
+```
 
 ---
 
-## Control manual de `turtle1`
+## Control manual de la tortuga
 
-El método `vel()` crea un mensaje `Twist` y asigna:
+El control manual de `turtle1` se realiza mediante las flechas del teclado.
+
+| Tecla            | Acción               | Velocidad lineal | Velocidad angular |
+| ---------------- | -------------------- | ---------------: | ----------------: |
+| Flecha arriba    | Avanzar              |            `2.0` |             `0.0` |
+| Flecha abajo     | Retroceder           |           `-2.0` |             `0.0` |
+| Flecha izquierda | Girar a la izquierda |            `0.0` |             `1.5` |
+| Flecha derecha   | Girar a la derecha   |            `0.0` |            `-1.5` |
+
+El método `vel()` construye un mensaje `Twist`:
 
 ```python
+msg = Twist()
 msg.linear.x = lineal
 msg.angular.z = angular
 ```
 
-Posteriormente publica el mensaje en:
+El mensaje se publica en:
 
 ```text
 /turtle1/cmd_vel
 ```
 
-Los valores utilizados para el control manual son:
+El método `parar()` publica una velocidad lineal y angular iguales a cero:
 
-| Movimiento           | Velocidad lineal | Velocidad angular |
-| -------------------- | ---------------: | ----------------: |
-| Avanzar              |            `2.0` |             `0.0` |
-| Retroceder           |           `-2.0` |             `0.0` |
-| Girar a la izquierda |            `0.0` |             `1.5` |
-| Girar a la derecha   |            `0.0` |            `-1.5` |
-| Detener              |            `0.0` |             `0.0` |
-
-El método `parar()` llama al método `vel()` con ambos valores iguales a cero.
+```python
+self.vel(0.0, 0.0)
+```
 
 ---
 
-## Generación de movimientos temporizados
+## Funciones automáticas implementadas
 
-El método `mover()` recibe tres parámetros:
+### Función de movimiento temporizado
 
-```text
-Velocidad lineal
-Velocidad angular
-Duración
-```
+El método `mover()` recibe:
 
-La cantidad de pasos se obtiene mediante:
+* Velocidad lineal.
+* Velocidad angular.
+* Duración del movimiento.
+
+La cantidad de pasos se calcula mediante:
 
 ```python
 pasos = int(duracion * 20)
 ```
 
-Cada paso dura `0.05 s`, por lo que se realizan aproximadamente veinte publicaciones por segundo.
+Cada paso tiene una duración de `0.05 s`, por lo que se realizan aproximadamente veinte publicaciones por segundo.
 
-Al finalizar la secuencia se llama a `parar()` para detener `turtle1`.
+Al terminar el movimiento se llama a `parar()`.
 
 ---
 
-## Cuadrado
+### Dibujo del cuadrado
 
 La tecla `S` ejecuta el método `cuadrado()`.
 
-El procedimiento repite cuatro veces:
+La secuencia se repite cuatro veces:
 
-1. Avanzar durante `2 s`.
-2. Girar durante (\pi/2) segundos con una velocidad angular de `1 rad/s`.
+1. Avanzar con velocidad lineal `1.0` durante `2.0 s`.
+2. Girar con velocidad angular `1.0 rad/s` durante (\pi/2) segundos.
 
-El giro total de cada esquina es aproximadamente:
+El ángulo aproximado de cada giro es:
 
 [
-\theta=1\frac{\text{rad}}{\text{s}}\cdot\frac{\pi}{2}\text{s}
-=\frac{\pi}{2}\text{ rad}
+\theta=\omega t
 ]
 
-Esto corresponde a un giro de aproximadamente (90^\circ).
+[
+\theta=(1.0)\left(\frac{\pi}{2}\right)
+=\frac{\pi}{2}\text{ rad}
+=90^\circ
+]
 
 ---
 
-## Triángulo equilátero
+### Dibujo del triángulo equilátero
 
 La tecla `T` ejecuta el método `triangulo()`.
 
-El procedimiento repite tres veces:
+La secuencia se repite tres veces:
 
-1. Avanzar durante `2 s`.
-2. Girar durante (2\pi/3) segundos con una velocidad angular de `1 rad/s`.
+1. Avanzar con velocidad lineal `1.0` durante `2.0 s`.
+2. Girar con velocidad angular `1.0 rad/s` durante (2\pi/3) segundos.
 
-El ángulo de giro es:
+El giro exterior aplicado es:
 
 [
-\theta=\frac{2\pi}{3}\text{ rad}=120^\circ
+\theta=\frac{2\pi}{3}\text{ rad}
+=120^\circ
 ]
 
-Este es el ángulo exterior necesario para construir un triángulo equilátero.
-
 ---
 
-## Letras personalizadas
+### Reinicio de la posición
 
-Se implementaron tres letras relacionadas con los nombres de los integrantes.
+La tecla `R` ejecuta el método `reset_pos()`.
 
-| Letra | Integrante | Tecla |
-| ----- | ---------- | ----- |
-| P     | Pablo      | `1`   |
-| M     | Marco      | `M`   |
-| D     | Daniel     | `D`   |
-
-Las letras se construyen mediante combinaciones de:
-
-* Movimientos lineales.
-* Giros.
-* Segmentos rectos.
-* Movimientos lineales y angulares simultáneos.
-* Aproximaciones de arcos.
-
-Cada letra se ejecuta en un hilo independiente para evitar que la secuencia bloquee la comunicación de ROS 2.
-
----
-
-## Control del lápiz
-
-La tecla `P` ejecuta el método `toggle_lapiz()`.
-
-Este método cambia el estado de la variable:
-
-```python
-self.lapiz_activo
-```
-
-Después utiliza el servicio:
-
-```text
-/turtle1/set_pen
-```
-
-El lápiz se configura con:
-
-```text
-R = 255
-G = 255
-B = 255
-Ancho = 2
-```
-
-El parámetro `off` determina si el lápiz se encuentra activo o desactivado.
-
-```python
-req.off = 0 if self.lapiz_activo else 1
-```
-
----
-
-## Reinicio de posición
-
-La tecla `R` utiliza el servicio:
+Este método utiliza el servicio:
 
 ```text
 /turtle1/teleport_absolute
@@ -430,74 +219,157 @@ y = 5.544
 theta = 0.0
 ```
 
-Estas coordenadas corresponden aproximadamente al centro del lienzo de Turtlesim.
+Estas coordenadas ubican a `turtle1` aproximadamente en el centro de la ventana.
 
-El teletransporte permite cambiar la posición de forma instantánea sin generar una trayectoria desde la posición anterior.
+El teletransporte permite cambiar la posición sin generar un trazo desde la ubicación anterior.
 
 ---
 
-## Limpieza del lienzo
+### Activación y desactivación del lápiz
 
-La tecla `L` realiza una llamada asíncrona al servicio:
+La tecla `P` ejecuta el método `toggle_lapiz()`.
+
+El método utiliza el servicio:
 
 ```text
-/clear
+/turtle1/set_pen
 ```
 
-Este servicio elimina los trazos existentes sin cerrar el simulador ni eliminar las tortugas.
+La variable:
 
-Esta función facilita la realización de varias pruebas consecutivas.
+```python
+self.lapiz_activo
+```
+
+almacena el estado actual del lápiz.
+
+La configuración utilizada es:
+
+```text
+R = 255
+G = 255
+B = 255
+Ancho = 2
+```
+
+El parámetro `off` se define mediante:
+
+```python
+req.off = 0 if self.lapiz_activo else 1
+```
+
+Cuando `off` es igual a cero, el lápiz se encuentra activo. Cuando es igual a uno, `turtle1` puede desplazarse sin dejar trazo.
 
 ---
 
-## Trayectoria automática
+### Trayectoria automática con evasión de bordes
 
-La tecla `A` activa o desactiva la trayectoria automática.
+La tecla `A` activa o desactiva el método `auto()`.
 
-La posición actual de `turtle1` se obtiene mediante el tópico:
+La trayectoria consulta continuamente la posición de `turtle1` mediante los datos recibidos desde:
 
 ```text
 /turtle1/pose
 ```
 
-Se considera que la tortuga se encuentra cerca de un borde cuando se cumple alguna de estas condiciones:
+Se considera que la tortuga está cerca de un borde cuando:
 
 ```python
-x < 1.0
-x > 10.0
-y < 1.0
-y > 10.0
+x < 1.0 or x > 10.0 or y < 1.0 or y > 10.0
 ```
 
-Cuando la tortuga se encuentra lejos de los bordes se publica:
+Cuando la tortuga no está cerca de un borde, se publica:
 
 ```python
 self.vel(1.5, 0.2)
 ```
 
-Esto produce un avance con una ligera curvatura.
+Esto produce un movimiento hacia adelante con una pequeña velocidad angular.
 
-Cuando se detecta un borde se publica:
+Cuando se detecta un borde, se publica:
 
 ```python
 self.vel(0.0, 1.5)
 ```
 
-La tortuga deja de avanzar y gira hasta recuperar una orientación que le permita continuar dentro de la ventana.
+La tortuga deja de avanzar y comienza a girar hasta recuperar una orientación que le permita permanecer dentro de la ventana.
+
+Si la trayectoria automática ya se encuentra activa y se vuelve a presionar `A`, la variable `auto_corriendo` cambia a `False` y `turtle1` se detiene.
 
 ---
 
-## Creación de `turtle2`
+### Detención del movimiento
 
-La tecla `K` ejecuta el método `crear_tortuga2()`.
+La tecla `Q` realiza las siguientes acciones:
 
-La segunda tortuga se crea utilizando el servicio:
+```python
+self.auto_corriendo = False
+self.parar()
+```
+
+Esto desactiva la trayectoria automática y publica velocidades iguales a cero para `turtle1`.
+
+---
+
+### Limpieza del lienzo
+
+La tecla `L` realiza una llamada al servicio:
+
+```text
+/clear
+```
+
+Este servicio elimina los trazos presentes en la ventana sin cerrar el simulador ni eliminar las tortugas.
+
+Esta función permite realizar nuevas pruebas sobre un lienzo limpio.
+
+---
+
+## Dibujo de letras personalizadas
+
+Se implementaron las letras P, M y D, asociadas a los nombres de los integrantes.
+
+| Tecla | Letra | Integrante |
+| ----- | ----- | ---------- |
+| `1`   | P     | Pablo      |
+| `M`   | M     | Marco      |
+| `D`   | D     | Daniel     |
+
+La letra P se asignó a la tecla `1` porque la tecla `P` ya se utiliza para activar o desactivar el lápiz.
+
+Cada letra posee un método independiente:
+
+```python
+letra_P()
+letra_M()
+letra_D()
+```
+
+Las letras se construyen mediante combinaciones de:
+
+* Avances lineales.
+* Giros.
+* Segmentos rectos.
+* Movimientos lineales y angulares simultáneos.
+* Aproximaciones de arcos.
+
+Cada función crea una tarea interna y la ejecuta mediante un hilo independiente.
+
+---
+
+## Sistema líder-seguidor con dos tortugas
+
+### Creación de `turtle2`
+
+La segunda tortuga se crea al presionar la tecla `K`.
+
+El método `crear_tortuga2()` utiliza el servicio:
 
 ```text
 /spawn
 ```
 
-Sus parámetros iniciales son:
+La solicitud contiene:
 
 ```text
 x = 2.0
@@ -506,23 +378,60 @@ theta = 0.0
 name = turtle2
 ```
 
-La solicitud se realiza de forma asíncrona mediante `call_async()`.
+La llamada se realiza de forma asíncrona:
 
-Cuando el servicio responde correctamente, el callback `spawn_listo()` establece:
+```python
+future = self.cli_spawn.call_async(req)
+```
+
+Cuando el servicio finaliza, se ejecuta el callback:
+
+```python
+spawn_listo()
+```
+
+Si la creación fue correcta, se establece:
 
 ```python
 self.t2_lista = True
 ```
 
-A partir de ese momento se habilita el sistema líder-seguidor.
+Esta variable habilita el sistema de seguimiento.
 
-La creación se dejó asociada a una tecla para permitir que las funciones de `turtle1` pudieran probarse antes de activar a la segunda tortuga.
+La creación de `turtle2` se dejó asociada a una tecla para permitir que las funciones de `turtle1` pudieran probarse antes de iniciar el seguimiento.
 
 ---
 
-## Sistema líder-seguidor
+### Lectura de las posiciones
 
-El método `seguir()` se ejecuta mediante un temporizador con un periodo de `0.1 s`.
+El nodo se suscribe a:
+
+```text
+/turtle1/pose
+/turtle2/pose
+```
+
+Los callbacks:
+
+```python
+cb_pose1()
+cb_pose2()
+```
+
+guardan las posiciones más recientes en:
+
+```python
+self.pose1
+self.pose2
+```
+
+Estos datos se utilizan para calcular la distancia y orientación relativa entre las tortugas.
+
+---
+
+### Cálculo del seguimiento
+
+El método `seguir()` se ejecuta mediante un temporizador con periodo de `0.1 s`:
 
 ```python
 self.create_timer(0.1, self.seguir)
@@ -534,7 +443,7 @@ La frecuencia de actualización es:
 f=\frac{1}{0.1}=10\text{ Hz}
 ]
 
-Cuando `turtle2` existe, se calculan las diferencias de posición:
+Las diferencias de posición se calculan mediante:
 
 [
 \Delta x=x_1-x_2
@@ -544,25 +453,25 @@ Cuando `turtle2` existe, se calculan las diferencias de posición:
 \Delta y=y_1-y_2
 ]
 
-La distancia euclidiana es:
+La distancia entre las tortugas es:
 
 [
 d=\sqrt{(\Delta x)^2+(\Delta y)^2}
 ]
 
-El ángulo desde `turtle2` hacia `turtle1` se obtiene mediante:
+El ángulo objetivo desde `turtle2` hacia `turtle1` se obtiene mediante:
 
 [
 \theta_d=\operatorname{atan2}(\Delta y,\Delta x)
 ]
 
-El error angular se calcula como:
+El error angular es:
 
 [
 e_\theta=\theta_d-\theta_2
 ]
 
-El error se normaliza utilizando:
+El error se normaliza mediante:
 
 ```python
 error_angulo = math.atan2(
@@ -574,10 +483,10 @@ error_angulo = math.atan2(
 Esta operación mantiene el error dentro del intervalo:
 
 [
--\pi\le e_\theta\le\pi
+-\pi\leq e_\theta\leq\pi
 ]
 
-Cuando la distancia es mayor que `0.5`, se aplican las siguientes leyes de control:
+Cuando la distancia es mayor que `0.5`, se aplican las siguientes relaciones:
 
 [
 v=1.5d
@@ -587,113 +496,359 @@ v=1.5d
 \omega=6e_\theta
 ]
 
-La velocidad lineal depende de la distancia y la velocidad angular depende del error de orientación.
+La velocidad lineal aumenta con la distancia entre las tortugas y la velocidad angular depende del error de orientación.
 
-Cuando la distancia es menor o igual que `0.5`, el mensaje `Twist` conserva velocidades iguales a cero y `turtle2` se detiene.
+Los comandos calculados se publican en:
+
+```text
+/turtle2/cmd_vel
+```
+
+Cuando la distancia es menor o igual que `0.5`, el mensaje `Twist` conserva sus valores en cero y `turtle2` deja de aproximarse.
 
 ---
 
-## Ejecución mediante hilos
+## Nodos utilizados
 
-La comunicación de ROS 2 se mantiene activa mediante:
+Durante la ejecución se encuentran activos principalmente dos nodos.
 
-```python
-rclpy.spin(nodo)
-```
+| Nodo               | Descripción                                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------------------- |
+| `/turtlesim`       | Administra la ventana gráfica, las tortugas, sus posiciones y los servicios del simulador.          |
+| `/control_tortuga` | Lee el teclado, publica velocidades, recibe posiciones, consume servicios y calcula el seguimiento. |
 
-Este proceso se ejecuta en un hilo secundario:
+El nodo `/control_tortuga` es el único nodo propio desarrollado para el laboratorio.
+
+---
+
+## Tópicos utilizados
+
+| Tópico             | Tipo de mensaje           | Publicador         | Suscriptor         | Función                                         |
+| ------------------ | ------------------------- | ------------------ | ------------------ | ----------------------------------------------- |
+| `/turtle1/cmd_vel` | `geometry_msgs/msg/Twist` | `/control_tortuga` | `/turtlesim`       | Controlar el movimiento de `turtle1`.           |
+| `/turtle2/cmd_vel` | `geometry_msgs/msg/Twist` | `/control_tortuga` | `/turtlesim`       | Controlar el movimiento de `turtle2`.           |
+| `/turtle1/pose`    | `turtlesim/msg/Pose`      | `/turtlesim`       | `/control_tortuga` | Obtener la posición y orientación de `turtle1`. |
+| `/turtle2/pose`    | `turtlesim/msg/Pose`      | `/turtlesim`       | `/control_tortuga` | Obtener la posición y orientación de `turtle2`. |
+
+---
+
+## Servicios utilizados
+
+| Servicio                     | Tipo                             | Función                                                   |
+| ---------------------------- | -------------------------------- | --------------------------------------------------------- |
+| `/spawn`                     | `turtlesim/srv/Spawn`            | Crear `turtle2`.                                          |
+| `/turtle1/set_pen`           | `turtlesim/srv/SetPen`           | Activar o desactivar el lápiz de `turtle1`.               |
+| `/turtle1/teleport_absolute` | `turtlesim/srv/TeleportAbsolute` | Llevar `turtle1` al centro.                               |
+| `/clear`                     | `std_srvs/srv/Empty`             | Borrar los trazos del lienzo.                             |
+| `/reset`                     | `std_srvs/srv/Empty`             | Cliente declarado para el reinicio general del simulador. |
+
+La tecla `R` utiliza `/turtle1/teleport_absolute`. El cliente `/reset` se encuentra declarado, pero no se llama desde el bucle del teclado.
+
+---
+
+## Decisiones de diseño
+
+### Uso de un único nodo propio
+
+Las funciones de control, seguimiento, lectura del teclado y consumo de servicios fueron integradas dentro de la clase `ControlTortuga`.
+
+Esto permitió mantener la comunicación principal dentro de un único nodo llamado `/control_tortuga`.
+
+### Uso de hilos
+
+Las figuras, letras y trayectoria automática contienen movimientos temporizados y pausas mediante `time.sleep()`.
+
+Estas funciones se ejecutan en hilos secundarios para evitar que bloqueen permanentemente:
+
+* La recepción de poses.
+* El temporizador de seguimiento.
+* Las respuestas de servicios.
+* La lectura del teclado.
+
+### Separación entre `rclpy.spin()` y el teclado
+
+En la función `main()`, `rclpy.spin()` se ejecuta en un hilo secundario:
 
 ```python
 hilo = threading.Thread(target=rclpy.spin, args=(nodo,), daemon=True)
 ```
 
-El hilo principal ejecuta el método:
+El hilo principal ejecuta:
 
 ```python
 nodo.correr()
 ```
 
-Esta separación permite que la lectura del teclado se realice al mismo tiempo que:
+De esta manera, la comunicación de ROS 2 y la lectura del teclado funcionan simultáneamente.
 
-* Se reciben las poses.
-* Se ejecuta el temporizador del seguidor.
-* Se procesan las respuestas de servicios.
-* Se publican los comandos de velocidad.
+### Creación manual de `turtle2`
 
-Las figuras, letras y trayectoria automática también se ejecutan mediante hilos independientes.
+La segunda tortuga se crea mediante la tecla `K`, en lugar de generarse inmediatamente al iniciar el nodo.
+
+Esto permite probar primero el control manual, las figuras y las letras de `turtle1`.
+
+### Uso de teletransporte
+
+La tecla `R` utiliza `TeleportAbsolute` para regresar al centro sin dibujar una línea adicional.
+
+### Uso de la tecla `1`
+
+La letra P se asignó a la tecla `1` debido a que la tecla `P` ya estaba reservada para el control del lápiz.
 
 ---
 
-## Diagrama de flujo
+## Verificación de la arquitectura ROS 2
 
-El siguiente diagrama fue desarrollado en Mermaid para que pueda visualizarse y editarse directamente desde GitHub.
+### `ros2 node list`
+
+El comando:
+
+```bash
+ros2 node list
+```
+
+permite observar los nodos activos en el sistema.
+
+Durante la ejecución se identificaron:
+
+```text
+/control_tortuga
+/turtlesim
+```
+
+Esto confirma que el nodo desarrollado y el simulador se encuentran activos dentro del mismo entorno de ROS 2.
+
+---
+
+### `ros2 topic list`
+
+El comando:
+
+```bash
+ros2 topic list
+```
+
+muestra los tópicos disponibles.
+
+Entre los canales utilizados por la aplicación se encuentran:
+
+```text
+/turtle1/cmd_vel
+/turtle1/pose
+/turtle2/cmd_vel
+/turtle2/pose
+```
+
+Estos tópicos permiten enviar velocidades a las tortugas y recibir sus posiciones.
+
+---
+
+### `ros2 topic echo /turtle1/pose`
+
+El comando:
+
+```bash
+ros2 topic echo /turtle1/pose
+```
+
+permite observar en tiempo real:
+
+* Posición `x`.
+* Posición `y`.
+* Orientación `theta`.
+* Velocidad lineal.
+* Velocidad angular.
+
+Cuando `turtle1` gira sin avanzar, las coordenadas `x` y `y` permanecen prácticamente constantes, mientras `theta` cambia continuamente.
+
+---
+
+### `ros2 topic info /turtle1/cmd_vel`
+
+El comando:
+
+```bash
+ros2 topic info /turtle1/cmd_vel
+```
+
+permite conocer:
+
+* El tipo de mensaje utilizado.
+* La cantidad de publicadores.
+* La cantidad de suscriptores.
+
+Durante la ejecución se observó un publicador y un suscriptor.
+
+El publicador corresponde a `/control_tortuga` y el suscriptor corresponde a `/turtlesim`.
+
+---
+
+### `ros2 service list`
+
+El comando:
+
+```bash
+ros2 service list
+```
+
+muestra los servicios disponibles dentro del sistema.
+
+Entre los servicios relacionados con la implementación se encuentran:
+
+```text
+/spawn
+/clear
+/reset
+/turtle1/set_pen
+/turtle1/teleport_absolute
+```
+
+La presencia de estos servicios permite que `/control_tortuga` pueda crear, modificar y reposicionar tortugas.
+
+---
+
+### `rqt_graph`
+
+La herramienta se ejecuta mediante:
+
+```bash
+rqt_graph
+```
+
+Permite visualizar gráficamente los nodos, los tópicos y la dirección de la comunicación entre ellos.
+
+#### Vista `Nodes only`
+
+<div align="center">
+  <img src="./img/NodesOnly.png" alt="Vista Nodes only de la arquitectura ROS 2" width="850"/>
+</div>
+
+En la imagen se observan los nodos:
+
+```text
+/control_tortuga
+/turtlesim
+```
+
+Las conexiones desde `/control_tortuga` hacia `/turtlesim` corresponden a:
+
+```text
+/turtle1/cmd_vel
+/turtle2/cmd_vel
+```
+
+Estas conexiones indican que el nodo propio publica comandos de velocidad para ambas tortugas.
+
+Las conexiones desde `/turtlesim` hacia `/control_tortuga` corresponden a:
+
+```text
+/turtle1/pose
+/turtle2/pose
+```
+
+Estas conexiones indican que el simulador publica las posiciones y que el nodo propio las recibe.
+
+#### Vista `Nodes/Topics (active)`
+
+<div align="center">
+  <img src="./img/NodesTopicsActive.png" alt="Vista de nodos y tópicos activos en ROS 2" width="850"/>
+</div>
+
+Esta vista muestra los tópicos que cuentan con publicadores y suscriptores activos.
+
+Se observan:
+
+```text
+/turtle1/cmd_vel
+/turtle1/pose
+/turtle2/cmd_vel
+/turtle2/pose
+```
+
+La imagen confirma que los cuatro canales principales se encuentran activos durante la ejecución.
+
+#### Vista `Nodes/Topics (all)`
+
+<div align="center">
+  <img src="./img/NodesTopicsAll.png" alt="Vista completa de nodos y tópicos en ROS 2" width="850"/>
+</div>
+
+Esta vista presenta los nodos y tópicos de la arquitectura.
+
+En la ejecución realizada, las vistas `active` y `all` muestran los mismos cuatro tópicos principales. Esto indica que los canales declarados cuentan con publicadores y suscriptores conectados.
+
+---
+
+# b) Diagrama de flujo
+
+El siguiente diagrama representa el inicio del nodo, la lectura del teclado, la selección de las acciones, la publicación de velocidades, el seguimiento de `turtle2` y la finalización del programa.
 
 ```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar rclpy]
     B --> C[Crear nodo control_tortuga]
-    C --> D[Crear publicadores]
-    C --> E[Crear suscriptores de pose]
-    C --> F[Crear clientes de servicios]
-    C --> G[Crear temporizador del seguidor]
-    D --> H[Ejecutar rclpy.spin en un hilo]
-    E --> H
-    F --> H
-    G --> H
-    H --> I[Iniciar lectura del teclado]
-    I --> J{Tecla detectada}
+    C --> D[Crear publicadores, suscriptores y clientes de servicios]
+    D --> E[Crear temporizador de seguimiento]
+    E --> F[Ejecutar rclpy spin en un hilo secundario]
+    F --> G[Leer teclado]
 
-    J -->|Flechas| K[Publicar velocidad de turtle1]
-    J -->|S| L[Dibujar cuadrado]
-    J -->|T| M[Dibujar triángulo]
-    J -->|1, M o D| N[Dibujar letra]
-    J -->|R| O[Teletransportar turtle1]
-    J -->|P| P[Cambiar estado del lápiz]
-    J -->|L| Q[Limpiar lienzo]
-    J -->|K| R[Crear turtle2]
-    J -->|A| S[Activar o detener trayectoria automática]
-    J -->|Q| T[Detener turtle1]
-    J -->|Ctrl+C| U[Finalizar]
+    G --> H{Tecla seleccionada}
 
-    S --> V[Leer pose de turtle1]
-    V --> W{¿Está cerca de un borde?}
-    W -->|Sí| X[Publicar giro]
-    W -->|No| Y[Publicar avance curvo]
-    X --> V
-    Y --> V
+    H -->|Flechas| I[Control manual]
+    H -->|S| J[Dibujar cuadrado]
+    H -->|T| K[Dibujar triángulo]
+    H -->|1, M o D| L[Dibujar letra]
+    H -->|R| M[Reiniciar posición]
+    H -->|P| N[Activar o desactivar lápiz]
+    H -->|L| O[Limpiar lienzo]
+    H -->|K| P[Crear turtle2]
+    H -->|A| Q[Activar o detener trayectoria automática]
+    H -->|Q| R[Publicar velocidad cero]
+    H -->|Ctrl+C| S[Finalización segura]
 
-    R --> Z[Marcar turtle2 como disponible]
+    I --> T[Publicar en turtle1 cmd_vel]
+    J --> T
+    K --> T
+    L --> T
 
-    G --> AA{¿Existe turtle2?}
-    AA -->|No| AB[Esperar siguiente ciclo]
-    AA -->|Sí| AC[Leer poses de turtle1 y turtle2]
-    AC --> AD[Calcular distancia y ángulo objetivo]
-    AD --> AE[Normalizar error angular]
-    AE --> AF{¿Distancia mayor que 0.5?}
-    AF -->|Sí| AG[Calcular velocidad lineal y angular]
-    AF -->|No| AH[Velocidades iguales a cero]
-    AG --> AI[Publicar en turtle2 cmd_vel]
-    AH --> AI
-    AI --> AB
+    Q --> U[Leer pose de turtle1]
+    U --> V{¿Está cerca de un borde?}
+    V -->|Sí| W[Publicar giro]
+    V -->|No| X[Publicar avance curvo]
+    W --> U
+    X --> U
 
-    K --> I
-    L --> I
-    M --> I
-    N --> I
-    O --> I
-    P --> I
-    Q --> I
-    T --> I
+    P --> Y[Marcar turtle2 como disponible]
 
-    U --> AJ[Publicar velocidad cero]
-    AJ --> AK[Destruir nodo]
-    AK --> AL[Ejecutar rclpy.shutdown]
-    AL --> AM[Fin]
+    E --> Z{¿Existe turtle2?}
+    Z -->|No| AA[Esperar siguiente ciclo]
+    Z -->|Sí| AB[Leer pose de turtle1 y turtle2]
+    AB --> AC[Calcular distancia y orientación relativa]
+    AC --> AD[Normalizar error angular]
+    AD --> AE{¿Distancia mayor que 0.5?}
+    AE -->|Sí| AF[Calcular velocidades de seguimiento]
+    AE -->|No| AG[Velocidades iguales a cero]
+    AF --> AH[Publicar en turtle2 cmd_vel]
+    AG --> AH
+    AH --> AA
+
+    T --> G
+    M --> G
+    N --> G
+    O --> G
+    R --> G
+
+    S --> AI[Detener turtle1]
+    AI --> AJ[Destruir nodo]
+    AJ --> AK[Ejecutar rclpy shutdown]
+    AK --> AL[Fin]
 ```
 
 ---
 
-## Código fuente implementado
+# c) Código fuente
+
+El archivo principal utilizado en el laboratorio es `move_turtle.py`.
 
 ```python
 '''
@@ -777,7 +932,7 @@ class ControlTortuga(Node):
 
         self.get_logger().info('Flechas=mover | S=cuadrado | T=triangulo | R=reset | P=lapiz | A=auto | Q=stop | K=crear turtle2 | L=limpiar | 1=P | M=M | D=D')
 
-        #self.crear_tortuga2())
+        #self.crear_tortuga2()
 
     # callbacks pose
 
@@ -989,263 +1144,70 @@ if __name__ == '__main__':
 
 ---
 
-## Verificación de la arquitectura
+# d) Evidencia de funcionamiento
 
-### Lista de nodos
+La ejecución del laboratorio permitió comprobar:
 
-El comando:
-
-```bash
-ros2 node list
-```
-
-permite visualizar los nodos activos.
-
-Durante la ejecución se observaron:
-
-```text
-/control_tortuga
-/turtlesim
-```
-
-Esto confirma que el nodo propio y el nodo del simulador se encuentran activos dentro del mismo entorno de ROS 2.
-
-### Lista de tópicos
-
-El comando:
-
-```bash
-ros2 topic list
-```
-
-permite identificar los canales de comunicación activos.
-
-Los tópicos principales utilizados por la aplicación son:
-
-```text
-/turtle1/cmd_vel
-/turtle1/pose
-/turtle2/cmd_vel
-/turtle2/pose
-```
-
-### Pose de `turtle1`
-
-El comando:
-
-```bash
-ros2 topic echo /turtle1/pose
-```
-
-permite observar en tiempo real:
-
-* Posición `x`.
-* Posición `y`.
-* Orientación `theta`.
-* Velocidad lineal.
-* Velocidad angular.
-
-Durante una rotación sin avance, las posiciones `x` y `y` permanecen prácticamente constantes, mientras la orientación `theta` cambia continuamente.
-
-### Información del tópico de velocidad
-
-El comando:
-
-```bash
-ros2 topic info /turtle1/cmd_vel
-```
-
-permite identificar:
-
-* Tipo de mensaje.
-* Número de publicadores.
-* Número de suscriptores.
-
-Durante la ejecución se obtuvo un publicador y un suscriptor activos para este tópico.
-
-### Lista de servicios
-
-El comando:
-
-```bash
-ros2 service list
-```
-
-permite verificar los servicios disponibles.
-
-Entre los servicios utilizados se encuentran:
-
-```text
-/spawn
-/clear
-/reset
-/turtle1/set_pen
-/turtle1/teleport_absolute
-```
-
----
-
-## Visualización con `rqt_graph`
-
-La arquitectura se visualizó mediante:
-
-```bash
-rqt_graph
-```
-
-### Vista Nodes only
-
-<div align="center">
-  <img src="./img/NodesOnly.png" alt="Vista Nodes only de la arquitectura ROS 2" width="850"/>
-</div>
-
-En esta vista se observan claramente los nodos:
-
-```text
-/control_tortuga
-/turtlesim
-```
-
-Los tópicos `/turtle1/cmd_vel` y `/turtle2/cmd_vel` se dirigen desde `/control_tortuga` hacia `/turtlesim`.
-
-Los tópicos `/turtle1/pose` y `/turtle2/pose` se dirigen desde `/turtlesim` hacia `/control_tortuga`.
-
-Esto confirma que el nodo propio envía comandos de movimiento y recibe la posición de las dos tortugas.
-
-### Vista Nodes/Topics active
-
-<div align="center">
-  <img src="./img/NodesTopicsActive.png" alt="Vista de nodos y tópicos activos en ROS 2" width="850"/>
-</div>
-
-Esta vista presenta únicamente los tópicos que poseen publicadores y suscriptores activos.
-
-Se observan los canales:
-
-```text
-/turtle1/cmd_vel
-/turtle1/pose
-/turtle2/cmd_vel
-/turtle2/pose
-```
-
-La presencia de los cuatro tópicos confirma que la comunicación entre el nodo propio y Turtlesim se encuentra activa.
-
-### Vista Nodes/Topics all
-
-<div align="center">
-  <img src="./img/NodesTopicsAll.png" alt="Vista completa de nodos y tópicos en ROS 2" width="850"/>
-</div>
-
-Esta vista muestra la arquitectura completa de los nodos y tópicos.
-
-En este caso, las vistas `active` y `all` presentan los mismos canales principales. Esto indica que los tópicos declarados cuentan con publicadores y suscriptores conectados y que no existen canales principales sin utilizar.
-
----
-
-## Decisiones de diseño
-
-### Un único nodo propio
-
-Todas las funciones se integraron dentro de `/control_tortuga`. Esto permite controlar el teclado, los publicadores, los suscriptores, los servicios y el sistema seguidor desde una misma clase.
-
-### Creación manual de `turtle2`
-
-La segunda tortuga se crea mediante la tecla `K`. Esta decisión facilita las pruebas de las figuras y letras de `turtle1` antes de activar el sistema líder-seguidor.
-
-### Lectura no bloqueante
-
-La lectura del teclado utiliza `select` con un tiempo de espera de `0.05 s`. Esto evita detener permanentemente el programa mientras se espera una tecla.
-
-### Uso de hilos
-
-Las figuras, letras y trayectoria automática se ejecutan en hilos independientes. Esto permite mantener activos los callbacks, temporizadores y servicios de ROS 2.
-
-### Teletransporte para el reinicio
-
-La tecla `R` utiliza `/turtle1/teleport_absolute`. Esto permite regresar al centro sin dibujar una línea desde la posición anterior.
-
-### Uso de la tecla `1`
-
-La letra P se asignó a la tecla `1` porque la tecla `P` se utiliza para controlar el lápiz.
-
-### Limpieza mediante `/clear`
-
-La tecla `L` se agregó para borrar los trazos del lienzo y facilitar la realización de nuevas pruebas.
-
----
-
-## Evidencias de funcionamiento
-
-Durante la ejecución se verificaron las siguientes funciones:
-
-* Movimiento manual mediante las flechas.
-* Reinicio de la posición mediante `R`.
-* Limpieza del lienzo mediante `L`.
-* Dibujo del cuadrado mediante `S`.
-* Dibujo del triángulo mediante `T`.
-* Dibujo de la letra P mediante `1`.
-* Dibujo de la letra M mediante `M`.
-* Dibujo de la letra D mediante `D`.
-* Activación y desactivación del lápiz mediante `P`.
-* Creación de `turtle2` mediante `K`.
-* Seguimiento de `turtle2` hacia `turtle1`.
-* Trayectoria automática mediante `A`.
-* Detección de bordes.
-* Detención mediante `Q`.
-* Visualización de nodos y tópicos mediante `rqt_graph`.
-
-La ejecución completa y las pruebas de funcionamiento pueden observarse en el video del laboratorio.
-
----
-
-## Resultados
-
-El nodo desarrollado permitió controlar correctamente a `turtle1` mediante las flechas del teclado sin utilizar `turtle_teleop_key`.
-
-Las figuras geométricas se generaron mediante secuencias de movimientos lineales y angulares. Las letras P, M y D se construyeron mediante combinaciones de segmentos rectos y arcos aproximados.
-
-La trayectoria automática utilizó la pose de `turtle1` para detectar la proximidad a los bordes. Cuando la tortuga alcanzaba una zona cercana al límite, detenía el avance lineal y comenzaba a girar.
-
-La segunda tortuga fue creada mediante el servicio `/spawn`. Después de su creación, el temporizador ejecutó el algoritmo de seguimiento diez veces por segundo.
-
-El control proporcional permitió que `turtle2` ajustara su velocidad lineal según la distancia y su velocidad angular según el error de orientación.
-
-Las herramientas de inspección permitieron comprobar que los nodos, tópicos y servicios se encontraban activos y correctamente conectados.
-
----
-
-## Análisis
-
-La aplicación demuestra que en ROS 2 los nodos no modifican directamente el estado de otros elementos. La comunicación se realiza mediante mensajes y servicios.
-
-El nodo `/control_tortuga` publica mensajes `Twist`, pero es el nodo `/turtlesim` el encargado de interpretar estos mensajes y modificar el movimiento de las tortugas.
-
-De manera similar, `/turtlesim` publica continuamente las poses. El nodo propio recibe esta información para detectar bordes y calcular el seguimiento.
-
-Los servicios se utilizaron para acciones puntuales que requieren una petición específica, como crear una tortuga, modificar el lápiz o teletransportar a `turtle1`.
-
-El uso de hilos permitió ejecutar secuencias temporizadas sin detener la recepción de poses ni la ejecución del temporizador del seguidor.
-
-La normalización del error angular evita cambios bruscos cuando la orientación pasa de (\pi) a (-\pi). Esta operación permite que `turtle2` seleccione el giro más corto para orientarse hacia `turtle1`.
-
----
-
-## Video explicativo
-
-El video incluye:
-
-* Presentación de los integrantes.
-* Explicación del código.
-* Control manual.
-* Figuras geométricas.
-* Letras personalizadas.
+* Movimiento manual de `turtle1` mediante las flechas.
+* Dibujo automático del cuadrado.
+* Dibujo automático del triángulo.
+* Dibujo de las letras P, M y D.
 * Activación y desactivación del lápiz.
+* Reinicio de la posición de `turtle1`.
+* Limpieza del lienzo.
+* Trayectoria automática con evasión de bordes.
 * Creación de `turtle2`.
-* Sistema líder-seguidor.
-* Trayectoria automática.
-* Comandos de inspección.
-* Visualización mediante `rqt_graph`.
+* Seguimiento automático de `turtle2` hacia `turtle1`.
+* Inspección de nodos, tópicos y servicios.
+* Visualización de la arquitectura mediante `rqt_graph`.
+
+Las pruebas de movimiento, figuras, letras y seguimiento se presentan en el video explicativo.
+
+Las siguientes capturas muestran la arquitectura ROS 2 obtenida durante la ejecución.
+
+## Nodos de la aplicación
+
+<div align="center">
+  <img src="./img/NodesOnly.png" alt="Nodos y conexiones principales de la aplicación" width="850"/>
+</div>
+
+La imagen permite verificar la existencia de `/control_tortuga` y `/turtlesim`, así como la dirección de los tópicos de velocidad y posición.
+
+## Nodos y tópicos activos
+
+<div align="center">
+  <img src="./img/NodesTopicsActive.png" alt="Nodos y tópicos activos de la aplicación" width="850"/>
+</div>
+
+La imagen permite verificar que los tópicos principales poseen publicadores y suscriptores activos.
+
+## Arquitectura completa
+
+<div align="center">
+  <img src="./img/NodesTopicsAll.png" alt="Arquitectura completa de nodos y tópicos" width="850"/>
+</div>
+
+La imagen presenta los cuatro canales de comunicación principales utilizados por el sistema.
+
+---
+
+# e) Video explicativo
+
+El video presenta:
+
+* La introducción del laboratorio.
+* La presentación de los integrantes.
+* La explicación del código.
+* El control manual de la tortuga.
+* El dibujo de figuras geométricas.
+* El dibujo de las letras P, M y D.
+* La activación y desactivación del lápiz.
+* La creación de `turtle2`.
+* El funcionamiento del sistema líder-seguidor.
+* La trayectoria automática.
+* Los comandos de inspección de ROS 2.
+* La visualización de la arquitectura mediante `rqt_graph`.
+* Las conclusiones generales del laboratorio.
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=oKxvXR15o30">
@@ -1263,38 +1225,16 @@ El video incluye:
 
 ## Conclusiones
 
-El desarrollo del laboratorio permitió implementar una aplicación completa en ROS 2 Jazzy Jalisco utilizando Python y `rclpy`.
+El laboratorio permitió implementar un nodo propio en Python utilizando `rclpy`, sin depender de `turtle_teleop_key` para controlar a `turtle1`.
 
-El control manual permitió comprender el uso de mensajes `Twist` para modificar las velocidades lineales y angulares de una tortuga.
+Los mensajes `Twist` permitieron controlar las velocidades lineales y angulares necesarias para el movimiento manual, las figuras geométricas, las letras y la trayectoria automática.
 
-Las figuras geométricas y las letras demostraron que es posible generar trayectorias más complejas mediante secuencias de movimientos básicos.
+Los tópicos de pose permitieron conocer continuamente la posición y orientación de las tortugas. Esta información fue utilizada para detectar los límites de la ventana y para calcular el seguimiento de `turtle2`.
 
-Los servicios de Turtlesim permitieron crear una segunda tortuga, modificar el estado del lápiz, limpiar el lienzo y cambiar la posición de `turtle1`.
+Los servicios de Turtlesim permitieron crear la segunda tortuga, cambiar el estado del lápiz, limpiar el lienzo y reposicionar a `turtle1`.
 
-El sistema líder-seguidor permitió aplicar cálculos de distancia, orientación y error angular para controlar automáticamente el movimiento de `turtle2`.
+El sistema líder-seguidor permitió relacionar conceptos de geometría y control mediante el cálculo de la distancia, el ángulo objetivo y el error angular entre las tortugas.
 
-La herramienta `rqt_graph` permitió verificar visualmente la dirección de la comunicación entre `/control_tortuga` y `/turtlesim`.
+La ejecución mediante hilos permitió mantener activa la comunicación de ROS 2 mientras se realizaban movimientos temporizados y se leían las entradas del teclado.
 
-Finalmente, el laboratorio permitió comprender la relación entre nodos, tópicos, mensajes, servicios, temporizadores y ejecución concurrente dentro de una aplicación de ROS 2.
-
----
-
-## Referencias
-
-LabSIR UN. *Intro Linux - Ubuntu 24.04*.
-https://github.com/labsir-un/01_Rob_2026_I_Intro_Ubuntu_24.04.git
-
-LabSIR UN. *Intro ROS 2 Jazzy Jalisco*.
-https://github.com/labsir-un/02_Rob_2026_I_Intro_ROS2_Jazzy.git
-
-LabSIR UN. *Intro Turtlesim con ROS 2 Jazzy Jalisco*.
-https://github.com/labsir-un/03_Rob_2026_I_ROS2_Jazzy_Turtlesim.git
-
-LabSIR UN. *Arquitectura de funcionamiento de ROS 2 Jazzy Jalisco*.
-https://github.com/labsir-un/04_Rob_2026_I_ROS2_Jazzy_Architecture.git
-
-Open Robotics. *ROS 2 Jazzy Jalisco Installation Guide*.
-https://docs.ros.org/en/jazzy/Installation.html
-
-Open Robotics. *Using turtlesim, ros2, and rqt*.
-https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html
+Finalmente, `rqt_graph` permitió comprobar visualmente que `/control_tortuga` publica los comandos de velocidad y recibe las posiciones publicadas por `/turtlesim`.
