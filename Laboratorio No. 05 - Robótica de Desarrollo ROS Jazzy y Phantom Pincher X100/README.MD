@@ -40,11 +40,11 @@ Se realizó la identificación mediante simulación de cada una de las articulac
 
 | Articulación | ID | Referencia | Sentido positivo | Función |
 |---|---:|---|---|---|
-| Base | `--` | `--` | `--` | Rotación principal del brazo |
-| Hombro | `--` | `--` | `--` | Elevación del primer eslabón |
-| Codo | `--` | `--` | `--` | Extensión y repliegue del brazo |
-| Muñeca | `--` | `--` | `--` | Orientación final del efector |
-| Pinza | `--` | `--` | `--` | Apertura y cierre |
+| Base | `1` | `--` | `--` | Rotación principal del brazo |
+| Hombro | `2` | `--` | `--` | Elevación del primer eslabón |
+| Codo | `3` | `--` | `--` | Extensión y repliegue del brazo |
+| Muñeca | `4` | `--` | `--` | Orientación final del efector |
+| Pinza | `5` | `--` | `--` | Apertura y cierre |
 
 ### Medición del robot
 
