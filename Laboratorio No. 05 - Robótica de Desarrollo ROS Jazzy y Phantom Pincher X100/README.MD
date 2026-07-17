@@ -145,11 +145,9 @@ En base al **Phantom X** se realizo un analisis con el fin de obtener los parám
 
 
 ## Conclusiones individuales
+* **Pablo de Jesús Arcila Mora**
 
-### **Pablo de Jesús Arcila Mora**
+* **Marco Alejandro Morales Pantoja**
 
-### **Daniel Felipe Castro Galindo**
-
-### **Marco Alejandro Morales Pantoja**
-
+* **Daniel Felipe Castro Galindo**
 
