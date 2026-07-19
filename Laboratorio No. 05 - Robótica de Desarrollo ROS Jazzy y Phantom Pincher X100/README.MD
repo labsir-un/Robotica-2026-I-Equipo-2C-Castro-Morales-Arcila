@@ -928,6 +928,12 @@ La comparación entre movimientos simultáneos, secuenciales e interpolados evid
 
 En el video se presenta el funcionamiento de las actividades desarrolladas, la ejecución de los programas en ROS 2 Jazzy, los resultados de cinemática directa e inversa, el trazado virtual y la coreografía robótica.
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=hjCt5STNxuI">
+    <img src="https://img.youtube.com/vi/hjCt5STNxuI/0.jpg" alt="Video explicativo del Laboratorio No. 05 - Phantom X Pincher X100" width="550"/>
+  </a>
+</div>
+
 <p align="center">
   <a href="https://www.youtube.com/watch?v=hjCt5STNxuI">
     Ver video completo en YouTube
