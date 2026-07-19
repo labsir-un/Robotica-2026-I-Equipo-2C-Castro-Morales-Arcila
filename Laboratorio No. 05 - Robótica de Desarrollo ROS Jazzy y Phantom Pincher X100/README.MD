@@ -1,4 +1,10 @@
 <div align="center">
+  <picture>
+    <source srcset="https://imgur.com/5bYAzsb.png" media="(prefers-color-scheme: dark)">
+    <source srcset="https://imgur.com/Os03JoE.png" media="(prefers-color-scheme: light)">
+    <img src="https://imgur.com/Os03JoE.png" alt="Escudo de la Universidad Nacional de Colombia" width="350px">
+  </picture>
+
   <h1>Laboratorio No. 05 - Robótica</h1>
   <h2>Phantom X Pincher X100 - ROS 2 Jazzy - RViz</h2>
 
