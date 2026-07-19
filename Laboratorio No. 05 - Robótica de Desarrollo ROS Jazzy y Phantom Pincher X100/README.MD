@@ -348,7 +348,7 @@ $$
 La interpolación quíntica garantiza velocidad y aceleración nulas en los extremos. En la prueba, el movimiento de ida utiliza interpolación lineal y el regreso a HOME utiliza interpolación quíntica.
 
 <div align="center">
-  <img src="./P9.png" alt="Posición angular de la base durante la interpolación lineal y quíntica" width="850"/>
+  <img src="./IMG/P9.png" alt="Posición angular de la base durante la interpolación lineal y quíntica" width="850"/>
 </div>
 
 <p align="center"><em>Figura 1. Movimiento lineal de ida y retorno quíntico de la articulación de la base.</em></p>
@@ -400,21 +400,21 @@ En modo sin hardware, `pincher_controller` actualiza el estado simulado inmediat
 <table>
   <tr>
     <td align="center">
-      <img src="./P10_1.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.1 Hz" width="390"/><br>
+      <img src="./IMG/P10_1.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.1 Hz" width="390"/><br>
       <em>Figura 2. A = 0.2 rad, f = 0.1 Hz.</em>
     </td>
     <td align="center">
-      <img src="./P10_2.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.3 Hz" width="390"/><br>
+      <img src="./IMG/P10_2.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.3 Hz" width="390"/><br>
       <em>Figura 3. A = 0.2 rad, f = 0.3 Hz.</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="./P10_3.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.1 Hz" width="390"/><br>
+      <img src="./IMG/P10_3.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.1 Hz" width="390"/><br>
       <em>Figura 4. A = 0.4 rad, f = 0.1 Hz.</em>
     </td>
     <td align="center">
-      <img src="./P10_4.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.3 Hz" width="390"/><br>
+      <img src="./IMG/P10_4.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.3 Hz" width="390"/><br>
       <em>Figura 5. A = 0.4 rad, f = 0.3 Hz.</em>
     </td>
   </tr>
@@ -526,7 +526,7 @@ La fila del TCP representa una transformación fija posterior a la muñeca. En l
 | 5 | 0.0314 | 0.1780 | 0.0629 | 3.1416 | 0.4363 | 1.3963 |
 
 <div align="center">
-  <img src="./P11.png" alt="Resultados de la cinemática directa para las cinco configuraciones" width="800"/>
+  <img src="./IMG/P11.png" alt="Resultados de la cinemática directa para las cinco configuraciones" width="800"/>
 </div>
 
 <p align="center"><em>Figura 6. Resultados calculados por el programa de cinemática directa.</em></p>
@@ -705,7 +705,7 @@ $$
 | $(0.40,0.40,0.40,0.0)$ | Punto fuera del espacio de trabajo. |
 
 <div align="center">
-  <img src="./P12.png" alt="Evaluación de cinco objetivos mediante cinemática inversa" width="720"/>
+  <img src="./IMG/P12.png" alt="Evaluación de cinco objetivos mediante cinemática inversa" width="720"/>
 </div>
 
 <p align="center"><em>Figura 7. Selección, validación y descarte de soluciones de cinemática inversa.</em></p>
