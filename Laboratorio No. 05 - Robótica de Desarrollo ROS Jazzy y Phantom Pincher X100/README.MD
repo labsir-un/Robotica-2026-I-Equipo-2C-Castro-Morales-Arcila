@@ -69,8 +69,6 @@ HOME = [0, 0, 0, 0, 0] rad
 - RViz 2.
 - `dynamixel_sdk`, requerido por el paquete de control aunque se utilice el modo sin hardware.
 
-> El laboratorio está desarrollado para ROS 2 Jazzy. No se utiliza ROS 2 Humble.
-
 ### Repositorios base
 
 El desarrollo toma como referencia los siguientes repositorios de LabSIR de la Universidad Nacional de Colombia:
