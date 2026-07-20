@@ -17,12 +17,6 @@
   </p>
 </div>
 
-## Integrantes
-
-- **Pablo de Jesús Arcila Mora**
-- **Marco Alejandro Morales Pantoja**
-- **Daniel Felipe Castro Galindo**
-
 ## a) Documentación del desarrollo
 
 ### Descripción general
@@ -33,7 +27,7 @@ En este laboratorio se desarrolló una solución en ROS 2 Jazzy Jalisco para mod
 - `pincher_control`: controlador articular, interfaz gráfica, perfiles DYNAMIXEL y publicación de estados.
 - `pincher_lab`: programas correspondientes a las actividades del laboratorio.
 
-El desarrollo se realizó exclusivamente en simulación mediante RViz. Las actividades 1, 2, 3 y 6 se resolvieron usando el modelo virtual, el archivo Xacro, las mallas STL y la configuración de control. Las actividades 5 y 13 no forman parte del alcance de esta entrega.
+El desarrollo se realizó exclusivamente en simulación mediante RViz, donde las actividades 1, 2, 3 y 6 se resolvieron usando el modelo virtual, el archivo Xacro, las mallas STL y la configuración de control, mientras que las actividades 5 y 13, no forman parte del alcance de esta entrega.
 
 Todos los movimientos parten de una configuración segura y, al terminar, llevan el manipulador nuevamente a la posición de referencia:
 
@@ -41,41 +35,13 @@ Todos los movimientos parten de una configuración segura y, al terminar, llevan
 HOME = [0, 0, 0, 0, 0] rad
 ```
 
-### Objetivos
-
-- Controlar las articulaciones del Phantom X Pincher X100 mediante ROS 2 Jazzy.
-- Identificar las articulaciones, sentidos positivos, referencias y límites del manipulador.
-- Establecer la geometría utilizada por el modelo virtual.
-- Ejecutar movimientos individuales, simultáneos y secuenciales.
-- Implementar interpolación lineal, interpolación quíntica y trayectorias sinusoidales.
-- Desarrollar la cinemática directa e inversa.
-- Generar una trayectoria cartesiana para el trazado de una figura.
-- Programar una coreografía sincronizada y completamente automática.
-
-### Requisitos
-
-- Ubuntu 24.04 LTS.
-- ROS 2 Jazzy Jalisco.
-- Python 3.
-- `colcon`.
-- `rclpy`.
-- `numpy`.
-- `matplotlib`.
-- `PyYAML`.
-- `Tkinter`, para la interfaz gráfica opcional.
-- `xacro`.
-- `robot_state_publisher`.
-- `joint_state_publisher_gui`.
-- RViz 2.
-- `dynamixel_sdk`, requerido por el paquete de control aunque se utilice el modo sin hardware.
-
 ### Repositorios base
 
 El desarrollo toma como referencia los siguientes repositorios de LabSIR de la Universidad Nacional de Colombia:
 
-- `06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`: visualización y control del robot en ROS 2 Jazzy.
-- `KIT_Phantom_X_Pincher_ROS2`: descripción y recursos del kit Phantom X Pincher.
-- `3DModels_KIT_Phantom_Pincher_X100`: modelos tridimensionales del manipulador.
+- [labsir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ](https://github.com/labsir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ): visualización y control del robot en ROS 2 Jazzy.
+- [KIT_Phantom_X_Pincher_ROS2](https://github.com/labsir-un/KIT_Phantom_X_Pincher_ROS2): descripción y recursos del kit Phantom X Pincher.
+- [3DModels_KIT_Phantom_Pincher_X100](https://github.com/labsir-un/3DModels_KIT_Phantom_Pincher_X100): modelos tridimensionales del manipulador.
 
 ### Arquitectura del sistema
 
@@ -121,7 +87,11 @@ flowchart TD
 
 ### Compilación y ejecución
 
-Los paquetes `pincher_control` y `pincher_description` se alojan en la carpeta `src` de un espacio de trabajo ROS 2. Los programas de las actividades se ejecutan desde `pincher_lab`.
+Para la ejecucion y compilacion fue necesario tener configurado un `WorkSpace` de ROS 2 con los paquetes `pincher_control` y `pincher_description` alojados en la carpeta `src`, ver ``absir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`, esto con el fin de contar con toda la configuración para la manipulacion y control del `Phantom X100`, sobre esta base se tuvo que modificar archivo `dynamixel_profile.py` y los `Modelos STL` dado a que el `Phantom Pincher` del laboratorio es una version antigua el cual cuenta con los servomotores `Dinamixel AX-12A`.
+
+Los codigos implementados para llevar acabo las actividades, son los archivos de python ubicados en la carpeta `pincher_lab`, para la ejecución de los mismos no se requiere que la carpeta este alojada en la misma direccion que el `WS` del Phantom.
+
+Para la replicación del taller se recomienda seguir los siguientes pasos en la terminal:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
@@ -152,21 +122,11 @@ python3 actividad04_individual.py
 
 El último comando se reemplaza por el programa de la actividad que se desee ejecutar.
 
-### Condiciones de operación
-
-- El robot inicia y finaliza cada prueba en HOME.
-- Los comandos se validan antes de publicarse.
-- Los movimientos de gran amplitud utilizan interpolación.
-- La simulación se ejecuta con `use_hardware:=false`.
-- Las cinco articulaciones se expresan en radianes dentro de ROS 2.
-- Los valores suministrados en grados se convierten antes de publicarse.
-- La parada de software está disponible mediante el servicio `/pincher/software_stop`.
-
 ---
 
 ### Actividad 1. Preparación virtual del robot
 
-La preparación se realizó sobre el modelo virtual. El archivo `pincher_system.launch.py` inicia:
+La preparación se realizó de manera virtual, donde mediante el archivo `pincher_system.launch.py` inicia:
 
 1. El modelo Xacro.
 2. `robot_state_publisher`.
@@ -174,17 +134,15 @@ La preparación se realizó sobre el modelo virtual. El archivo `pincher_system.
 4. El controlador `pincher_controller`.
 5. La interfaz gráfica opcional.
 
-La correspondencia entre la postura comandada y el modelo se verifica observando `/joint_states` y las transformaciones TF. La configuración inicial segura es HOME.
+Con el fin de verificar que la postura comandada y el modelo correspondan correctamente, se observan los mensajes de /joint_states y las transformaciones TF, teniendo presente la configuración inicial segura, es decir HOME.
 
-El modelo también puede examinarse de forma independiente mediante:
+El modelo también puede examinarse de forma independiente mediante el siguiente comando:
 
 ```bash
 ros2 launch pincher_description display_gui.launch.py use_meshes:=true
 ```
 
 ### Actividad 2. Identificación de motores y articulaciones
-
-Los archivos de configuración definen cinco servomotores con ID consecutivos. En el perfil XL430, la referencia central es 2048 unidades; en el AX-12A es 512. Ambas referencias equivalen a cero radianes.
 
 | Articulación | Nombre ROS 2 | ID | Referencia | Signo configurado | Función |
 | --- | --- | ---: | --- | ---: | --- |
@@ -198,27 +156,28 @@ El sentido positivo de cada coordenada articular se interpreta mediante la regla
 
 ### Actividad 3. Geometría del robot
 
-La geometría se obtuvo del archivo `robot.xacro` y de las mallas STL utilizadas por RViz.
+### Dimensiones estructurales
 
-#### Distancias entre ejes
+La geometría del manipulador se obtuvo a partir del archivo `robot.xacro` y de los modelos STL del manipulador.
 
-| Parámetro geométrico | Valor |
+| Parámetro | Valor |
 | --- | ---: |
-| Altura del eje de la cintura respecto a `world` | 0.04495 m |
-| Distancia vertical cintura-hombro | 0.04450 m |
-| Altura acumulada hasta el hombro | 0.08945 m |
-| Desplazamiento del hombro | $L_m=0.03150\ \mathrm{m}$ |
-| Proyección principal del primer eslabón | $L_2=0.10100\ \mathrm{m}$ |
-| Longitud efectiva hombro-codo | $L_r=\sqrt{L_2^2+L_m^2}=0.10580\ \mathrm{m}$ |
-| Distancia codo-muñeca | $L_3=0.10100\ \mathrm{m}$ |
-| Distancia visual muñeca-`gripper_bar` | 0.11900 m |
-| Distancia analítica muñeca-TCP usada por la IK | 0.12915 m |
+| Altura de la base | 44,95 mm |
+| Distancia Base – Hombro | 44,50 mm |
+| Distancia Hombro – Codo | 105,80 mm |
+| Distancia Codo – Muñeca | 101,00 mm |
+| Distancia Muñeca – TCP | 129,15 mm |
 
-La distancia final depende del marco seleccionado. El Xacro ubica el marco visual `gripper_bar` a 0.119 m de la muñeca, mientras el modelo analítico utiliza un TCP a 0.12915 m. Por esta razón, las comparaciones deben realizarse siempre sobre el mismo marco.
+
+### Longitud de los eslabones
+
+| Eslabón | Longitud |
+| --- | ---: |
+| Eslabón 1 | 44,50 mm |
+| Eslabón 2 | 105,80 mm |
+| Eslabón 3 | 101,00 mm |
 
 #### Dimensiones principales de la pinza
-
-Las siguientes dimensiones corresponden a las cajas envolventes de las mallas STL, antes de aplicar las transformaciones del Xacro.
 
 | Componente | Dimensiones aproximadas |
 | --- | --- |
@@ -231,7 +190,7 @@ Las siguientes dimensiones corresponden a las cajas envolventes de las mallas ST
 
 ```mermaid
 flowchart TD
-    A["world"] --> B["Cintura q1 - eje vertical"]
+    A["Base"] --> B["Cintura q1 - eje vertical"]
     B --> C["Hombro q2 - altura 0.08945 m"]
     C --> D["Codo q3 - longitud efectiva 0.10580 m"]
     D --> E["Muñeca q4 - longitud 0.10100 m"]
@@ -240,18 +199,18 @@ flowchart TD
 
 ### Actividad 4. Movimiento individual de articulaciones
 
-El programa `actividad04_individual.py` implementa dos modos:
+El programa [`actividad04_individual.py`](../src/pincher_lab/actividad04_individual.py) implementa dos modos:
 
 1. Selección manual de una articulación y un ángulo en grados.
 2. Prueba automática de todas las articulaciones.
 
-La prueba automática utiliza:
+Para la prueba automática utiliza como referencia los angulos:
 
 ```text
 [20°, -20°, 35°]
 ```
 
-Cada articulación se mueve de manera independiente a las tres posiciones y regresa a HOME antes de continuar con la siguiente. Para la pinza se aplica un factor de escala de 0.4, según el mapeo usado por la visualización.
+Donde, cada articulación se mueve de manera independiente a las tres posiciones y regresa a HOME antes de continuar con la siguiente articulacion, en el caso de la pinza fue necesario aplicar un factor de escala de 0.4, esto según el mapeo usado por la visualización.
 
 ### Actividad 6. Determinación de límites seguros
 
@@ -260,16 +219,16 @@ Los límites se tomaron del modelo Xacro y se implementaron en `pincher_lab_util
 | Articulación | Límite inferior | Límite superior | Criterio de seguridad |
 | --- | ---: | ---: | --- |
 | Base | -150° | 150° | Límite del modelo y validación de software. |
-| Hombro | -150° | 150° | Límite del modelo y validación de software. |
+| Hombro | -115° | 115° | Límite del modelo y validación de software. |
 | Codo | -150° | 150° | Límite del modelo y validación de software. |
-| Muñeca | -150° | 150° | Límite del modelo y validación de software. |
+| Muñeca | -100° | 100° | Límite del modelo y validación de software. |
 | Pinza | -90° | 90° | Límite del modelo y articulaciones imitadoras. |
 
 Al intentar enviar un objetivo exterior al intervalo permitido, `PincherLab.send()` genera un error y evita la publicación. Al tratarse de una simulación, estos límites corresponden al margen operativo definido por el modelo y no a una medición de topes físicos.
 
 ### Actividad 7. Movimiento simultáneo
 
-El programa `actividad07_simultaneo.py` convierte las configuraciones de grados a radianes y publica las cinco articulaciones dentro de un único mensaje `JointState`.
+El programa [`actividad07_simultaneo.py`](../src/pincher_lab/actividad07_simultaneo.py) convierte las configuraciones de grados a radianes y publica las cinco articulaciones dentro de un único mensaje `JointState`.
 
 | Configuración | Base | Hombro | Codo | Muñeca | Pinza |
 | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -283,7 +242,7 @@ Después de completar las configuraciones, el programa agrega un último comando
 
 ### Actividad 8. Movimiento secuencial
 
-El programa `actividad08_secuencial.py` utiliza la configuración 2:
+El programa [`actividad08_secuencial.py`](../src/pincher_lab/actividad08_secuencial.py) utiliza la configuración 2:
 
 ```text
 [25°, 25°, 20°, -20°, 0°]
@@ -306,7 +265,7 @@ Las articulaciones se actualizan en el orden:
 
 ### Actividad 9. Interpolación de trayectorias
 
-El programa `actividad09_interpolacion.py` desplaza simultáneamente las articulaciones entre:
+El programa [`actividad09_interpolacion.py`](../src/pincher_lab/actividad09_interpolacion.py) desplaza simultáneamente las articulaciones entre:
 
 ```text
 qi = [0.0, 0.0, 0.0, 0.0, 0.0] rad
@@ -329,7 +288,7 @@ $$
 q(t)=q_i+\tau(q_f-q_i)
 $$
 
-Este método mantiene velocidad constante durante el recorrido, pero presenta cambios abruptos de velocidad al inicio y al final.
+Al implementar la trayetoria del manipulador mediante este método se evidencio una velocidad constante durante el recorrido, pero con cambios abruptos de velocidad al inicio y al final de la trayectoria.
 
 #### Interpolación quíntica
 
@@ -345,10 +304,12 @@ $$
 q(t)=q_i+s(\tau)(q_f-q_i)
 $$
 
-La interpolación quíntica garantiza velocidad y aceleración nulas en los extremos. En la prueba, el movimiento de ida utiliza interpolación lineal y el regreso a HOME utiliza interpolación quíntica.
+Caso contrario al anterior, la interpolación quíntica garantiza velocidad y aceleración nulas en los extremos. 
+
+Cabe recalcar que en la prueba, el movimiento de ida utiliza interpolación lineal y el regreso a HOME utiliza interpolación quíntica, comportamiento que podemos evidenciar mediante la siguiente imagen.
 
 <div align="center">
-  <img src="./IMG/P9.png" alt="Posición angular de la base durante la interpolación lineal y quíntica" width="850"/>
+  <img src="./img/P9.png" alt="Posición angular de la base durante la interpolación lineal y quíntica" width="850"/>
 </div>
 
 <p align="center"><em>Figura 1. Movimiento lineal de ida y retorno quíntico de la articulación de la base.</em></p>
@@ -357,7 +318,7 @@ La curva lineal alcanza 1.2 rad en $t=3\ \mathrm{s}$. A partir de ese instante c
 
 ### Actividad 10. Trayectoria sinusoidal de una articulación
 
-El programa `actividad10_sinusoidal.py` controla la articulación de la muñeca mediante:
+El programa [`actividad10_sinusoidal.py`](../pincher_lab/actividad10_sinusoidal.py) controla la articulación de la muñeca mediante:
 
 $$
 q(t)=q_0+A\sin(2\pi ft)
@@ -395,26 +356,26 @@ $$
 \sqrt{\frac{1}{N}\sum_{k=1}^{N}e_k^2}
 $$
 
-En modo sin hardware, `pincher_controller` actualiza el estado simulado inmediatamente después de recibir cada comando. Por esta razón, la posición deseada y la posición reportada prácticamente se superponen, y los errores impresos con cuatro cifras decimales son cercanos a cero.
+En la simulación, `pincher_controller` actualiza el estado simulado inmediatamente después de recibir cada comando. Por esta razón, la posición deseada y la posición reportada prácticamente se superponen, y los errores impresos con cuatro cifras decimales son cercanos a cero.
 
 <table>
   <tr>
     <td align="center">
-      <img src="./IMG/P10_1.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.1 Hz" width="390"/><br>
+      <img src="./img/P10_1.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.1 Hz" width="390"/><br>
       <em>Figura 2. A = 0.2 rad, f = 0.1 Hz.</em>
     </td>
     <td align="center">
-      <img src="./IMG/P10_2.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.3 Hz" width="390"/><br>
+      <img src="./img/P10_2.png" alt="Trayectoria sinusoidal A igual a 0.2 rad y f igual a 0.3 Hz" width="390"/><br>
       <em>Figura 3. A = 0.2 rad, f = 0.3 Hz.</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="./IMG/P10_3.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.1 Hz" width="390"/><br>
+      <img src="./img/P10_3.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.1 Hz" width="390"/><br>
       <em>Figura 4. A = 0.4 rad, f = 0.1 Hz.</em>
     </td>
     <td align="center">
-      <img src="./IMG/P10_4.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.3 Hz" width="390"/><br>
+      <img src="./img/P10_4.png" alt="Trayectoria sinusoidal A igual a 0.4 rad y f igual a 0.3 Hz" width="390"/><br>
       <em>Figura 5. A = 0.4 rad, f = 0.3 Hz.</em>
     </td>
   </tr>
@@ -424,21 +385,15 @@ Las leyendas “posición medida” de las figuras corresponden al estado public
 
 ### Actividad 11. Cinemática directa
 
-El programa `actividad11_fk.py` recibe:
+Para el Phantom X100, el desarrollo de su cinemática directa parte de la formulación de un modelo Denavit-Hartenberg equivalente, construido a partir de la geometría del robot y de los desplazamientos fijos definidos en el archivo Xacro. Con este modelo se establece la relación entre las articulaciones y la pose final del efector.
 
-$$
-q_1,\ q_2,\ q_3,\ q_4
-$$
+<div align="center">
+  <img src="./Cinematicas/Cinematica%20directa.jpeg" alt="Modelo DH equivalente de la cinemática directa" width="850"/>
+</div>
 
-y calcula:
+<p align="center"><em>Figura 6. Cinemática directa - Phantom X100.</em></p>
 
-$$
-x,\ y,\ z,\ \mathrm{roll},\ \mathrm{pitch},\ \mathrm{yaw}
-$$
-
-#### Modelo DH equivalente
-
-Después de incorporar los desplazamientos fijos del Xacro dentro de las referencias articulares, el manipulador puede representarse mediante el siguiente modelo equivalente:
+A partir de esta formulación, el manipulador puede representarse mediante el siguiente modelo equivalente:
 
 | $i$ | Elemento | $\theta_i$ | $d_i$ | $a_i$ | $\alpha_i$ |
 | ---: | --- | ---: | ---: | ---: | ---: |
@@ -450,49 +405,49 @@ Después de incorporar los desplazamientos fijos del Xacro dentro de las referen
 
 Para el modelo analítico:
 
-$$
+\[
 L_r=0.10595\ \mathrm{m},\qquad
 L_3=0.10000\ \mathrm{m},\qquad
 L_4=0.12915\ \mathrm{m}
-$$
+\]
 
-La posición del centro de la muñeca utilizada por `actividad11_fk.py` se obtiene con:
+La posición del centro de la muñeca se obtiene con:
 
-$$
+\[
 \rho =
 0.10595\cos q_2+
 0.10000\cos(q_2+q_3)
-$$
+\]
 
-$$
+\[
 x_w=\rho\cos q_1
-$$
+\]
 
-$$
+\[
 y_w=\rho\sin q_1
-$$
+\]
 
-$$
+\[
 z_w=
 0.08945+
 0.10595\sin q_2+
 0.10000\sin(q_2+q_3)
-$$
+\]
 
-La orientación depende de:
+La orientación depende de la suma articular:
 
-$$
+\[
 q_{234}=q_2+q_3+q_4
-$$
+\]
 
-y se calcula en el programa mediante:
+y se expresa mediante:
 
-$$
+\[
 \mathrm{roll}=
 \mathrm{atan2}\left(0,-\cos(q_{234})\right)
-$$
+\]
 
-$$
+\[
 \mathrm{pitch}=
 \mathrm{atan2}
 \left(
@@ -502,18 +457,32 @@ $$
 (\sin q_1\cos q_{234})^2
 }
 \right)
-$$
+\]
 
-$$
+\[
 \mathrm{yaw}=
 \mathrm{atan2}
 \left(
 \sin q_1\cos q_{234},
 \cos q_1\cos q_{234}
 \right)
-$$
+\]
 
-La fila del TCP representa una transformación fija posterior a la muñeca. En la ejecución de `actividad11_fk.py`, los valores $x$, $y$ y $z$ se reportan en el centro de la muñeca; por ello $q_4$ modifica la orientación, pero no esas tres coordenadas. Para comparar con un marco terminal de RViz se debe aplicar además la transformación fija correspondiente al TCP seleccionado.
+La última fila de la tabla representa una transformación fija posterior a la muñeca. Por ello, el modelo analítico calcula inicialmente la pose en el centro de la muñeca y luego aplica la transformación adicional correspondiente al TCP seleccionado.
+
+En la implementación, esta formulación teórica se llevó al programa [`actividad11_fk.py`](./src/pincher_lab/actividad11_fk.py), el cual recibe:
+
+\[
+q_1,\ q_2,\ q_3,\ q_4
+\]
+
+y calcula:
+
+\[
+x,\ y,\ z,\ \mathrm{roll},\ \mathrm{pitch},\ \mathrm{yaw}
+\]
+
+Los valores de \(x\), \(y\) y \(z\) se reportan en el centro de la muñeca, mientras que \(q_4\) modifica principalmente la orientación del efector final. Para comparar con RViz, se debe considerar siempre el mismo marco de referencia utilizado en el modelo cinemático.
 
 #### Resultados
 
@@ -526,173 +495,177 @@ La fila del TCP representa una transformación fija posterior a la muñeca. En l
 | 5 | 0.0314 | 0.1780 | 0.0629 | 3.1416 | 0.4363 | 1.3963 |
 
 <div align="center">
-  <img src="./IMG/P11.png" alt="Resultados de la cinemática directa para las cinco configuraciones" width="800"/>
+  <img src="./img/P11.png" alt="Resultados de la cinemática directa para las cinco configuraciones" width="800"/>
 </div>
 
-<p align="center"><em>Figura 6. Resultados calculados por el programa de cinemática directa.</em></p>
+<p align="center"><em>Figura 7. Resultados calculados por el programa de cinemática directa.</em></p>
 
 Para la configuración 2:
 
-$$
-\mathrm{atan2}(y,x)
-=
-\mathrm{atan2}(0.0705,0.1511)
-\approx25^\circ
-$$
+\[
+\mathrm{atan2}(y,x) = \mathrm{atan2}(0.0705,0.1511) \approx 25^\circ
+\]
 
-El ángulo coincide con la orientación horizontal observada en RViz. Las diferencias de distancia aparecen cuando se comparan el centro de la muñeca y el marco `gripper_bar`, por lo que la validación debe conservar el mismo marco en ambos modelos.
+Este valor coincide con la orientación horizontal observada en RViz. Las diferencias en distancia aparecen al comparar el centro de la muñeca con el marco `gripper_bar`, por lo que la validación debe realizarse siempre sobre el mismo sistema de referencia.
 
 ### Actividad 12. Cinemática inversa
+El desarrollo teórico parte de un modelo analítico que considera la geometría del manipulador, el desacople de la muñeca y la reducción del problema a un mecanismo equivalente de dos grados de libertad en el plano de trabajo. A partir de esta formulación se obtienen las soluciones de codo arriba y codo abajo, y posteriormente se selecciona la más conveniente de acuerdo con los límites articulares y la postura actual del robot.
 
-El programa `actividad12_ik.py` recibe:
+#### Modelo analítico
 
-$$
+El programa [actividad12_ik.py](./src/pincher_lab/actividad12_ik.py) recibe como entrada:
+
+\[
 x_T,\ y_T,\ z_T,\ \theta
-$$
+\]
 
 Los parámetros del modelo analítico implementado son:
 
-$$
+\[
 L_1=0.08945\ \mathrm{m},\quad
 L_2=0.10000\ \mathrm{m},\quad
 L_m=0.03500\ \mathrm{m},\quad
 L_3=0.10000\ \mathrm{m},\quad
 L_4=0.12915\ \mathrm{m}
-$$
+\]
 
 #### Ángulo de la base
 
-$$
+\[
 q_1=\mathrm{atan2}(y_T,x_T)
-$$
+\]
 
 #### Desacople de muñeca
 
 Las componentes del vector de aproximación de la herramienta son:
 
-$$
+\[
 a_x=\sin(\theta)\cos(q_1)
-$$
+\]
 
-$$
+\[
 a_y=\sin(\theta)\sin(q_1)
-$$
+\]
 
-$$
+\[
 a_z=\cos(\theta)
-$$
+\]
 
-La posición del centro de la muñeca se obtiene al retirar el desplazamiento de la herramienta de la posición objetivo:
+La posición del centro de la muñeca se obtiene al retirar el desplazamiento de la herramienta respecto a la posición objetivo:
 
-$$
+\[
 x_w=x_T-L_4a_x=x_T-L_4\sin(\theta)\cos(q_1)
-$$
+\]
 
-$$
+\[
 y_w=y_T-L_4a_y=y_T-L_4\sin(\theta)\sin(q_1)
-$$
+\]
 
-$$
+\[
 z_w=z_T-L_4a_z=z_T-L_4\cos(\theta)
-$$
+\]
 
 #### Reducción a un mecanismo 2R
 
-$$
+\[
 r=\sqrt{x_w^2+y_w^2}
-$$
+\]
 
-$$
+\[
 h=z_w-L_1
-$$
+\]
 
-$$
+\[
 c=\sqrt{r^2+h^2}
-$$
+\]
 
 con:
 
-$$
+\[
 L_r=\sqrt{L_2^2+L_m^2}
-$$
+\]
 
-$$
+\[
 \beta=\mathrm{atan2}(L_m,L_2)
-$$
+\]
 
-$$
+\[
 \psi=\frac{\pi}{2}-\beta
-$$
+\]
 
 El punto es geométricamente alcanzable si:
 
-$$
+\[
 |L_r-L_3|\leq c\leq L_r+L_3
-$$
+\]
 
-Los ángulos auxiliares son:
+Los ángulos auxiliares se calculan como:
 
-$$
+\[
 \phi=
 \arccos
 \left(
 \frac{L_r^2+L_3^2-c^2}{2L_rL_3}
 \right)
-$$
+\]
 
-$$
+\[
 \alpha=
 \arccos
 \left(
 \frac{L_r^2+c^2-L_3^2}{2L_rc}
 \right)
-$$
+\]
 
-$$
+\[
 \gamma=\mathrm{atan2}(h,r)
-$$
+\]
 
 #### Solución de codo arriba
 
-$$
+\[
 q_{2a}=
 \frac{\pi}{2}-\beta-\alpha-\gamma
-$$
+\]
 
-$$
+\[
 q_{3a}=
 \pi-\psi-\phi
-$$
+\]
 
-$$
+\[
 q_{4a}=
 \theta-q_{2a}-q_{3a}-\frac{\pi}{2}
-$$
+\]
 
 #### Solución de codo abajo
 
-$$
+\[
 q_{2b}=
 \frac{\pi}{2}-(\gamma-\alpha+\beta)
-$$
+\]
 
-$$
+\[
 q_{3b}=
 -\pi+(\phi-\psi)
-$$
+\]
 
-$$
+\[
 q_{4b}=
 \theta-q_{2b}-q_{3b}-\frac{\pi}{2}
-$$
+\]
 
-Los ángulos se normalizan al intervalo $[-\pi,\pi)$. Después se descartan las configuraciones que incumplen los límites y, si ambas son válidas, se elige la más cercana a la postura actual:
+Los ángulos obtenidos se normalizan al intervalo \([-\pi,\pi)\). Después se descartan las configuraciones que incumplen los límites articulares y, si ambas son válidas, se elige la solución más cercana a la postura actual:
 
-$$
+\[
 q^*=
 \mathrm{arg\,min}_{q\in\{q_a,q_b\}}
 \left\|q-q_{\mathrm{actual}}\right\|_2
-$$
+\]
+
+#### Implementación en el programa
+
+El programa `actividad12_ik.py`, evalúa una posición cartesiana objetivo, calcula las posibles configuraciones articulares y verifica si el punto pertenece al espacio de trabajo del robot, en caso de existir más de una solución válida, el programa identifica las configuraciones de codo arriba y codo abajo, descarta aquellas que exceden los límites articulares y selecciona la más cercana a la postura actual del manipulador.
 
 #### Pruebas cartesianas
 
@@ -705,14 +678,14 @@ $$
 | $(0.40,0.40,0.40,0.0)$ | Punto fuera del espacio de trabajo. |
 
 <div align="center">
-  <img src="./IMG/P12.png" alt="Evaluación de cinco objetivos mediante cinemática inversa" width="720"/>
+  <img src="./img/P12.png" alt="Evaluación de cinco objetivos mediante cinemática inversa" width="720"/>
 </div>
 
-<p align="center"><em>Figura 7. Selección, validación y descarte de soluciones de cinemática inversa.</em></p>
+<p align="center"><em>Figura 8. Selección, validación y descarte de soluciones de cinemática inversa.</em></p>
 
 ### Actividad 14. Trazado virtual de una figura
 
-El programa `actividad14_trazado.py` define un cuadrado de 60 mm por 60 mm mediante cinco puntos cartesianos. Cada punto se resuelve con la cinemática inversa de la Actividad 12.
+En el programa [actividad14_trazado.py](./src/pincher_lab/actividad14_trazado.py) se define un cuadrado de 60 mm por 60 mm mediante cinco puntos cartesianos, donde cada punto se resuelve mediante la cinemática inversa, vista en la Actividad 12.
 
 | Punto | $x$ (m) | $y$ (m) | $z$ (m) | $\theta$ (rad) |
 | ---: | ---: | ---: | ---: | ---: |
@@ -732,13 +705,12 @@ Para cada objetivo:
 
 ### Actividad 15. Reto final: coreografía robótica
 
-La coreografía se implementa mediante:
+La coreografía se implementa mediante el programa [`actividad15_coreografia.py`](./src/pincher_lab/actividad15_coreografia.py), teniendo en cuenta tambien los archivos:
 
-- `actividad15_coreografia.py`: ejecutor de la secuencia.
 - `poses_coreografia.yaml`: configuraciones articulares.
 - `guion.yaml`: tiempos, poses y duración de cada transición.
 
-El archivo de poses contiene:
+Donde, el archivo de poses contiene:
 
 | Grupo | Poses |
 | --- | --- |
@@ -802,7 +774,7 @@ flowchart TD
 
 ## c) Código fuente
 
-El código completo se encuentra distribuido en los tres componentes del repositorio. Los archivos principales son:
+El código completo se encuentra dentro de la carpeta [`src`](./src), de los cuales los archivos de mayor relevancia son:
 
 ### Paquete de control
 
@@ -838,76 +810,16 @@ El código completo se encuentra distribuido en los tres componentes del reposit
 | 15 | `actividad15_coreografia.py` |
 | Utilidades | `pincher_lab_utils.py` |
 
-### Exclusiones del repositorio
 
-Se recomienda utilizar el siguiente contenido en `.gitignore`:
+## d) Plano de planta 
+<div align="center">
+  <img src="./img/Plano%20de%20planta.png" alt="Plano de planta" width="720"/>
+</div>
 
-```gitignore
-build/
-install/
-log/
-__pycache__/
-*.pyc
-*.pyo
-.pytest_cache/
-.vscode/
-.idea/
-```
+<p align="center"><em>Figura 9. Planto de planta Phantom X100.</em></p>
 
-## d) Plano de planta virtual
 
-El marco fijo de RViz es `world` y el robot se ubica en el origen. La cuadrícula representa el plano $XY$. La figura de la Actividad 14 se traza en el plano horizontal:
-
-$$
-z=0.05\ \mathrm{m}
-$$
-
-con orientación constante:
-
-$$
-\theta=\frac{\pi}{2}
-$$
-
-La planta de la trayectoria es:
-
-```mermaid
-flowchart LR
-    P1["P1 - (0.15, -0.03)"] --> P2["P2 - (0.21, -0.03)"]
-    P2 --> P3["P3 - (0.21, 0.03)"]
-    P3 --> P4["P4 - (0.15, 0.03)"]
-    P4 --> P1
-```
-
-La base del robot permanece en $(0,0)$, mientras el cuadrado ocupa:
-
-$$
-0.15\leq x\leq0.21\ \mathrm{m}
-$$
-
-$$
--0.03\leq y\leq0.03\ \mathrm{m}
-$$
-
-## e) Evidencia de funcionamiento
-
-Durante la simulación se verificó:
-
-- Movimiento independiente de las cinco articulaciones.
-- Ejecución automática de tres posiciones por articulación.
-- Recorrido de las cinco configuraciones simultáneas.
-- Movimiento secuencial de la configuración 2.
-- Interpolación lineal y quíntica.
-- Cuatro trayectorias sinusoidales.
-- Cálculo de cinemática directa para las cinco configuraciones.
-- Soluciones de cinemática inversa con codo arriba y codo abajo.
-- Descarte por límites y por espacio de trabajo.
-- Trazado cartesiano de un cuadrado.
-- Coreografía automática superior a 45 s.
-- Inicio y finalización en una posición segura.
-
-Las Figuras 1 a 7 presentan las salidas numéricas y gráficas. La ejecución completa en RViz se encuentra en el video explicativo de la última sección.
-
-## f) Conclusiones individuales
+## e) Conclusiones individuales
 
 ### Pablo de Jesús Arcila Mora
 
@@ -919,16 +831,10 @@ El desarrollo de las cinemáticas mostró la importancia de utilizar el mismo si
 
 ### Daniel Felipe Castro Galindo
 
-La comparación entre movimientos simultáneos, secuenciales e interpolados evidenció que la forma de construir una trayectoria modifica el tiempo, la suavidad y el recorrido del TCP. La interpolación quíntica resultó adecuada para el trazado y la coreografía debido a su comportamiento suave en los extremos.
+Este fue un laboratorio interesante y retador dado que mediante este aplicamos de una manera mas directa las tematicas abordadas en la clase magistrar debido a que como la interfaz para la manipulacion del Phamtom es simple, tuvimos que definir las trayectorias del manipulador mediante los modelos cinematicos. 
 
-## g) Referencias
 
-- LabSIR, Universidad Nacional de Colombia. `06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`. Visualización y control del Phantom X Pincher X100 en ROS 2 Jazzy.
-- LabSIR, Universidad Nacional de Colombia. `KIT_Phantom_X_Pincher_ROS2`. Kit Phantom X Pincher para ROS 2.
-- LabSIR, Universidad Nacional de Colombia. `3DModels_KIT_Phantom_Pincher_X100`. Modelos tridimensionales del Phantom X Pincher X100.
-- Cychitivav. `px100_ikine`. Cinemática inversa y planificación básica de trayectorias para el PincherX 100.
-
-## h) Video explicativo
+## f) Video explicativo
 
 En el video se presenta el funcionamiento de las actividades desarrolladas, la ejecución de los programas en ROS 2 Jazzy, los resultados de cinemática directa e inversa, el trazado virtual y la coreografía robótica.
 
@@ -943,3 +849,11 @@ En el video se presenta el funcionamiento de las actividades desarrolladas, la e
     Ver video completo en YouTube
   </a>
 </p>
+
+
+## g) Referencias
+
+- LabSIR, Universidad Nacional de Colombia. `06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`. Visualización y control del Phantom X Pincher X100 en ROS 2 Jazzy.
+- LabSIR, Universidad Nacional de Colombia. `KIT_Phantom_X_Pincher_ROS2`. Kit Phantom X Pincher para ROS 2.
+- LabSIR, Universidad Nacional de Colombia. `3DModels_KIT_Phantom_Pincher_X100`. Modelos tridimensionales del Phantom X Pincher X100.
+- Cychitivav. `px100_ikine`. Cinemática inversa y planificación básica de trayectorias para el PincherX 100.
