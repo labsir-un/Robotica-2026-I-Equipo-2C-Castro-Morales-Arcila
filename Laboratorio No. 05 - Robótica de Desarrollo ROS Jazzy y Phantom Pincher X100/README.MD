@@ -228,7 +228,7 @@ Al intentar enviar un objetivo exterior al intervalo permitido, `PincherLab.send
 
 ### Actividad 7. Movimiento simultáneo
 
-El programa [`actividad07_simultaneo.py`](../src/pincher_lab/actividad07_simultaneo.py) convierte las configuraciones de grados a radianes y publica las cinco articulaciones dentro de un único mensaje `JointState`.
+El programa [`actividad07_simultaneo.py`](./src/pincher_lab/actividad07_simultaneo.py) convierte las configuraciones de grados a radianes y publica las cinco articulaciones dentro de un único mensaje `JointState`.
 
 | Configuración | Base | Hombro | Codo | Muñeca | Pinza |
 | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -242,7 +242,7 @@ Después de completar las configuraciones, el programa agrega un último comando
 
 ### Actividad 8. Movimiento secuencial
 
-El programa [`actividad08_secuencial.py`](../src/pincher_lab/actividad08_secuencial.py) utiliza la configuración 2:
+El programa [`actividad08_secuencial.py`](./src/pincher_lab/actividad08_secuencial.py) utiliza la configuración 2:
 
 ```text
 [25°, 25°, 20°, -20°, 0°]
@@ -265,7 +265,7 @@ Las articulaciones se actualizan en el orden:
 
 ### Actividad 9. Interpolación de trayectorias
 
-El programa [`actividad09_interpolacion.py`](../src/pincher_lab/actividad09_interpolacion.py) desplaza simultáneamente las articulaciones entre:
+El programa [`actividad09_interpolacion.py`](./src/pincher_lab/actividad09_interpolacion.py) desplaza simultáneamente las articulaciones entre:
 
 ```text
 qi = [0.0, 0.0, 0.0, 0.0, 0.0] rad
