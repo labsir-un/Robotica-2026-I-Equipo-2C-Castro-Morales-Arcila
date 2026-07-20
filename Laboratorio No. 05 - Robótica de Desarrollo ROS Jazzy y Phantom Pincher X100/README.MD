@@ -686,7 +686,7 @@ El programa [`actividad12_ik.py`](./src/pincher_lab/actividad12_ik.py) evalúa u
 
 ### Actividad 14. Trazado virtual de una figura
 
-En el programa [actividad14_trazado.py](./src/pincher_lab/actividad14_trazado.py) se define un cuadrado de 60 mm por 60 mm mediante cinco puntos cartesianos, donde cada punto se resuelve mediante la cinemática inversa, vista en la Actividad 12.
+En el programa [`actividad14_trazado.py`](./src/pincher_lab/actividad14_trazado.py) se define un cuadrado de 60 mm por 60 mm mediante cinco puntos cartesianos, donde cada punto se resuelve mediante la cinemática inversa, vista en la Actividad 12.
 
 | Punto | $x$ (m) | $y$ (m) | $z$ (m) | $\theta$ (rad) |
 | ---: | ---: | ---: | ---: | ---: |
