@@ -405,49 +405,49 @@ A partir de esta formulación, el manipulador puede representarse mediante el si
 
 Para el modelo analítico:
 
-\[
+$$
 L_r=0.10595\ \mathrm{m},\qquad
 L_3=0.10000\ \mathrm{m},\qquad
 L_4=0.12915\ \mathrm{m}
-\]
+$$
 
 La posición del centro de la muñeca se obtiene con:
 
-\[
+$$
 \rho =
 0.10595\cos q_2+
 0.10000\cos(q_2+q_3)
-\]
+$$
 
-\[
+$$
 x_w=\rho\cos q_1
-\]
+$$
 
-\[
+$$
 y_w=\rho\sin q_1
-\]
+$$
 
-\[
+$$
 z_w=
 0.08945+
 0.10595\sin q_2+
 0.10000\sin(q_2+q_3)
-\]
+$$
 
 La orientación depende de la suma articular:
 
-\[
+$$
 q_{234}=q_2+q_3+q_4
-\]
+$$
 
 y se expresa mediante:
 
-\[
+$$
 \mathrm{roll}=
 \mathrm{atan2}\left(0,-\cos(q_{234})\right)
-\]
+$$
 
-\[
+$$
 \mathrm{pitch}=
 \mathrm{atan2}
 \left(
@@ -457,32 +457,32 @@ y se expresa mediante:
 (\sin q_1\cos q_{234})^2
 }
 \right)
-\]
+$$
 
-\[
+$$
 \mathrm{yaw}=
 \mathrm{atan2}
 \left(
 \sin q_1\cos q_{234},
 \cos q_1\cos q_{234}
 \right)
-\]
+$$
 
 La última fila de la tabla representa una transformación fija posterior a la muñeca. Por ello, el modelo analítico calcula inicialmente la pose en el centro de la muñeca y luego aplica la transformación adicional correspondiente al TCP seleccionado.
 
 En la implementación, esta formulación teórica se llevó al programa [`actividad11_fk.py`](./src/pincher_lab/actividad11_fk.py), el cual recibe:
 
-\[
+$$
 q_1,\ q_2,\ q_3,\ q_4
-\]
+$$
 
 y calcula:
 
-\[
+$$
 x,\ y,\ z,\ \mathrm{roll},\ \mathrm{pitch},\ \mathrm{yaw}
-\]
+$$
 
-Los valores de \(x\), \(y\) y \(z\) se reportan en el centro de la muñeca, mientras que \(q_4\) modifica principalmente la orientación del efector final. Para comparar con RViz, se debe considerar siempre el mismo marco de referencia utilizado en el modelo cinemático.
+Los valores de $x$, $y$ y $z$ se reportan en el centro de la muñeca, mientras que $q_4$ modifica principalmente la orientación del efector final. Para comparar con RViz, se debe considerar siempre el mismo marco de referencia utilizado en el modelo cinemático.
 
 #### Resultados
 
@@ -502,170 +502,171 @@ Los valores de \(x\), \(y\) y \(z\) se reportan en el centro de la muñeca, mien
 
 Para la configuración 2:
 
-\[
+$$
 \mathrm{atan2}(y,x) = \mathrm{atan2}(0.0705,0.1511) \approx 25^\circ
-\]
+$$
 
 Este valor coincide con la orientación horizontal observada en RViz. Las diferencias en distancia aparecen al comparar el centro de la muñeca con el marco `gripper_bar`, por lo que la validación debe realizarse siempre sobre el mismo sistema de referencia.
 
 ### Actividad 12. Cinemática inversa
+
 El desarrollo teórico parte de un modelo analítico que considera la geometría del manipulador, el desacople de la muñeca y la reducción del problema a un mecanismo equivalente de dos grados de libertad en el plano de trabajo. A partir de esta formulación se obtienen las soluciones de codo arriba y codo abajo, y posteriormente se selecciona la más conveniente de acuerdo con los límites articulares y la postura actual del robot.
 
 #### Modelo analítico
 
-El programa [actividad12_ik.py](./src/pincher_lab/actividad12_ik.py) recibe como entrada:
+El programa [`actividad12_ik.py`](./src/pincher_lab/actividad12_ik.py) recibe como entrada:
 
-\[
+$$
 x_T,\ y_T,\ z_T,\ \theta
-\]
+$$
 
 Los parámetros del modelo analítico implementado son:
 
-\[
+$$
 L_1=0.08945\ \mathrm{m},\quad
 L_2=0.10000\ \mathrm{m},\quad
 L_m=0.03500\ \mathrm{m},\quad
 L_3=0.10000\ \mathrm{m},\quad
 L_4=0.12915\ \mathrm{m}
-\]
+$$
 
 #### Ángulo de la base
 
-\[
+$$
 q_1=\mathrm{atan2}(y_T,x_T)
-\]
+$$
 
 #### Desacople de muñeca
 
 Las componentes del vector de aproximación de la herramienta son:
 
-\[
+$$
 a_x=\sin(\theta)\cos(q_1)
-\]
+$$
 
-\[
+$$
 a_y=\sin(\theta)\sin(q_1)
-\]
+$$
 
-\[
+$$
 a_z=\cos(\theta)
-\]
+$$
 
 La posición del centro de la muñeca se obtiene al retirar el desplazamiento de la herramienta respecto a la posición objetivo:
 
-\[
+$$
 x_w=x_T-L_4a_x=x_T-L_4\sin(\theta)\cos(q_1)
-\]
+$$
 
-\[
+$$
 y_w=y_T-L_4a_y=y_T-L_4\sin(\theta)\sin(q_1)
-\]
+$$
 
-\[
+$$
 z_w=z_T-L_4a_z=z_T-L_4\cos(\theta)
-\]
+$$
 
 #### Reducción a un mecanismo 2R
 
-\[
+$$
 r=\sqrt{x_w^2+y_w^2}
-\]
+$$
 
-\[
+$$
 h=z_w-L_1
-\]
+$$
 
-\[
+$$
 c=\sqrt{r^2+h^2}
-\]
+$$
 
 con:
 
-\[
+$$
 L_r=\sqrt{L_2^2+L_m^2}
-\]
+$$
 
-\[
+$$
 \beta=\mathrm{atan2}(L_m,L_2)
-\]
+$$
 
-\[
+$$
 \psi=\frac{\pi}{2}-\beta
-\]
+$$
 
 El punto es geométricamente alcanzable si:
 
-\[
+$$
 |L_r-L_3|\leq c\leq L_r+L_3
-\]
+$$
 
 Los ángulos auxiliares se calculan como:
 
-\[
+$$
 \phi=
 \arccos
 \left(
 \frac{L_r^2+L_3^2-c^2}{2L_rL_3}
 \right)
-\]
+$$
 
-\[
+$$
 \alpha=
 \arccos
 \left(
 \frac{L_r^2+c^2-L_3^2}{2L_rc}
 \right)
-\]
+$$
 
-\[
+$$
 \gamma=\mathrm{atan2}(h,r)
-\]
+$$
 
 #### Solución de codo arriba
 
-\[
+$$
 q_{2a}=
 \frac{\pi}{2}-\beta-\alpha-\gamma
-\]
+$$
 
-\[
+$$
 q_{3a}=
 \pi-\psi-\phi
-\]
+$$
 
-\[
+$$
 q_{4a}=
 \theta-q_{2a}-q_{3a}-\frac{\pi}{2}
-\]
+$$
 
 #### Solución de codo abajo
 
-\[
+$$
 q_{2b}=
 \frac{\pi}{2}-(\gamma-\alpha+\beta)
-\]
+$$
 
-\[
+$$
 q_{3b}=
 -\pi+(\phi-\psi)
-\]
+$$
 
-\[
+$$
 q_{4b}=
 \theta-q_{2b}-q_{3b}-\frac{\pi}{2}
-\]
+$$
 
-Los ángulos obtenidos se normalizan al intervalo \([-\pi,\pi)\). Después se descartan las configuraciones que incumplen los límites articulares y, si ambas son válidas, se elige la solución más cercana a la postura actual:
+Los ángulos obtenidos se normalizan al intervalo $[-\pi,\pi)$. Después se descartan las configuraciones que incumplen los límites articulares y, si ambas son válidas, se elige la solución más cercana a la postura actual:
 
-\[
+$$
 q^*=
 \mathrm{arg\,min}_{q\in\{q_a,q_b\}}
 \left\|q-q_{\mathrm{actual}}\right\|_2
-\]
+$$
 
 #### Implementación en el programa
 
-El programa `actividad12_ik.py`, evalúa una posición cartesiana objetivo, calcula las posibles configuraciones articulares y verifica si el punto pertenece al espacio de trabajo del robot, en caso de existir más de una solución válida, el programa identifica las configuraciones de codo arriba y codo abajo, descarta aquellas que exceden los límites articulares y selecciona la más cercana a la postura actual del manipulador.
+El programa [`actividad12_ik.py`](./src/pincher_lab/actividad12_ik.py) evalúa una posición cartesiana objetivo, calcula las posibles configuraciones articulares y verifica si el punto pertenece al espacio de trabajo del robot. En caso de existir más de una solución válida, el programa identifica las configuraciones de codo arriba y codo abajo, descarta aquellas que exceden los límites articulares y selecciona la más cercana a la postura actual del manipulador.
 
 #### Pruebas cartesianas
 
