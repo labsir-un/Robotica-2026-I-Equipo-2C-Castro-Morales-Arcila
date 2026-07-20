@@ -809,7 +809,6 @@ El código completo se encuentra dentro de la carpeta [`src`](./src), de los cua
 | 12 | `actividad12_ik.py` |
 | 14 | `actividad14_trazado.py` |
 | 15 | `actividad15_coreografia.py` |
-| Utilidades | `pincher_lab_utils.py` |
 
 
 ## d) Plano de planta 
