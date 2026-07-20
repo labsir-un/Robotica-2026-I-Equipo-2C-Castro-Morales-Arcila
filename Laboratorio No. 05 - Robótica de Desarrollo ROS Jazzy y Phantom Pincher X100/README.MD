@@ -87,7 +87,7 @@ flowchart TD
 
 ### Compilación y ejecución
 
-Para la ejecucion y compilacion fue necesario tener configurado un `WorkSpace` de ROS 2 con los paquetes `pincher_control` y `pincher_description` alojados en la carpeta `src`, ver ``absir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`, esto con el fin de contar con toda la configuración para la manipulacion y control del `Phantom X100`, sobre esta base se tuvo que modificar archivo `dynamixel_profile.py` y los `Modelos STL` dado a que el `Phantom Pincher` del laboratorio es una version antigua el cual cuenta con los servomotores `Dinamixel AX-12A`.
+Para la ejecucion y compilacion fue necesario tener configurado un `WorkSpace` de ROS 2 con los paquetes `pincher_control` y `pincher_description` alojados en la carpeta `src`, ver ``Labsir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ`, esto con el fin de contar con toda la configuración para la manipulacion y control del `Phantom X100`, sobre esta base se tuvo que modificar archivo `dynamixel_profile.py` y los `Modelos STL` dado a que el `Phantom Pincher` del laboratorio es una version antigua el cual cuenta con los servomotores `Dinamixel AX-12A`.
 
 Los codigos implementados para llevar acabo las actividades, son los archivos de python ubicados en la carpeta `pincher_lab`, para la ejecución de los mismos no se requiere que la carpeta este alojada en la misma direccion que el `WS` del Phantom.
 
@@ -199,7 +199,7 @@ flowchart TD
 
 ### Actividad 4. Movimiento individual de articulaciones
 
-El programa [`actividad04_individual.py`](../src/pincher_lab/actividad04_individual.py) implementa dos modos:
+El programa [`actividad04_individual.py`](./src/pincher_lab/actividad04_individual.py) implementa dos modos:
 
 1. Selección manual de una articulación y un ángulo en grados.
 2. Prueba automática de todas las articulaciones.
