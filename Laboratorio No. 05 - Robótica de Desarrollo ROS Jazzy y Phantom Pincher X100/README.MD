@@ -777,7 +777,7 @@ flowchart TD
 
 El código completo se encuentra dentro de la carpeta [`src`](./src), de los cuales los archivos de mayor relevancia son:
 
-### Paquete de control
+### Pincher Control
 
 | Archivo | Función |
 | --- | --- |
@@ -787,7 +787,7 @@ El código completo se encuentra dentro de la carpeta [`src`](./src), de los cua
 | `scan_dynamixel.py` | Herramienta opcional de detección de motores físicos. |
 | `pincher_system.launch.py` | Lanzamiento integrado del sistema. |
 
-### Paquete de descripción
+### Pincher Control
 
 | Archivo | Función |
 | --- | --- |
