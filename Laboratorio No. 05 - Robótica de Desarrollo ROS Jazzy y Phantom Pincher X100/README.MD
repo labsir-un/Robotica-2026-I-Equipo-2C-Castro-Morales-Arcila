@@ -318,7 +318,7 @@ La curva lineal alcanza 1.2 rad en $t=3\ \mathrm{s}$. A partir de ese instante c
 
 ### Actividad 10. Trayectoria sinusoidal de una articulación
 
-El programa [`actividad10_sinusoidal.py`](../pincher_lab/actividad10_sinusoidal.py) controla la articulación de la muñeca mediante:
+El programa [`actividad10_sinusoidal.py`](./pincher_lab/actividad10_sinusoidal.py) controla la articulación de la muñeca mediante:
 
 $$
 q(t)=q_0+A\sin(2\pi ft)
