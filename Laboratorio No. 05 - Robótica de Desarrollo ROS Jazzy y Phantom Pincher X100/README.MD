@@ -821,7 +821,7 @@ El código completo se encuentra dentro de la carpeta [`src`](./src), de los cua
 
 ## e) Conclusiones individuales
 
-### Pablo de Jesús Arcila Mora
+### Pablo de Jesus Arcila Mora
 
 El laboratorio permitió integrar el modelo geométrico del robot con la comunicación de ROS 2 y la visualización en RViz. La separación entre descripción, control y programas de aplicación facilitó probar cada estrategia de movimiento de forma independiente y mantener una posición segura al comenzar y finalizar las pruebas.
 
