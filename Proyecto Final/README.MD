@@ -5,8 +5,8 @@
     <img src="https://imgur.com/Os03JoE.png" alt="Escudo de la Universidad Nacional de Colombia" width="350px">
   </picture>
 
-  <h1>Laboratorio No. 04 - Robótica de Desarrollo</h1>
-  <h2>Introducción a ROS 2 Jazzy Jalisco - Turtlesim</h2>
+  <h1>Proyecto Final- Robótica Industrial</h1>
+  <h2>Automatización del Proceso de Ensamblaje, Soldadura y Empaque de PCBs.</h2>
 
   <p>
     <strong>Robótica - 2026-I</strong><br>
