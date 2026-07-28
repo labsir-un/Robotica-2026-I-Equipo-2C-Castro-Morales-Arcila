@@ -24,5 +24,5 @@
 * **Marco Alejandro Morales Pantoja**
 * **Daniel Felipe Castro Galindo**
 * **Juan ... ... ...**
-* **Alejandra ... ... ...**
+* **Alejandra ... ... ..**
 
