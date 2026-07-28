@@ -20,9 +20,34 @@
 
 ## Integrantes
 
-* **Pablo de Jesús Arcila Mora**
+* **Pablo de Jesus Arcila Mora**
 * **Marco Alejandro Morales Pantoja**
 * **Daniel Felipe Castro Galindo**
 * **Juan ... ... ...**
-* **Alejandra ... ... ..**
+* **Alejandra ... ... ...**
 
+### Bitácora del desarrollo
+
+### Diagrama de flujo del proceso global y por estación (robots) con estados y fallas
+
+### Diseño del gripper/herramientas
+
+### Modelos/simulaciones
+
+### Código fuente comentado
+
+### Comparación manual vs automatizado
+
+### Descripción detallada de la solución planteada
+
+### Diagrama de flujo de acciones del robot
+
+### Plano de planta de la ubicación de cada uno de los elementos
+
+### Descripción de las funciones utilizadas
+
+### Diseño de la herramienta detallado
+
+### Código fuente utilizado para el desarrollo de la práctica
+
+### Vídeo (simulación e implementación con robots reales)
