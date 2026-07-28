@@ -93,6 +93,45 @@ flowchart TD
 
 ### Diagrama de flujo de acciones del robot
 
+```mermaid
+flowchart TD
+    Start([IDLE: Inicio Estación 3]) --> Conn[Conectar al robot físico / RoboDK]
+    Conn --> ConnOK{Conexión establecida?}
+    ConnOK -- No --> ErrConn[FAULT: error de conexión, verificar modo remoto/config]
+    ErrConn --> Conn
+    ConnOK -- Sí --> Home[READY: mover a posición Home]
+    Home --> Riel[Desplazarse por riel axial hasta el punto frente a la mesa PCB]
+    Riel --> RielOK{Posición en riel confirmada?}
+    RielOK -- No --> RielRetry[FAULT: reintentar posicionamiento en riel]
+    RielRetry --> Riel
+    RielOK -- Sí --> EntA[Esperar señal PCB Poblada desde Etapa 2]
+    EntA --> EntB{PCB fijada correctamente en fixture?}
+    EntB -- No --> AjusteFixture[FAULT: detener y solicitar ajuste de PCB]
+    AjusteFixture --> EntB
+    EntB -- Sí --> RUN[RUN: iniciar rutina de soldadura]
+    RUN --> Aprox[Mover a punto de aproximación general]
+    Aprox --> Pose[Calcular pose base de la PCB - SolveFK]
+    Pose --> L1[Calcular pose de aproximación y soldadura del punto i]
+    L1 --> L2[Resolver cinemática inversa - SolveIK]
+    L2 --> L3[Mover a aproximación del punto]
+    L3 --> Emerg{Parada de emergencia activada?}
+    Emerg -- Sí --> FaultEmerg[FAULT: detener, reset y home seguro]
+    FaultEmerg --> Home
+    Emerg -- No --> L4[Descender a punto de soldadura]
+    L4 --> L5[Activar herramienta y esperar tiempo de soldadura]
+    L5 --> L6[Retornar a punto de aproximación]
+    L6 --> L7{Quedan más puntos?}
+    L7 -- Sí --> L1
+    L7 -- No --> Verif[Verificar log de puntos soldados + evidencia]
+    Verif --> VerifOK{Todos los puntos verificados?}
+    VerifOK -- No --> Reproceso[FAULT: marcar Reproceso y reintentar]
+    Reproceso --> Aprox
+    VerifOK -- Sí --> ReturnAprox[Volver al target de aproximación]
+    ReturnAprox --> ReturnHome[Volver a Home]
+    ReturnHome --> DONE[DONE: entregar señal PCB Soldada a Etapa 4]
+    DONE --> Fin([Fin del ciclo de estación])
+```
+
 ### Plano de planta de la ubicación de cada uno de los elementos
 
 ### Descripción de las funciones utilizadas
