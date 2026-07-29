@@ -92,7 +92,7 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
 - **Nombre completo:** Daniel Felipe Castro Galindo
 - **Carrera:** Ingeniería Mecatrónica
 - **Correo institucional:** dancastroga@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/DanielCastro-02)
+- **Usuario de GitHub:** [DanielCastro-02](https://github.com/DanielCastro-02)
 - **Rol en el equipo:** Documentación, pruebas, modelado 3D
 - **Intereses:** Robótica industrial, Robótica Movil, integración de hardware y software
 - **Descripción breve:**  
